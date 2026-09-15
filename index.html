@@ -1,0 +1,1161 @@
+<title>김민영 서비스 기획 사례집</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap">
+<style>
+/* ============ tokens ============ */
+:root{
+  --bg:#F3F5F9;
+  --surface:#FFFFFF;
+  --surface-2:#EAEEF4;
+  --surface-3:#DFE5EE;
+  --border:#D7DDE7;
+  --text:#1B2333;
+  --text-muted:#5B6478;
+  --text-faint:#8890A0;
+  --primary:#1E2A44;
+  --accent:#2E6E8E;
+  --accent-soft:#E3EEF3;
+  --positive:#2F8F6B;
+  --positive-soft:#E4F3EC;
+  --negative:#C1443C;
+  --negative-soft:#FBE9E7;
+  --mark:#DD6A32;
+  --mark-soft:#FCEADD;
+  --shadow: 0 1px 2px rgba(20,30,50,.04), 0 8px 24px -12px rgba(20,30,50,.12);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#10141C;
+    --surface:#161C27;
+    --surface-2:#1D2531;
+    --surface-3:#26303F;
+    --border:#2C3648;
+    --text:#E7EAF1;
+    --text-muted:#9BA5B8;
+    --text-faint:#6E788C;
+    --primary:#D3DBEA;
+    --accent:#79BEDB;
+    --accent-soft:#1D3440;
+    --positive:#5CC499;
+    --positive-soft:#1A3B31;
+    --negative:#E58179;
+    --negative-soft:#3D2320;
+    --mark:#F0925C;
+    --mark-soft:#3A2A1E;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10141C;
+  --surface:#161C27;
+  --surface-2:#1D2531;
+  --surface-3:#26303F;
+  --border:#2C3648;
+  --text:#E7EAF1;
+  --text-muted:#9BA5B8;
+  --text-faint:#6E788C;
+  --primary:#D3DBEA;
+  --accent:#79BEDB;
+  --accent-soft:#1D3440;
+  --positive:#5CC499;
+  --positive-soft:#1A3B31;
+  --negative:#E58179;
+  --negative-soft:#3D2320;
+  --mark:#F0925C;
+  --mark-soft:#3A2A1E;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+}
+
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'IBM Plex Sans KR','IBM Plex Sans',sans-serif;
+  font-size:15.5px;
+  line-height:1.65;
+  padding-inline:20px;
+}
+h1,h2,h3,h4{
+  font-family:'Noto Serif KR','Noto Serif',serif;
+  color:var(--primary);
+  font-weight:700;
+  text-wrap:balance;
+  margin:0;
+}
+a{color:var(--accent);}
+.mono{font-family:'IBM Plex Mono',monospace;}
+
+.page{max-width:1080px;margin:0 auto;}
+
+/* ---------- top nav ---------- */
+.topnav{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;gap:18px;
+  padding-block:12px;
+  background:color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+  margin-inline:-20px;padding-inline:20px;
+}
+.topnav .brand{font-family:'Noto Serif KR',serif;font-weight:700;font-size:15px;color:var(--primary);white-space:nowrap;}
+.nav-scroll{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;}
+.nav-scroll::-webkit-scrollbar{display:none;}
+.nav-pill{
+  flex:none;display:flex;align-items:center;gap:6px;
+  font-size:12.5px;color:var(--text-muted);
+  padding:6px 12px;border-radius:999px;
+  border:1px solid var(--border);
+  text-decoration:none;white-space:nowrap;
+  transition:background .15s,color .15s,border-color .15s;
+}
+.nav-pill:hover{background:var(--surface-2);color:var(--text);border-color:var(--accent);}
+.nav-no{font-family:'IBM Plex Mono',monospace;color:var(--accent);font-weight:600;}
+
+/* ---------- hero ---------- */
+.hero{padding-block:56px 40px;}
+.hero .kicker{
+  font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;
+  color:var(--accent);text-transform:uppercase;margin-bottom:14px;display:block;
+}
+.hero h1{font-size:clamp(28px,5.2vw,52px);line-height:1.28;max-width:100%;}
+.hero .lede{margin-top:18px;font-size:15.5px;color:var(--text-muted);max-width:62ch;}
+
+.method{margin-top:44px;}
+.method h2{font-size:13px;letter-spacing:.08em;color:var(--text-faint);text-transform:uppercase;font-family:'IBM Plex Mono',monospace;font-weight:600;margin-bottom:14px;}
+.phase-svg{width:100%;height:auto;display:block;}
+.phasepill{fill:var(--surface);stroke:var(--border);}
+.phase-desc{font-size:9.5px;fill:var(--text-faint);font-family:'IBM Plex Sans KR',sans-serif;}
+.pill-label.phasenum{font-family:'IBM Plex Mono',monospace;font-size:10px;fill:var(--accent);letter-spacing:.04em;}
+
+/* ---------- case grid (thumbnail overview) ---------- */
+.case-grid-section{padding-block:44px 20px;border-top:1px solid var(--border);}
+.case-grid-head{max-width:70ch;margin-bottom:24px;}
+.case-grid-head h2{font-size:clamp(20px,2.4vw,26px);margin-bottom:8px;}
+.case-grid-head .summary{margin:0;}
+.case-grid-head strong{color:var(--text);}
+.case-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;margin-bottom:20px;}
+.case-card{
+  display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  overflow:hidden;text-decoration:none;color:inherit;box-shadow:var(--shadow);
+  transition:transform .15s ease, border-color .15s ease;
+}
+.case-card:hover{transform:translateY(-2px);border-color:var(--accent);}
+.case-card.flagship{border-color:var(--accent);border-width:1.5px;}
+.case-card-thumb{
+  height:140px;overflow:hidden;background:var(--surface-2);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;padding:12px;
+}
+.case-card-thumb svg{width:100%;height:auto;max-height:100%;pointer-events:none;}
+.case-card-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1;}
+.case-card-top{display:flex;align-items:center;gap:8px;}
+.case-card-no{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-faint);}
+.case-card-flag{
+  font-size:10px;font-weight:700;color:var(--accent);background:var(--accent-soft);
+  border-radius:999px;padding:2px 8px;letter-spacing:.02em;
+}
+.case-card h3{font-size:15px;line-height:1.4;margin:0;color:var(--primary);}
+.case-card p{
+  font-size:12.5px;color:var(--text-muted);line-height:1.55;margin:0;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.case-card-stat{margin-top:auto;padding-top:8px;display:flex;align-items:baseline;gap:6px;}
+.ccs-v{font-family:'Noto Serif KR',serif;font-size:18px;font-weight:700;color:var(--primary);}
+.ccs-l{font-size:11.5px;color:var(--text-faint);}
+.expand-all-btn{
+  font-family:'IBM Plex Sans KR',sans-serif;font-size:13px;font-weight:600;color:var(--accent);
+  background:var(--accent-soft);border:none;border-radius:8px;padding:9px 16px;cursor:pointer;
+}
+.expand-all-btn:hover{background:var(--accent);color:var(--surface);}
+
+/* ---------- case detail accordion ---------- */
+.case-detail summary.case-detail-toggle{
+  list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;
+  font-family:'IBM Plex Sans KR',sans-serif;font-size:13px;font-weight:600;color:var(--accent);
+  margin-top:8px;padding:6px 2px;user-select:none;
+}
+.case-detail summary.case-detail-toggle::-webkit-details-marker{display:none;}
+.case-detail summary.case-detail-toggle::marker{content:"";}
+.case-detail .chevron{transition:transform .15s ease;}
+.case-detail[open] .chevron{transform:rotate(180deg);}
+.case-detail .case-body{padding-top:30px;}
+
+/* ---------- case sections ---------- */
+.case{padding-block:52px;border-top:1px solid var(--border);}
+.case-head{
+  display:grid;grid-template-columns:64px 1fr;gap:18px 20px;margin-bottom:34px;
+}
+.case-no{
+  font-family:'IBM Plex Mono',monospace;font-size:15px;color:var(--text-faint);
+  padding-top:6px;
+}
+.case-headtext .eyebrow{
+  margin:0 0 6px;font-size:12.5px;color:var(--accent);font-weight:600;
+}
+.case-headtext h2{font-size:clamp(21px,2.6vw,28px);margin-bottom:10px;}
+.badge{
+  display:inline-block;font-size:11.5px;font-weight:600;color:var(--accent);
+  background:var(--accent-soft);border-radius:999px;padding:4px 11px;margin-bottom:12px;
+}
+.summary{color:var(--text-muted);font-size:15px;max-width:66ch;margin:0;}
+.case-meta{grid-column:1 / -1;margin-top:6px;}
+@media (min-width:760px){
+  .case-head{grid-template-columns:64px 1fr 260px;}
+  .case-meta{grid-column:3;margin-top:0;}
+}
+.meta-table{border-collapse:collapse;width:100%;font-size:13px;}
+.meta-table th,.meta-table td{
+  text-align:left;padding:8px 0;border-top:1px solid var(--border);
+  vertical-align:top;
+}
+.meta-table th{color:var(--text-faint);font-weight:500;width:38%;padding-right:10px;}
+.meta-table td{color:var(--text);}
+
+.case-body{display:flex;flex-direction:column;gap:38px;}
+.block h3{
+  display:flex;align-items:center;gap:10px;
+  font-size:15px;font-family:'IBM Plex Sans KR',sans-serif;font-weight:700;color:var(--primary);
+  margin-bottom:16px;
+}
+.phase-tag{
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;color:var(--accent);
+  background:var(--accent-soft);border-radius:5px;padding:3px 8px;letter-spacing:.02em;
+}
+
+.problem-list{margin:0 0 20px;padding-left:1.15em;color:var(--text-muted);font-size:14px;}
+.problem-list li{margin-bottom:6px;}
+
+.scope-grid{display:grid;grid-template-columns:1fr;gap:14px;}
+@media (min-width:640px){.scope-grid{grid-template-columns:1fr 1fr;}}
+.scope-col{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 18px;}
+.scope-col h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-faint);font-family:'IBM Plex Mono',monospace;margin-bottom:10px;font-weight:600;}
+.scope-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;}
+.scope-col li{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;color:var(--text);}
+.scope-col.in .ic{color:var(--positive);}
+.scope-col.out .ic{color:var(--negative);}
+.ic{width:15px;height:15px;flex:none;margin-top:2px;}
+
+/* wireframe */
+.wire-subtitle{
+  font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.01em;
+  color:var(--accent);margin:0 0 10px;padding-left:2px;
+}
+.wire-subtitle:not(:first-child){margin-top:26px;}
+.wireframe-grid{display:grid;grid-template-columns:1fr;gap:18px;}
+@media (min-width:760px){.wireframe-grid{grid-template-columns:1.5fr 1fr;align-items:start;}}
+.wireframe-canvas,.diagram-canvas{
+  background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:8px;
+}
+.wireframe-svg,.tree-svg{width:100%;height:auto;display:block;}
+.frame{fill:var(--surface);stroke:var(--border);}
+.breadcrumb{font-family:'IBM Plex Mono',monospace;font-size:10.5px;fill:var(--text-faint);}
+.hr{stroke:var(--border);stroke-width:1;}
+.region{fill:var(--surface-2);stroke:var(--border);stroke-width:1;}
+.region.hl{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4;}
+.region-label{font-size:11px;fill:var(--text);font-family:'IBM Plex Sans KR',sans-serif;font-weight:600;}
+.region-sub{font-size:9.5px;fill:var(--text-faint);font-family:'IBM Plex Sans KR',sans-serif;}
+.pin circle{fill:var(--mark);}
+.pin text{fill:#fff;font-size:10px;font-weight:700;font-family:'IBM Plex Mono',monospace;}
+
+.legend-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;}
+.legend-list li{display:flex;gap:10px;align-items:flex-start;}
+.legend-n{
+  flex:none;width:20px;height:20px;border-radius:50%;background:var(--mark);color:#fff;
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;margin-top:1px;
+}
+.legend-list strong{display:block;font-size:13px;color:var(--text);font-weight:600;}
+.legend-list span{display:block;font-size:12.5px;color:var(--text-muted);margin-top:2px;}
+
+.diagram-card{margin-bottom:18px;}
+.diagram-caption{font-size:12.5px;color:var(--text-faint);margin:10px 2px 0;}
+.field-block{margin-bottom:18px;}
+.badge-row{display:flex;flex-wrap:wrap;gap:8px;}
+.field-badge{
+  font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--accent);
+  background:var(--accent-soft);border-radius:6px;padding:5px 10px;
+}
+
+/* state diagram */
+.state-block{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:14px;}
+.state-svg{width:100%;height:auto;display:block;}
+.pill{stroke-width:1.4;}
+.pill.default{fill:var(--surface-2);stroke:var(--border);}
+.pill.progress{fill:var(--accent-soft);stroke:var(--accent);}
+.pill.positive{fill:var(--positive-soft);stroke:var(--positive);}
+.pill.negative{fill:var(--negative-soft);stroke:var(--negative);}
+.pill.root{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.8;}
+.pill.leaf{fill:var(--surface);stroke:var(--border);}
+.pill-label{font-size:11.5px;font-family:'IBM Plex Sans KR',sans-serif;font-weight:600;fill:var(--text);}
+.pill-label.small{font-size:10px;}
+.arrow{stroke:var(--text-faint);stroke-width:1.4;fill:none;}
+.arrow2{stroke:var(--text-faint);stroke-width:1.2;fill:none;}
+.hr2{stroke:var(--text-faint);stroke-width:1.2;}
+
+.data-note{font-size:13px;color:var(--text-muted);background:var(--surface-2);border-radius:10px;padding:12px 16px;margin:0;}
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:10px;}
+.data-table{border-collapse:collapse;width:100%;font-size:13px;min-width:480px;}
+.data-table th,.data-table td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);}
+.data-table th{background:var(--surface-2);color:var(--text-faint);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table td:first-child{font-family:'IBM Plex Mono',monospace;color:var(--accent);white-space:nowrap;}
+
+.edge-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;}
+.edge-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
+.edge-card .tag{
+  display:inline-block;font-size:10.5px;font-weight:700;color:var(--mark);
+  background:var(--mark-soft);border-radius:5px;padding:2px 7px;margin-bottom:8px;
+  font-family:'IBM Plex Mono',monospace;letter-spacing:.02em;
+}
+.edge-card p{margin:0;font-size:13px;color:var(--text);}
+
+.impact-block{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px 24px;}
+.impact-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:16px;margin-bottom:16px;}
+.stat{display:flex;flex-direction:column;gap:2px;}
+.stat-v{font-family:'Noto Serif KR',serif;font-size:26px;font-weight:700;color:var(--primary);font-variant-numeric:tabular-nums;}
+.stat-l{font-size:12px;color:var(--text-muted);}
+.impact-text{margin:0;font-size:14px;color:var(--text);max-width:70ch;}
+.footnote{margin:14px 0 0;font-size:12.5px;color:var(--text-faint);border-top:1px dashed var(--border);padding-top:12px;}
+
+/* ---------- gallery: real deliverables ---------- */
+.gallery-section{padding-block:52px;border-top:1px solid var(--border);}
+.gallery-head{max-width:70ch;margin-bottom:32px;}
+.gallery-head .eyebrow{margin:0 0 6px;font-size:12.5px;color:var(--accent);font-weight:600;}
+.gallery-head h2{font-size:clamp(21px,2.6vw,28px);margin-bottom:10px;}
+.gallery-head .summary{margin-bottom:10px;}
+.gallery-note{
+  display:inline-block;font-size:12.5px;color:var(--text-faint);
+  background:var(--surface-2);border-radius:8px;padding:8px 12px;margin:0;
+}
+.gallery-group{margin-bottom:36px;}
+.gallery-group:last-child{margin-bottom:0;}
+.gallery-group-title{
+  display:flex;align-items:center;flex-wrap:wrap;gap:10px;
+  font-size:16px;font-family:'IBM Plex Sans KR',sans-serif;font-weight:700;color:var(--primary);
+  margin-bottom:16px;
+}
+.gallery-period{font-size:12px;color:var(--text-faint);font-weight:500;}
+.gallery-org-link{
+  font-family:'IBM Plex Sans KR',sans-serif;font-weight:500;font-size:12.5px;
+  color:var(--accent);text-decoration:none;margin-left:auto;
+}
+.gallery-org-link:hover{text-decoration:underline;}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
+.gallery-card{
+  margin:0;background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:12px;
+  overflow:hidden;box-shadow:var(--shadow);
+}
+.gallery-card.kind-menu,.gallery-card.kind-ia{border-top-color:var(--positive);}
+.gallery-card.kind-test{border-top-color:var(--mark);}
+.gallery-card img{display:block;width:100%;height:auto;border-bottom:1px solid var(--border);background:var(--surface-2);}
+.gallery-card figcaption{padding:10px 12px 12px;display:flex;flex-direction:column;gap:4px;}
+.gcap-kind{
+  font-size:10px;font-weight:700;color:var(--text-faint);text-transform:uppercase;letter-spacing:.05em;
+}
+.kind-menu .gcap-kind,.kind-ia .gcap-kind{color:var(--positive);}
+.kind-test .gcap-kind{color:var(--mark);}
+.gcap-tag{
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;color:var(--accent);
+  background:var(--accent-soft);border-radius:5px;padding:2px 7px;width:fit-content;letter-spacing:.02em;
+}
+.kind-menu .gcap-tag,.kind-ia .gcap-tag{color:var(--positive);background:var(--positive-soft);}
+.kind-test .gcap-tag{color:var(--mark);background:var(--mark-soft);}
+.gcap-desc{font-size:12.5px;color:var(--text-muted);line-height:1.5;}
+.nav-pill-gallery{border-color:var(--accent);color:var(--accent);}
+
+footer.site-footer{
+  padding-block:40px 60px;border-top:1px solid var(--border);
+  color:var(--text-faint);font-size:12.5px;
+}
+
+</style>
+
+<div class="page">
+  <nav class="topnav">
+    <span class="brand">김민영 · 기획 사례집</span>
+    <div class="nav-scroll"><a href="#case-01" class="nav-pill"><span class="nav-no">01</span>입학 홈페이지 UI/UX …</a><a href="#case-02" class="nav-pill"><span class="nav-no">02</span>PMS 시스템 개편 프로젝…</a><a href="#case-03" class="nav-pill"><span class="nav-no">03</span>대입 합격자 발표 시스템 …</a><a href="#case-04" class="nav-pill"><span class="nav-no">04</span>KNU 오픈캠퍼스 웹 시스…</a><a href="#case-05" class="nav-pill"><span class="nav-no">05</span>메인 배너 관리 시스템(C…</a><a href="#case-06" class="nav-pill"><span class="nav-no">06</span>가톨릭대학교 입학처 홈페이…</a><a href="#gallery" class="nav-pill nav-pill-gallery">실제 산출물</a></div>
+  </nav>
+
+  <header class="hero">
+    <span class="kicker">Service Planning Portfolio · Phase 1–5</span>
+    <h1>화면 너머의 데이터와 상태를<br>설계하는 기획자, 김민영</h1>
+    <p class="lede">아래 6개 사례는 모두 실제 기획서·화면설계서·정책 정의서를 기준으로, 다음의 5단계 표준 프로세스로 재구성했습니다. 프로세스 자체가 이 포트폴리오의 첫 번째 산출물입니다.</p>
+    <div class="method">
+      <h2>5단계 표준 프로세스</h2>
+      <svg class="phase-svg" viewBox="0 0 900 150" role="img" aria-label="5단계 기획 프로세스">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<rect class="pill phasepill" x="26.666666666666668" y="6.0" width="148" height="56" rx="10"/>
+<text class="pill-label phasenum" x="100.66666666666667" y="26" text-anchor="middle">PHASE 1</text>
+<text class="pill-label small" x="100.66666666666667" y="46" text-anchor="middle">요구사항 &amp; 범위</text>
+<text class="phase-desc" x="100.66666666666667" y="84.0" text-anchor="middle">문제 정의 · Scope In/Out · 시작/종료 조건</text>
+<line class="arrow" x1="174.66666666666666" y1="34" x2="201.33333333333331" y2="34" marker-end="url(#arr)"/>
+<rect class="pill phasepill" x="201.33333333333331" y="6.0" width="148" height="56" rx="10"/>
+<text class="pill-label phasenum" x="275.3333333333333" y="26" text-anchor="middle">PHASE 2</text>
+<text class="pill-label small" x="275.3333333333333" y="46" text-anchor="middle">정책 &amp; 상태</text>
+<text class="phase-desc" x="275.3333333333333" y="84.0" text-anchor="middle">업무 규칙 · 상태 목록과 전이 트리거</text>
+<line class="arrow" x1="349.3333333333333" y1="34" x2="376.0" y2="34" marker-end="url(#arr)"/>
+<rect class="pill phasepill" x="376.0" y="6.0" width="148" height="56" rx="10"/>
+<text class="pill-label phasenum" x="450.0" y="26" text-anchor="middle">PHASE 3</text>
+<text class="pill-label small" x="450.0" y="46" text-anchor="middle">데이터 정의</text>
+<text class="phase-desc" x="450.0" y="84.0" text-anchor="middle">UI 항목 매핑 · CRUD 시점/주체 · 데이터 관계</text>
+<line class="arrow" x1="524.0" y1="34" x2="550.6666666666666" y2="34" marker-end="url(#arr)"/>
+<rect class="pill phasepill" x="550.6666666666666" y="6.0" width="148" height="56" rx="10"/>
+<text class="pill-label phasenum" x="624.6666666666666" y="26" text-anchor="middle">PHASE 4</text>
+<text class="pill-label small" x="624.6666666666666" y="46" text-anchor="middle">흐름 &amp; 화면</text>
+<text class="phase-desc" x="624.6666666666666" y="84.0" text-anchor="middle">유스케이스 · UI 컴포넌트 · 화면 이동</text>
+<line class="arrow" x1="698.6666666666666" y1="34" x2="725.3333333333333" y2="34" marker-end="url(#arr)"/>
+<rect class="pill phasepill" x="725.3333333333333" y="6.0" width="148" height="56" rx="10"/>
+<text class="pill-label phasenum" x="799.3333333333333" y="26" text-anchor="middle">PHASE 5</text>
+<text class="pill-label small" x="799.3333333333333" y="46" text-anchor="middle">예외 &amp; 명세</text>
+<text class="phase-desc" x="799.3333333333333" y="84.0" text-anchor="middle">Edge Case 대응 · 입출력 정의</text>
+</svg>
+    </div>
+  </header>
+
+  <section class="case-grid-section" id="case-grid">
+  <div class="case-grid-head">
+    <h2>사례 한눈에 보기</h2>
+    <p class="summary">카드를 클릭하면 해당 사례의 Phase 1~5 상세가 펼쳐집니다. <strong>대표 사례</strong> 3건은 기본으로 펼쳐져 있습니다.</p>
+  </div>
+  <div class="case-grid">
+    <a class="case-card" href="#case-01" data-detail="detail-01">
+  <div class="case-card-thumb"><svg class="wireframe-svg" viewBox="0 0 600 320" role="img" aria-label="전북대학교 입학처 &gt; 메인 화면 와이어프레임">
+<rect class="frame" x="1" y="1" width="598" height="318" rx="14"/>
+<text class="breadcrumb" x="18" y="26">전북대학교 입학처 &gt; 메인</text>
+<line class="hr" x1="0" y1="38" x2="600" y2="38"/>
+<rect class="region" x="16" y="50" width="568" height="34" rx="6"/>
+<text class="region-label" x="300.0" y="71.0" text-anchor="middle">헤더 GNB · 로고 / 전형별 메뉴 / 사이트맵</text><g class="pin"><circle cx="28" cy="50" r="11"/><text x="28" y="54.5" text-anchor="middle">1</text></g><rect class="region" x="16" y="96" width="352" height="120" rx="6"/>
+<text class="region-label" x="192.0" y="160.0" text-anchor="middle">비주얼 롤링 + 슬로건 문구</text><g class="pin"><circle cx="28" cy="96" r="11"/><text x="28" y="100.5" text-anchor="middle">2</text></g><rect class="region hl" x="380" y="96" width="204" height="120" rx="6"/>
+<text class="region-label" x="482.0" y="155.0" text-anchor="middle">사이드바 팝업 (신규 제안)</text>
+<text class="region-sub" x="482.0" y="170.0" text-anchor="middle">다중 팝업 리스트형 그룹핑</text><g class="pin"><circle cx="392" cy="96" r="11"/><text x="392" y="100.5" text-anchor="middle">3</text></g><rect class="region" x="16" y="228" width="272" height="68" rx="6"/>
+<text class="region-label" x="152.0" y="266.0" text-anchor="middle">공지사항 · 등록일 역순</text><g class="pin"><circle cx="28" cy="228" r="11"/><text x="28" y="232.5" text-anchor="middle">4</text></g><rect class="region hl" x="300" y="228" width="284" height="68" rx="6"/>
+<text class="region-label" x="442.0" y="261.0" text-anchor="middle">입시 캘린더 위젯 (신규 제안)</text>
+<text class="region-sub" x="442.0" y="276.0" text-anchor="middle">전형구분 · 시작일 · 종료일</text><g class="pin"><circle cx="312" cy="228" r="11"/><text x="312" y="232.5" text-anchor="middle">5</text></g>
+</svg></div>
+  <div class="case-card-body">
+    <div class="case-card-top"><span class="case-card-no">01</span></div>
+    <h3>입학 홈페이지 UI/UX 개편</h3>
+    <p>정형화된 대학 입시 사이트를 글로벌 레퍼런스 기반으로 리뉴얼하고, 입시 캘린더·CMS 연동 사이드바 팝업을 기획자가 직접 역제안</p>
+    <div class="case-card-stat"><span class="ccs-v">30%+</span><span class="ccs-l">운영 리소스 절감</span></div>
+  </div>
+</a>
+<a class="case-card flagship" href="#case-02" data-detail="detail-02">
+  <div class="case-card-thumb"><svg class="wireframe-svg" viewBox="0 0 600 320" role="img" aria-label="PMS &gt; 로그인 / 대시보드 화면 와이어프레임">
+<rect class="frame" x="1" y="1" width="598" height="318" rx="14"/>
+<text class="breadcrumb" x="18" y="26">PMS &gt; 로그인 / 대시보드</text>
+<line class="hr" x1="0" y1="38" x2="600" y2="38"/>
+<rect class="region" x="16" y="50" width="220" height="254" rx="6"/>
+<text class="region-label" x="126.0" y="176.0" text-anchor="middle">FRONT · 로그인</text>
+<text class="region-sub" x="126.0" y="191.0" text-anchor="middle">5회 오기입 시 계정 자동 비활성화</text><g class="pin"><circle cx="24" cy="50" r="11"/><text x="24" y="54.5" text-anchor="middle">1</text></g><rect class="region" x="252" y="50" width="332" height="90" rx="6"/>
+<text class="region-label" x="418.0" y="94.0" text-anchor="middle">대시보드</text>
+<text class="region-sub" x="418.0" y="109.0" text-anchor="middle">요청 / 진행중 / 완료 카운트</text><g class="pin"><circle cx="260" cy="50" r="11"/><text x="260" y="54.5" text-anchor="middle">2</text></g><rect class="region" x="252" y="150" width="332" height="68" rx="6"/>
+<text class="region-label" x="418.0" y="183.0" text-anchor="middle">게시글 · 알림 피드</text>
+<text class="region-sub" x="418.0" y="198.0" text-anchor="middle">프로젝트 알림 / 내 게시물 알림 / 미알림</text><g class="pin"><circle cx="260" cy="150" r="11"/><text x="260" y="154.5" text-anchor="middle">3</text></g><rect class="region hl" x="252" y="228" width="332" height="76" rx="6"/>
+<text class="region-label" x="418.0" y="265.0" text-anchor="middle">ADMIN 4대 모듈</text>
+<text class="region-sub" x="418.0" y="280.0" text-anchor="middle">계정관리 · 권한관리 · 프로젝트 통계 · 게시글 관리</text><g class="pin"><circle cx="260" cy="228" r="11"/><text x="260" y="232.5" text-anchor="middle">4</text></g>
+</svg></div>
+  <div class="case-card-body">
+    <div class="case-card-top"><span class="case-card-no">02</span><span class="case-card-flag">대표 사례</span></div>
+    <h3>PMS 시스템 개편 프로젝트</h3>
+    <p>노후화된 프로젝트 관리 시스템을 신규 구축해 업무요청·피드백·계정 프로세스를 체계화하고, 정보통신망법 기반 개인정보 파기 프로세스를 신규 설계</p>
+    
+  </div>
+</a>
+<a class="case-card" href="#case-03" data-detail="detail-03">
+  <div class="case-card-thumb"><svg class="wireframe-svg" viewBox="0 0 600 320" role="img" aria-label="합격자 발표 운영 관제 프로세스 프로세스 다이어그램">
+<rect class="frame" x="1" y="1" width="598" height="318" rx="14"/>
+<text class="breadcrumb" x="18" y="26">합격자 발표 운영 관제 프로세스</text>
+<line class="hr" x1="0" y1="38" x2="600" y2="38"/>
+<rect class="region" x="16" y="50" width="568" height="90" rx="6"/>
+<text class="region-label" x="300.0" y="94.0" text-anchor="middle">운영 시트</text>
+<text class="region-sub" x="300.0" y="109.0" text-anchor="middle">학교 · 구분 · 발표일 · 서버 · 처리상태 · 담당자 (90여 개교)</text><g class="pin"><circle cx="28" cy="50" r="11"/><text x="28" y="54.5" text-anchor="middle">1</text></g><rect class="region" x="16" y="156" width="272" height="88" rx="6"/>
+<text class="region-label" x="152.0" y="199.0" text-anchor="middle">TRS 정합성 비교</text>
+<text class="region-sub" x="152.0" y="214.0" text-anchor="middle">DB 등록값 vs 화면 노출값</text><g class="pin"><circle cx="28" cy="156" r="11"/><text x="28" y="160.5" text-anchor="middle">2</text></g><rect class="region hl" x="300" y="156" width="284" height="88" rx="6"/>
+<text class="region-label" x="442.0" y="199.0" text-anchor="middle">배포 스케줄 교차 검증</text>
+<text class="region-sub" x="442.0" y="214.0" text-anchor="middle">Red Zone(트래픽 밀집) 회피 배포일 산정</text><g class="pin"><circle cx="312" cy="156" r="11"/><text x="312" y="160.5" text-anchor="middle">3</text></g><rect class="region" x="16" y="260" width="568" height="44" rx="6"/>
+<text class="region-label" x="300.0" y="286.0" text-anchor="middle">발표 시각 타임라인 · 세팅 → 노출 ON 자동 전환</text><g class="pin"><circle cx="28" cy="260" r="11"/><text x="28" y="264.5" text-anchor="middle">4</text></g>
+</svg></div>
+  <div class="case-card-body">
+    <div class="case-card-top"><span class="case-card-no">03</span></div>
+    <h3>대입 합격자 발표 시스템 운영 및 실시간 대응 최적화</h3>
+    <p>연간 90여 개 대학의 합격자 발표 일정을 데이터화해 CMS 세팅·배포 스케줄을 최적화하고, GA4×T-con 실시간 관제로 트래픽·서버 부하까지 선제 방어해 무장애 운영을 달성</p>
+    <div class="case-card-stat"><span class="ccs-v">100%</span><span class="ccs-l">데이터 노출 정확도</span></div>
+  </div>
+</a>
+<a class="case-card flagship" href="#case-04" data-detail="detail-04">
+  <div class="case-card-thumb"><svg class="wireframe-svg" viewBox="0 0 600 320" role="img" aria-label="KNU 오픈캠퍼스 &gt; 참가 신청 화면 와이어프레임">
+<rect class="frame" x="1" y="1" width="598" height="318" rx="14"/>
+<text class="breadcrumb" x="18" y="26">KNU 오픈캠퍼스 &gt; 참가 신청</text>
+<line class="hr" x1="0" y1="38" x2="600" y2="38"/>
+<rect class="region" x="16" y="50" width="568" height="50" rx="6"/>
+<text class="region-label" x="300.0" y="79.0" text-anchor="middle">캘린더 · 신청 일자 선택</text><g class="pin"><circle cx="28" cy="50" r="11"/><text x="28" y="54.5" text-anchor="middle">1</text></g><rect class="region hl" x="16" y="110" width="568" height="150" rx="6"/>
+<text class="region-label" x="300.0" y="184.0" text-anchor="middle">1~6지망 학과 선택</text>
+<text class="region-sub" x="300.0" y="199.0" text-anchor="middle">1지망 필수 · 2~6지망 선택, 지망별 최대 1개 학과</text><g class="pin"><circle cx="28" cy="110" r="11"/><text x="28" y="114.5" text-anchor="middle">2</text></g><rect class="region" x="16" y="270" width="568" height="34" rx="6"/>
+<text class="region-label" x="300.0" y="291.0" text-anchor="middle">신청하기 → 실시간 중복 검증 → 완료</text><g class="pin"><circle cx="28" cy="270" r="11"/><text x="28" y="274.5" text-anchor="middle">3</text></g>
+</svg></div>
+  <div class="case-card-body">
+    <div class="case-card-top"><span class="case-card-no">04</span><span class="case-card-flag">대표 사례</span></div>
+    <h3>KNU 오픈캠퍼스 웹 시스템 구축</h3>
+    <p>오프라인 입시 설명회(오픈캠퍼스) 신청을 위한 End-to-End 웹 신청 시스템을 신규 기획, 유효성 검증 로직과 CMS 구조를 직접 설계</p>
+    <div class="case-card-stat"><span class="ccs-v">0건</span><span class="ccs-l">운영 기간 내 장애</span></div>
+  </div>
+</a>
+<a class="case-card" href="#case-05" data-detail="detail-05">
+  <div class="case-card-thumb"><svg class="wireframe-svg" viewBox="0 0 600 260" role="img" aria-label="메인 배너 관리 CMS · AS-IS → TO-BE 화면 와이어프레임">
+<rect class="frame" x="1" y="1" width="598" height="258" rx="14"/>
+<text class="breadcrumb" x="18" y="26">메인 배너 관리 CMS · AS-IS → TO-BE</text>
+<line class="hr" x1="0" y1="38" x2="600" y2="38"/>
+<rect class="region" x="16" y="50" width="268" height="180" rx="6"/>
+<text class="region-label" x="150.0" y="139.0" text-anchor="middle">AS-IS</text>
+<text class="region-sub" x="150.0" y="154.0" text-anchor="middle">HTML 태그 수동 입력 · 순서 변경 불가 · 미리보기 없음</text><g class="pin"><circle cx="28" cy="50" r="11"/><text x="28" y="54.5" text-anchor="middle">1</text></g><rect class="region hl" x="316" y="50" width="268" height="180" rx="6"/>
+<text class="region-label" x="450.0" y="139.0" text-anchor="middle">TO-BE</text>
+<text class="region-sub" x="450.0" y="154.0" text-anchor="middle">GUI 컬러 에디터 · 상하 이동 · 실시간 미리보기 · Toggle</text><g class="pin"><circle cx="328" cy="50" r="11"/><text x="328" y="54.5" text-anchor="middle">2</text></g>
+</svg></div>
+  <div class="case-card-body">
+    <div class="case-card-top"><span class="case-card-no">05</span></div>
+    <h3>메인 배너 관리 시스템(CMS) 개선</h3>
+    <p>팝업 관리 시스템을 우회 활용하던 배너 관리 방식의 비효율을 GUI 기반 전용 CMS로 개편해 운영 시간을 75% 단축</p>
+    <div class="case-card-stat"><span class="ccs-v">75%</span><span class="ccs-l">운영 시간 단축</span></div>
+  </div>
+</a>
+<a class="case-card flagship" href="#case-06" data-detail="detail-06">
+  <div class="case-card-thumb"><svg class="wireframe-svg" viewBox="0 0 600 320" role="img" aria-label="입학도우미 &gt; 고교방문 입시설명회 신청 화면 와이어프레임">
+<rect class="frame" x="1" y="1" width="598" height="318" rx="14"/>
+<text class="breadcrumb" x="18" y="26">입학도우미 &gt; 고교방문 입시설명회 신청</text>
+<line class="hr" x1="0" y1="38" x2="600" y2="38"/>
+<rect class="region" x="16" y="50" width="272" height="54" rx="6"/>
+<text class="region-label" x="152.0" y="76.0" text-anchor="middle">고교 검색</text>
+<text class="region-sub" x="152.0" y="91.0" text-anchor="middle">마스터데이터 자동완성 / 신규 등록 분기</text><g class="pin"><circle cx="28" cy="50" r="11"/><text x="28" y="54.5" text-anchor="middle">1</text></g><rect class="region" x="300" y="50" width="284" height="54" rx="6"/>
+<text class="region-label" x="442.0" y="76.0" text-anchor="middle">희망일자 1안 · 2안</text>
+<text class="region-sub" x="442.0" y="91.0" text-anchor="middle">캘린더 선택</text><g class="pin"><circle cx="312" cy="50" r="11"/><text x="312" y="54.5" text-anchor="middle">2</text></g><rect class="region" x="16" y="116" width="568" height="64" rx="6"/>
+<text class="region-label" x="300.0" y="152.0" text-anchor="middle">참석 예정인원 · 담당교사 · 연락처</text><g class="pin"><circle cx="28" cy="116" r="11"/><text x="28" y="120.5" text-anchor="middle">3</text></g><rect class="region hl" x="16" y="192" width="568" height="46" rx="6"/>
+<text class="region-label" x="300.0" y="219.0" text-anchor="middle">신청하기 → 승인대기 등록</text><g class="pin"><circle cx="28" cy="192" r="11"/><text x="28" y="196.5" text-anchor="middle">4</text></g><rect class="region" x="16" y="250" width="568" height="54" rx="6"/>
+<text class="region-label" x="300.0" y="281.0" text-anchor="middle">신청 조회(이름·휴대전화·고교명) · 상태별 수정/재신청</text><g class="pin"><circle cx="28" cy="250" r="11"/><text x="28" y="254.5" text-anchor="middle">5</text></g>
+</svg></div>
+  <div class="case-card-body">
+    <div class="case-card-top"><span class="case-card-no">06</span><span class="case-card-flag">대표 사례</span></div>
+    <h3>가톨릭대학교 입학처 홈페이지 신규 구축</h3>
+    <p>총 151개 페이지를 6종 콘텐츠 타입으로 표준화해 IA를 설계하고, 동적 신청폼·승인 상태 전이·이원화된 개인정보 동의 체계까지 데이터 기준으로 명세화</p>
+    <div class="case-card-stat"><span class="ccs-v">151p</span><span class="ccs-l">전체 페이지</span></div>
+  </div>
+</a>
+  </div>
+  <button type="button" class="expand-all-btn" id="expandAllBtn">전체 사례 펼쳐보기</button>
+</section>
+
+  <main>
+    
+<section class="case" id="case-01">
+  <div class="case-head">
+    <div class="case-no" aria-hidden="true">01</div>
+    <div class="case-headtext">
+      <p class="eyebrow">전북대학교</p>
+      <h2>입학 홈페이지 UI/UX 개편</h2>
+      <span class="badge">기획형 운영</span>
+      <p class="summary">정형화된 대학 입시 사이트를 글로벌 레퍼런스 기반으로 리뉴얼하고, 입시 캘린더·CMS 연동 사이드바 팝업을 기획자가 직접 역제안</p>
+    </div>
+    <div class="case-meta"><table class="meta-table"><tbody><tr><th>기간</th><td>2025.03 – 2025.06</td></tr><tr><th>참여 인원</th><td>기획 1 · 개발 1 · 퍼블리셔 1 · 디자인 1</td></tr><tr><th>담당 역할</th><td>PM</td></tr></tbody></table></div>
+  </div>
+
+  <details class="case-detail" id="detail-01">
+    <summary class="case-detail-toggle">
+      <span class="cdt-label">Phase 1~5 상세 보기</span>
+      <svg class="chevron" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </summary>
+    <div class="case-body">
+      <div class="block">
+        <h3><span class="phase-tag">Phase 1</span>문제 정의 &amp; Scope</h3>
+        <ul class="problem-list"><li>10년 전 UI 스타일을 답습해 정보 과잉·복잡한 내비게이션 문제가 누적</li><li>메인 화면에 팝업이 중첩 노출되어 브랜드 노출이 저해되고, 긴급 공지마다 하드코딩으로 대응</li></ul>
+        <div class="scope-grid"><div class="scope-col in"><h4>Scope In</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>메인 UI/UX 전면 리뉴얼(그리드·반응형)</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>입시 캘린더 신규 기획·설계</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>CMS 연동 사이드바 팝업 시스템</span></li></ul></div><div class="scope-col out"><h4>Scope Out</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>학사정보시스템 등 백엔드 DB 구조 변경</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>원서접수 프로세스 자체 개편</span></li></ul></div></div>
+      </div>
+
+      <div class="block">
+        <h3><span class="phase-tag">Phase 4</span>화면 설계 &amp; 데이터 모델</h3>
+        <div class="wireframe-grid">
+        <div class="wireframe-canvas"><svg class="wireframe-svg" viewBox="0 0 600 320" role="img" aria-label="전북대학교 입학처 &gt; 메인 화면 와이어프레임">
+<rect class="frame" x="1" y="1" width="598" height="318" rx="14"/>
+<text class="breadcrumb" x="18" y="26">전북대학교 입학처 &gt; 메인</text>
+<line class="hr" x1="0" y1="38" x2="600" y2="38"/>
+<rect class="region" x="16" y="50" width="568" height="34" rx="6"/>
+<text class="region-label" x="300.0" y="71.0" text-anchor="middle">헤더 GNB · 로고 / 전형별 메뉴 / 사이트맵</text><g class="pin"><circle cx="28" cy="50" r="11"/><text x="28" y="54.5" text-anchor="middle">1</text></g><rect class="region" x="16" y="96" width="352" height="120" rx="6"/>
+<text class="region-label" x="192.0" y="160.0" text-anchor="middle">비주얼 롤링 + 슬로건 문구</text><g class="pin"><circle cx="28" cy="96" r="11"/><text x="28" y="100.5" text-anchor="middle">2</text></g><rect class="region hl" x="380" y="96" width="204" height="120" rx="6"/>
+<text class="region-label" x="482.0" y="155.0" text-anchor="middle">사이드바 팝업 (신규 제안)</text>
+<text class="region-sub" x="482.0" y="170.0" text-anchor="middle">다중 팝업 리스트형 그룹핑</text><g class="pin"><circle cx="392" cy="96" r="11"/><text x="392" y="100.5" text-anchor="middle">3</text></g><rect class="region" x="16" y="228" width="272" height="68" rx="6"/>
+<text class="region-label" x="152.0" y="266.0" text-anchor="middle">공지사항 · 등록일 역순</text><g class="pin"><circle cx="28" cy="228" r="11"/><text x="28" y="232.5" text-anchor="middle">4</text></g><rect class="region hl" x="300" y="228" width="284" height="68" rx="6"/>
+<text class="region-label" x="442.0" y="261.0" text-anchor="middle">입시 캘린더 위젯 (신규 제안)</text>
+<text class="region-sub" x="442.0" y="276.0" text-anchor="middle">전형구분 · 시작일 · 종료일</text><g class="pin"><circle cx="312" cy="228" r="11"/><text x="312" y="232.5" text-anchor="middle">5</text></g>
+</svg></div>
+        <ol class="legend-list"><li><span class="legend-n">1</span><div><strong>헤더 GNB</strong><span>로고 클릭 시 홈 이동, 전형별 메뉴 + 사이트맵 전체 노출</span></div></li><li><span class="legend-n">2</span><div><strong>비주얼 롤링</strong><span>관리자 등록 이미지 롤링, 비주얼별 슬로건 문구 분리 출력</span></div></li><li><span class="legend-n">3</span><div><strong>사이드바 팝업(신규)</strong><span>중첩 노출되던 팝업을 리스트형으로 통합, '오늘 하루 보지 않기' 시 재노출 억제</span></div></li><li><span class="legend-n">4</span><div><strong>공지사항</strong><span>최근 등록일 기준 내림차순, 관리자 노출 개수 제어</span></div></li><li><span class="legend-n">5</span><div><strong>입시 캘린더(신규)</strong><span>전형구분·시작일·종료일·하이라이트 태그를 CMS에서 CRUD</span></div></li></ol>
+    </div>
+      </div>
+
+      <div class="block">
+        <h3><span class="phase-tag">Phase 2~3</span>정책 &amp; 상태 전이</h3>
+        <div class="state-block">
+            <svg class="state-svg" viewBox="0 0 554 80" role="img" aria-label="상태 전이 다이어그램">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<rect class="pill default" x="20.0" y="20.0" width="100" height="40" rx="20"/>
+<text class="pill-label" x="70.0" y="45.0" text-anchor="middle">등록</text>
+<line class="arrow" x1="120.0" y1="40.0" x2="154.0" y2="40.0" marker-end="url(#arr)"/>
+<rect class="pill progress" x="154.0" y="20.0" width="106" height="40" rx="20"/>
+<text class="pill-label" x="207.0" y="45.0" text-anchor="middle">노출대기</text>
+<line class="arrow" x1="260.0" y1="40.0" x2="294.0" y2="40.0" marker-end="url(#arr)"/>
+<rect class="pill positive" x="294.0" y="20.0" width="100" height="40" rx="20"/>
+<text class="pill-label" x="344.0" y="45.0" text-anchor="middle">노출중</text>
+<line class="arrow" x1="394.0" y1="40.0" x2="428.0" y2="40.0" marker-end="url(#arr)"/>
+<rect class="pill negative" x="428.0" y="20.0" width="106" height="40" rx="20"/>
+<text class="pill-label" x="481.0" y="45.0" text-anchor="middle">노출종료</text>
+</svg>
+            <p class="diagram-caption">관리자가 CMS에서 노출기간을 설정하면 현재 시각 기준으로 자동 전이</p>
+        </div><p class="data-note">전형구분(고교연계/재외국민/수시/정시) · 시작일 · 종료일 · 하이라이트 태그 필드로 CMS 입력 → 캘린더 그리드에 자동 매핑</p>
+      </div>
+
+      <div class="block">
+        <h3><span class="phase-tag">Phase 5</span>예외 처리</h3>
+        <div class="edge-grid"><div class="edge-card"><span class="tag">검증</span><p>노출기간 미입력 시 저장 차단</p></div><div class="edge-card"><span class="tag">정책</span><p>팝업 노출 기간 중첩 시 최신 등록 우선 노출</p></div><div class="edge-card"><span class="tag">UX</span><p>일정 없는 날짜의 빈 상태(Empty State) 처리</p></div><div class="edge-card"><span class="tag">반응형</span><p>모바일에서 팝업이 콘텐츠를 가리지 않도록 사이드 배치 전환</p></div></div>
+      </div>
+
+      <div class="block impact-block">
+        <h3>Collaboration &amp; Impact</h3>
+        <div class="impact-stats"><div class="stat"><span class="stat-v">30%+</span><span class="stat-l">운영 리소스 절감</span></div><div class="stat"><span class="stat-v">0건</span><span class="stat-l">하드코딩 팝업 대응</span></div><div class="stat"><span class="stat-v">↑</span><span class="stat-l">브랜드 비주얼 노출</span></div></div><p class="impact-text">국내외 대학·커머스·핀테크 UI 레퍼런스를 조사해 그리드 시스템을 직접 기획하고, 클라이언트 요구를 넘어 캘린더·CMS 팝업을 역제안해 개편을 성공시켰습니다.</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<section class="case" id="case-02">
+  <div class="case-head">
+    <div class="case-no" aria-hidden="true">02</div>
+    <div class="case-headtext">
+      
+      <h2>PMS 시스템 개편 프로젝트</h2>
+      <span class="badge">법적 준수 · 데이터 파기</span>
+      <p class="summary">노후화된 프로젝트 관리 시스템을 신규 구축해 업무요청·피드백·계정 프로세스를 체계화하고, 정보통신망법 기반 개인정보 파기 프로세스를 신규 설계</p>
+    </div>
+    <div class="case-meta"><table class="meta-table"><tbody><tr><th>기간</th><td>2025.06 – 2025.10</td></tr><tr><th>참여 인원</th><td>기획 2 · 개발 2 · 퍼블리셔 1 · 디자이너 1</td></tr><tr><th>담당 역할</th><td>PM</td></tr></tbody></table></div>
+  </div>
+
+  <details class="case-detail" id="detail-02" open>
+    <summary class="case-detail-toggle">
+      <span class="cdt-label">Phase 1~5 상세 접기</span>
+      <svg class="chevron" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </summary>
+    <div class="case-body">
+      <div class="block">
+        <h3><span class="phase-tag">Phase 1</span>문제 정의 &amp; Scope</h3>
+        <ul class="problem-list"><li>프로젝트 관리·업무요청(VOC)·피드백이 구두·파편화된 방식으로 진행되어 히스토리 관리와 우선순위 조율이 어려움</li><li>정보통신망법 등 관련 법령 준수를 위한 개인정보 파기·휴면 계정 관리 체계 부재</li></ul>
+        <div class="scope-grid"><div class="scope-col in"><h4>Scope In</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>FRONT: 계정 접속·대시보드·게시판·알림·스케줄</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>ADMIN: 계정관리·권한관리·프로젝트 통계·게시글 관리</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>로그인/회원가입/휴면/비밀번호 정책 수립</span></li></ul></div><div class="scope-col out"><h4>Scope Out</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>레거시 데이터 자동 마이그레이션 도구</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>결제·과금 기능(내부 협업 도구 성격에 한정)</span></li></ul></div></div>
+      </div>
+
+      <div class="block">
+        <h3><span class="phase-tag">Phase 4</span>화면 설계 &amp; 데이터 모델</h3>
+        <div class="wireframe-grid">
+        <div class="wireframe-canvas"><svg class="wireframe-svg" viewBox="0 0 600 320" role="img" aria-label="PMS &gt; 로그인 / 대시보드 화면 와이어프레임">
+<rect class="frame" x="1" y="1" width="598" height="318" rx="14"/>
+<text class="breadcrumb" x="18" y="26">PMS &gt; 로그인 / 대시보드</text>
+<line class="hr" x1="0" y1="38" x2="600" y2="38"/>
+<rect class="region" x="16" y="50" width="220" height="254" rx="6"/>
+<text class="region-label" x="126.0" y="176.0" text-anchor="middle">FRONT · 로그인</text>
+<text class="region-sub" x="126.0" y="191.0" text-anchor="middle">5회 오기입 시 계정 자동 비활성화</text><g class="pin"><circle cx="24" cy="50" r="11"/><text x="24" y="54.5" text-anchor="middle">1</text></g><rect class="region" x="252" y="50" width="332" height="90" rx="6"/>
+<text class="region-label" x="418.0" y="94.0" text-anchor="middle">대시보드</text>
+<text class="region-sub" x="418.0" y="109.0" text-anchor="middle">요청 / 진행중 / 완료 카운트</text><g class="pin"><circle cx="260" cy="50" r="11"/><text x="260" y="54.5" text-anchor="middle">2</text></g><rect class="region" x="252" y="150" width="332" height="68" rx="6"/>
+<text class="region-label" x="418.0" y="183.0" text-anchor="middle">게시글 · 알림 피드</text>
+<text class="region-sub" x="418.0" y="198.0" text-anchor="middle">프로젝트 알림 / 내 게시물 알림 / 미알림</text><g class="pin"><circle cx="260" cy="150" r="11"/><text x="260" y="154.5" text-anchor="middle">3</text></g><rect class="region hl" x="252" y="228" width="332" height="76" rx="6"/>
+<text class="region-label" x="418.0" y="265.0" text-anchor="middle">ADMIN 4대 모듈</text>
+<text class="region-sub" x="418.0" y="280.0" text-anchor="middle">계정관리 · 권한관리 · 프로젝트 통계 · 게시글 관리</text><g class="pin"><circle cx="260" cy="228" r="11"/><text x="260" y="232.5" text-anchor="middle">4</text></g>
+</svg></div>
+        <ol class="legend-list"><li><span class="legend-n">1</span><div><strong>로그인 정책</strong><span>아이디·비밀번호 5회 오기입 시 계정 자동 비활성화(관리자 해지 전까지 유지)</span></div></li><li><span class="legend-n">2</span><div><strong>대시보드</strong><span>요청/진행중/완료 업무 카운트를 진입 즉시 확인</span></div></li><li><span class="legend-n">3</span><div><strong>알림 정책</strong><span>3종 알림 구분, 로그인 알림 2개월 간격, 비밀번호 3개월 미변경 시 팝업</span></div></li><li><span class="legend-n">4</span><div><strong>ADMIN 4대 모듈</strong><span>프로젝트별 참여자 권한 CRUD는 관리자만 수행, 통계는 엑셀 온디맨드 추출</span></div></li></ol>
+    </div>
+      </div>
+
+      <div class="block">
+        <h3><span class="phase-tag">Phase 2~3</span>정책 &amp; 상태 전이</h3>
+        <div class="state-block">
+            <svg class="state-svg" viewBox="0 0 479 80" role="img" aria-label="상태 전이 다이어그램">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<rect class="pill positive" x="20.0" y="20.0" width="100" height="40" rx="20"/>
+<text class="pill-label" x="70.0" y="45.0" text-anchor="middle">활성</text>
+<line class="arrow" x1="120.0" y1="40.0" x2="154.0" y2="40.0" marker-end="url(#arr)"/>
+<rect class="pill progress" x="154.0" y="20.0" width="171" height="40" rx="20"/>
+<text class="pill-label" x="239.5" y="45.0" text-anchor="middle">휴면(1년 미접속)</text>
+<line class="arrow" x1="325.0" y1="40.0" x2="359.0" y2="40.0" marker-end="url(#arr)"/>
+<rect class="pill negative" x="359.0" y="20.0" width="100" height="40" rx="20"/>
+<text class="pill-label" x="409.0" y="45.0" text-anchor="middle">삭제</text>
+</svg>
+            <p class="diagram-caption">1년 이내 로그인 이력 없으면 휴면 전환(30일 전 고지) → 휴면 후 1년 내 미접속 시 삭제(30일 전 재고지)</p>
+        </div><div class="table-wrap"><table class="data-table"><thead><tr><th>대구분</th><th>중구분</th><th>정책</th></tr></thead><tbody><tr><td>로그인/회원가입</td><td>회원가입</td><td>코드 부여 (삭제 후 재가입 시에도 신규 계정), 비밀번호 영문+숫자+특수문자 8~20자</td></tr><tr><td></td><td>아이디/비밀번호 찾기</td><td>이름/연락처로 아이디 조회, 이메일·인증번호로 비밀번호 재설정</td></tr><tr><td></td><td>내 정보 수정</td><td>아이디·이름·소속대학교명은 관리자 확인 후에만 수정</td></tr></tbody></table></div>
+      </div>
+
+      <div class="block">
+        <h3><span class="phase-tag">Phase 5</span>예외 처리</h3>
+        <div class="edge-grid"><div class="edge-card"><span class="tag">데이터</span><p>계정 삭제 후 동일 정보 재가입 시 신규 회원 코드로 충돌 방지</p></div><div class="edge-card"><span class="tag">UX</span><p>비밀번호 미변경 시 3개월마다 팝업 재노출</p></div><div class="edge-card"><span class="tag">데이터</span><p>휴면 전환 후 삭제는 논리 삭제 → 물리 삭제 2단계</p></div><div class="edge-card"><span class="tag">권한</span><p>소속 대학교명 변경은 관리자 승인 후에만 반영</p></div></div>
+      </div>
+
+      <div class="block impact-block">
+        <h3>Collaboration &amp; Impact</h3>
+        <p class="impact-text">AS-IS(피드백 관리 부재·VOC 파편화·CMS 부재)를 대시보드 중심 FRONT + 4모듈 ADMIN 구조의 TO-BE로 재설계하고, 정책을 항목별로 명세화해 개발 협업 기준을 마련했습니다.</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<section class="case" id="case-03">
+  <div class="case-head">
+    <div class="case-no" aria-hidden="true">03</div>
+    <div class="case-headtext">
+      
+      <h2>대입 합격자 발표 시스템 운영 및 실시간 대응 최적화</h2>
+      <span class="badge">무장애 운영 · 실시간 관제</span>
+      <p class="summary">연간 90여 개 대학의 합격자 발표 일정을 데이터화해 CMS 세팅·배포 스케줄을 최적화하고, GA4×T-con 실시간 관제로 트래픽·서버 부하까지 선제 방어해 무장애 운영을 달성</p>
+    </div>
+    <div class="case-meta"><table class="meta-table"><tbody><tr><th>기간</th><td>2023.02 – 2025.10</td></tr><tr><th>참여 인원</th><td>기획 1 · 개발 3 · 퍼블리싱 2 · 디자인 3</td></tr><tr><th>담당 역할</th><td>PM</td></tr></tbody></table></div>
+  </div>
+
+  <details class="case-detail" id="detail-03">
+    <summary class="case-detail-toggle">
+      <span class="cdt-label">Phase 1~5 상세 보기</span>
+      <svg class="chevron" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </summary>
+    <div class="case-body">
+      <div class="block">
+        <h3><span class="phase-tag">Phase 1</span>문제 정의 &amp; Scope</h3>
+        <ul class="problem-list"><li>90여 개 대학의 상이한 발표 일정에 따른 트래픽 변동성과 장애 리스크, 발표 유형(최초/충원 등) 미표준화 시 데이터 노출 오류 위험</li><li>발표 피크 타임 서버 과부하·DB 교착(Lock)·응답 지연 우려</li><li>사용자 관점(유입/이탈)과 서버 관점(리소스) 데이터를 각각 다른 도구로 봐야 해 통합 판단이 어려움</li></ul>
+        <div class="scope-grid"><div class="scope-col in"><h4>Scope In</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>대학별 발표 일정 전수조사·운영 시트화 + CMS/하드코딩 세팅 표준화</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>TRS 기반 데이터 정합성 모니터링 + 배포·발표 일정 교차 검증(Red Zone 회피)</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>GA4·T-con 병행 실시간 트래픽/서버 모니터링 및 임계치 선제 조치 프로세스</span></li></ul></div><div class="scope-col out"><h4>Scope Out</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>개별 대학의 입시요강 정책 결정</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>서버 인프라 증설 등 물리 아키텍처 설계</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>접속 대기 시스템(대기열) 자체 개발</span></li></ul></div></div>
+      </div>
+
+      <div class="block">
+        <h3><span class="phase-tag">Phase 4</span>운영 프로세스 &amp; 데이터 흐름</h3>
+        <p class="wire-subtitle">사전 운영 설계 — 발표 일정·배포 표준화</p>
+    <div class="wireframe-grid">
+        <div class="wireframe-canvas"><svg class="wireframe-svg" viewBox="0 0 600 320" role="img" aria-label="합격자 발표 운영 관제 프로세스 프로세스 다이어그램">
+<rect class="frame" x="1" y="1" width="598" height="318" rx="14"/>
+<text class="breadcrumb" x="18" y="26">합격자 발표 운영 관제 프로세스</text>
+<line class="hr" x1="0" y1="38" x2="600" y2="38"/>
+<rect class="region" x="16" y="50" width="568" height="90" rx="6"/>
+<text class="region-label" x="300.0" y="94.0" text-anchor="middle">운영 시트</text>
+<text class="region-sub" x="300.0" y="109.0" text-anchor="middle">학교 · 구분 · 발표일 · 서버 · 처리상태 · 담당자 (90여 개교)</text><g class="pin"><circle cx="28" cy="50" r="11"/><text x="28" y="54.5" text-anchor="middle">1</text></g><rect class="region" x="16" y="156" width="272" height="88" rx="6"/>
+<text class="region-label" x="152.0" y="199.0" text-anchor="middle">TRS 정합성 비교</text>
+<text class="region-sub" x="152.0" y="214.0" text-anchor="middle">DB 등록값 vs 화면 노출값</text><g class="pin"><circle cx="28" cy="156" r="11"/><text x="28" y="160.5" text-anchor="middle">2</text></g><rect class="region hl" x="300" y="156" width="284" height="88" rx="6"/>
+<text class="region-label" x="442.0" y="199.0" text-anchor="middle">배포 스케줄 교차 검증</text>
+<text class="region-sub" x="442.0" y="214.0" text-anchor="middle">Red Zone(트래픽 밀집) 회피 배포일 산정</text><g class="pin"><circle cx="312" cy="156" r="11"/><text x="312" y="160.5" text-anchor="middle">3</text></g><rect class="region" x="16" y="260" width="568" height="44" rx="6"/>
+<text class="region-label" x="300.0" y="286.0" text-anchor="middle">발표 시각 타임라인 · 세팅 → 노출 ON 자동 전환</text><g class="pin"><circle cx="28" cy="260" r="11"/><text x="28" y="264.5" text-anchor="middle">4</text></g>
+</svg></div>
+        <ol class="legend-list"><li><span class="legend-n">1</span><div><strong>운영 시트</strong><span>대학별 발표 유형과 CMS 세팅값·배포 금지 기간을 매핑</span></div></li><li><span class="legend-n">2</span><div><strong>TRS 정합성</strong><span>합격자·등록금 인원수를 DB값 vs 화면값 두 계열로 비교, 불일치 시 알림</span></div></li><li><span class="legend-n">3</span><div><strong>Red Zone 회피</strong><span>신규 배포 요청과 발표 스케줄을 교차 대조해 트래픽 밀집 구간 회피</span></div></li><li><span class="legend-n">4</span><div><strong>자동 전이</strong><span>발표 시각 도달 여부에 따라 시스템이 자동으로 노출 전환</span></div></li></ol>
+    </div><p class="wire-subtitle">실시간 대응 — 트래픽·서버 관제</p>
+    <div class="wireframe-grid">
+        <div class="wireframe-canvas"><svg class="wireframe-svg" viewBox="0 0 600 300" role="img" aria-label="합격자 발표 실시간 대응 프로세스 프로세스 다이어그램">
+<rect class="frame" x="1" y="1" width="598" height="298" rx="14"/>
+<text class="breadcrumb" x="18" y="26">합격자 발표 실시간 대응 프로세스</text>
+<line class="hr" x1="0" y1="38" x2="600" y2="38"/>
+<rect class="region" x="16" y="50" width="272" height="180" rx="6"/>
+<text class="region-label" x="152.0" y="139.0" text-anchor="middle">GA4 · 사용자 유입</text>
+<text class="region-sub" x="152.0" y="154.0" text-anchor="middle">분 단위 활성 사용자 수 / 유입 경로</text><g class="pin"><circle cx="28" cy="50" r="11"/><text x="28" y="54.5" text-anchor="middle">1</text></g><rect class="region hl" x="300" y="50" width="284" height="180" rx="6"/>
+<text class="region-label" x="442.0" y="139.0" text-anchor="middle">T-con · 서버 커넥션</text>
+<text class="region-sub" x="442.0" y="154.0" text-anchor="middle">서버별 도메인 접속 커넥션 수</text><g class="pin"><circle cx="312" cy="50" r="11"/><text x="312" y="54.5" text-anchor="middle">2</text></g><rect class="region" x="16" y="242" width="568" height="40" rx="6"/>
+<text class="region-label" x="300.0" y="266.0" text-anchor="middle">임계치 80% 도달 → 캐싱 강화 / 스크립트 차단 / DB 쿼리 모니터링 3종 조건부 실행</text><g class="pin"><circle cx="28" cy="242" r="11"/><text x="28" y="246.5" text-anchor="middle">3</text></g>
+</svg></div>
+        <ol class="legend-list"><li><span class="legend-n">1</span><div><strong>GA4 대시보드</strong><span>사용자 관점(유입/이탈)을 분 단위로 실시간 추적</span></div></li><li><span class="legend-n">2</span><div><strong>T-con 모니터링</strong><span>서버 관점(리소스)을 도메인 단위 커넥션 수로 추적, GA4와 동일 타임라인 교차 확인</span></div></li><li><span class="legend-n">3</span><div><strong>선제 조치 트리거</strong><span>임계치 80% 도달 시 캐싱·스크립트 차단·DB 모니터링 3종을 조건부 실행</span></div></li></ol>
+    </div>
+      </div>
+
+      <div class="block">
+        <h3><span class="phase-tag">Phase 2~3</span>정책 &amp; 상태 전이</h3>
+        <div class="state-block">
+            <svg class="state-svg" viewBox="0 0 618 80" role="img" aria-label="상태 전이 다이어그램">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<rect class="pill default" x="20.0" y="20.0" width="114" height="40" rx="20"/>
+<text class="pill-label" x="77.0" y="45.0" text-anchor="middle">세팅 대기</text>
+<line class="arrow" x1="134.0" y1="40.0" x2="168.0" y2="40.0" marker-end="url(#arr)"/>
+<rect class="pill progress" x="168.0" y="20.0" width="148" height="40" rx="20"/>
+<text class="pill-label" x="242.0" y="45.0" text-anchor="middle">CMS 세팅 완료</text>
+<line class="arrow" x1="316.0" y1="40.0" x2="350.0" y2="40.0" marker-end="url(#arr)"/>
+<rect class="pill positive" x="350.0" y="20.0" width="100" height="40" rx="20"/>
+<text class="pill-label" x="400.0" y="45.0" text-anchor="middle">노출 ON</text>
+<line class="arrow" x1="450.0" y1="40.0" x2="484.0" y2="40.0" marker-end="url(#arr)"/>
+<rect class="pill default" x="484.0" y="20.0" width="114" height="40" rx="20"/>
+<text class="pill-label" x="541.0" y="45.0" text-anchor="middle">노출 유지</text>
+</svg>
+            <p class="diagram-caption">발표 시각 도달 여부에 따라 시스템이 자동 전환, 이슈 대학은 담당자가 재확인</p>
+        </div><div class="state-block">
+            <svg class="state-svg" viewBox="0 0 526 130" role="img" aria-label="상태 전이 다이어그램">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<rect class="pill positive" x="20.0" y="24.0" width="114" height="40" rx="20"/>
+<text class="pill-label" x="77.0" y="49.0" text-anchor="middle">정상 운영</text>
+<line class="arrow" x1="134.0" y1="44" x2="168.0" y2="44" marker-end="url(#arr)"/>
+<rect class="pill progress" x="168.0" y="24.0" width="114" height="40" rx="20"/>
+<text class="pill-label" x="225.0" y="49.0" text-anchor="middle">징후 감지</text>
+<line class="arrow" x1="282.0" y1="44" x2="328.0" y2="6" marker-end="url(#arr)"/>
+<rect class="pill positive" x="328.0" y="-14.0" width="178" height="40" rx="20"/>
+<text class="pill-label" x="417.0" y="11.0" text-anchor="middle">선제 대응 후 유지</text>
+<line class="arrow" x1="282.0" y1="44" x2="328.0" y2="90" marker-end="url(#arr)"/>
+<rect class="pill negative" x="328.0" y="70.0" width="145" height="40" rx="20"/>
+<text class="pill-label" x="400.5" y="95.0" text-anchor="middle">접속대기 가동</text>
+</svg>
+            <p class="diagram-caption">임계치 도달 전 징후만 있으면 선제 대응 후 정상 유지로 판단, 실제 도달 시에만 접속대기 시스템 가동</p>
+        </div><p class="data-note">① 학교·구분·발표일·서버·발표유형·처리상태·개시일·담당자(8개 필드, 90여 개교) ② GA4(분 단위 활성 사용자·유입 경로) × T-con(서버별 커넥션 수) — 사전 설계 데이터와 실시간 관제 데이터를 하나의 운영 체계로 연결</p>
+      </div>
+
+      <div class="block">
+        <h3><span class="phase-tag">Phase 5</span>예외 처리</h3>
+        <div class="edge-grid"><div class="edge-card"><span class="tag">배포정책</span><p>동일 시간대 다수 대학 발표가 집중되면 해당 구간 배포 보류</p></div><div class="edge-card"><span class="tag">데이터</span><p>DB-화면 불일치 발생 시 TRS 알림 기반 즉시 확인·롤백</p></div><div class="edge-card"><span class="tag">운영</span><p>대학 발표 일정 변경 시 시트 갱신 및 재세팅 프로세스 가동</p></div><div class="edge-card"><span class="tag">판단</span><p>징후만 있고 미도달 시 선제 조치 후 정상 유지로 판단</p></div><div class="edge-card"><span class="tag">에스컬레이션</span><p>접속대기 가동 후에도 병목 지속 시 개발팀 에스컬레이션</p></div></div>
+      </div>
+
+      <div class="block impact-block">
+        <h3>Collaboration &amp; Impact</h3>
+        <div class="impact-stats"><div class="stat"><span class="stat-v">100%</span><span class="stat-l">데이터 노출 정확도</span></div><div class="stat"><span class="stat-v">1.8만</span><span class="stat-l">동시 접속자 무장애 수용</span></div><div class="stat"><span class="stat-v">0%</span><span class="stat-l">배포 사고율</span></div></div><p class="impact-text">발표 유형별 세팅을 표준화하고 TRS·GA4·T-con 실시간 모니터링으로 배포 리스크를 사전 차단하는 한편, 사용자 관점과 서버 관점을 하나의 타임라인에서 교차 판단하는 이중 방어 체계를 설계해, 입시 집중기간(8월~익년 2월) 서비스 가용성 100%를 유지했습니다.</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<section class="case" id="case-04">
+  <div class="case-head">
+    <div class="case-no" aria-hidden="true">04</div>
+    <div class="case-headtext">
+      
+      <h2>KNU 오픈캠퍼스 웹 시스템 구축</h2>
+      <span class="badge">유효성 검증 설계</span>
+      <p class="summary">오프라인 입시 설명회(오픈캠퍼스) 신청을 위한 End-to-End 웹 신청 시스템을 신규 기획, 유효성 검증 로직과 CMS 구조를 직접 설계</p>
+    </div>
+    <div class="case-meta"><table class="meta-table"><tbody><tr><th>기간</th><td>2024.04 – 2024.05</td></tr><tr><th>참여 인원</th><td>기획 1 · 개발 1 · 퍼블리싱 1 · 디자인 1</td></tr><tr><th>담당 역할</th><td>PM</td></tr></tbody></table></div>
+  </div>
+
+  <details class="case-detail" id="detail-04" open>
+    <summary class="case-detail-toggle">
+      <span class="cdt-label">Phase 1~5 상세 접기</span>
+      <svg class="chevron" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </summary>
+    <div class="case-body">
+      <div class="block">
+        <h3><span class="phase-tag">Phase 1</span>문제 정의 &amp; Scope</h3>
+        <ul class="problem-list"><li>오프라인 행사 신청을 받을 안정적이고 직관적인 신청 프로그램 부재</li><li>짧은 오픈 기간에 신청이 몰리는 트래픽 대응 및 무장애 운영 요구</li><li>1~6지망 학과 선택, 중복 신청 방지 등 세부 검증 로직 필요</li></ul>
+        <div class="scope-grid"><div class="scope-col in"><h4>Scope In</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>사용자 신청 Front-End(캘린더 UI·지망 선택)</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>신청 검증 로직(Validation)</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>관리자 CMS(리스트 통합·엑셀 추출·취소 제어)</span></li></ul></div><div class="scope-col out"><h4>Scope Out</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>행사 현장 운영(출석 체크 등)</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>학과/장소 마스터 데이터 신설·변경 프로세스</span></li></ul></div></div>
+      </div>
+
+      <div class="block">
+        <h3><span class="phase-tag">Phase 4</span>화면 설계 &amp; 데이터 모델</h3>
+        <div class="wireframe-grid">
+        <div class="wireframe-canvas"><svg class="wireframe-svg" viewBox="0 0 600 320" role="img" aria-label="KNU 오픈캠퍼스 &gt; 참가 신청 화면 와이어프레임">
+<rect class="frame" x="1" y="1" width="598" height="318" rx="14"/>
+<text class="breadcrumb" x="18" y="26">KNU 오픈캠퍼스 &gt; 참가 신청</text>
+<line class="hr" x1="0" y1="38" x2="600" y2="38"/>
+<rect class="region" x="16" y="50" width="568" height="50" rx="6"/>
+<text class="region-label" x="300.0" y="79.0" text-anchor="middle">캘린더 · 신청 일자 선택</text><g class="pin"><circle cx="28" cy="50" r="11"/><text x="28" y="54.5" text-anchor="middle">1</text></g><rect class="region hl" x="16" y="110" width="568" height="150" rx="6"/>
+<text class="region-label" x="300.0" y="184.0" text-anchor="middle">1~6지망 학과 선택</text>
+<text class="region-sub" x="300.0" y="199.0" text-anchor="middle">1지망 필수 · 2~6지망 선택, 지망별 최대 1개 학과</text><g class="pin"><circle cx="28" cy="110" r="11"/><text x="28" y="114.5" text-anchor="middle">2</text></g><rect class="region" x="16" y="270" width="568" height="34" rx="6"/>
+<text class="region-label" x="300.0" y="291.0" text-anchor="middle">신청하기 → 실시간 중복 검증 → 완료</text><g class="pin"><circle cx="28" cy="270" r="11"/><text x="28" y="274.5" text-anchor="middle">3</text></g>
+</svg></div>
+        <ol class="legend-list"><li><span class="legend-n">1</span><div><strong>일자 선택</strong><span>캘린더 UI에서 신청 일자를 선택</span></div></li><li><span class="legend-n">2</span><div><strong>지망 선택</strong><span>1지망 필수(미지정 시 진입 불가), 단과대학-학과 선택 시 DB 연동 실시간 필터링</span></div></li><li><span class="legend-n">3</span><div><strong>이중 검증</strong><span>지망 선택 직후 + 최종 제출 시 이중 트랜잭션 검증, 동일 날짜·학과 중복 시 차단</span></div></li></ol>
+    </div>
+      </div>
+
+      <div class="block">
+        <h3><span class="phase-tag">Phase 2~3</span>정책 &amp; 상태 전이</h3>
+        <div class="table-wrap"><table class="data-table"><thead><tr><th>No</th><th>구분</th><th>정책</th></tr></thead><tbody><tr><td>01</td><td>Front</td><td>1지망 필수, 2~6지망 선택 · 지망별 최대 1개 학과</td></tr><tr><td>02</td><td>System</td><td>1인 1일 1건 신청, 동일 날짜·학과 중복 시 차단 + 이중 트랜잭션 검증</td></tr><tr><td>03</td><td>Front</td><td>취소 가능 기간 경과 시 버튼 자동 비활성화 → 관리자 수동 처리</td></tr><tr><td>04</td><td>Admin</td><td>1~6지망을 학과명+장소 통합 컬럼 노출, 지망별 개별 컬럼 엑셀 추출</td></tr></tbody></table></div><p class="diagram-caption">실제 서비스 정책 정의서(문서번호 POL-KNU-25-001) 4개 정책을 표로 그대로 시각화</p>
+      </div>
+
+      <div class="block">
+        <h3><span class="phase-tag">Phase 5</span>예외 처리</h3>
+        <div class="edge-grid"><div class="edge-card"><span class="tag">검증</span><p>1지망 미입력 시 제출 차단</p></div><div class="edge-card"><span class="tag">검증</span><p>동일 날짜·동일 학과 재신청 시도 시 차단 메시지</p></div><div class="edge-card"><span class="tag">운영</span><p>취소 가능 기간 종료 후 관리자 수동 처리로 전환</p></div><div class="edge-card"><span class="tag">안정성</span><p>부하 분산·DB Lock 방지 설계로 트랜잭션 무결성 확보</p></div></div>
+      </div>
+
+      <div class="block impact-block">
+        <h3>Collaboration &amp; Impact</h3>
+        <div class="impact-stats"><div class="stat"><span class="stat-v">0건</span><span class="stat-l">운영 기간 내 장애</span></div><div class="stat"><span class="stat-v">0건</span><span class="stat-l">정보 오류</span></div></div><p class="impact-text">Front-End(편의)–Back-End(안정성)–Admin(데이터 관리) 3단계로 End-to-End 로직을 구조화하고, 정책 정의서로 검증 규칙을 문서화해 개발 협업 기준을 마련했습니다.</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<section class="case" id="case-05">
+  <div class="case-head">
+    <div class="case-no" aria-hidden="true">05</div>
+    <div class="case-headtext">
+      
+      <h2>메인 배너 관리 시스템(CMS) 개선</h2>
+      <span class="badge">AS-IS → TO-BE</span>
+      <p class="summary">팝업 관리 시스템을 우회 활용하던 배너 관리 방식의 비효율을 GUI 기반 전용 CMS로 개편해 운영 시간을 75% 단축</p>
+    </div>
+    <div class="case-meta"><table class="meta-table"><tbody><tr><th>기간</th><td>2025.06 – 2025.06</td></tr><tr><th>참여 인원</th><td>기획 1 · 개발 1 · 퍼블리싱 1</td></tr><tr><th>담당 역할</th><td>PM</td></tr></tbody></table></div>
+  </div>
+
+  <details class="case-detail" id="detail-05">
+    <summary class="case-detail-toggle">
+      <span class="cdt-label">Phase 1~5 상세 보기</span>
+      <svg class="chevron" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </summary>
+    <div class="case-body">
+      <div class="block">
+        <h3><span class="phase-tag">Phase 1</span>문제 정의 &amp; Scope</h3>
+        <ul class="problem-list"><li>기존 팝업 관리 시스템을 우회 활용한 배너 관리로 운영 비효율·데이터 관리 혼선</li><li>텍스트 컬러·줄바꿈 등 세부 디자인 제어 시 직접 HTML 코딩 필요</li><li>노출 순서 변경·스케줄링 자동화 미흡으로 실시간 대응 공수 과다</li></ul>
+        <div class="scope-grid"><div class="scope-col in"><h4>Scope In</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>배너 전용 CMS 신규 설계(팝업 CMS와 분리)</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>GUI 컬러/템플릿 에디터, 순서 관리, 실시간 미리보기, 게시 Toggle</span></li></ul></div><div class="scope-col out"><h4>Scope Out</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>배너 콘텐츠(이미지·카피) 제작(디자인팀 영역)</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>사이트 전체 CMS 통합 리뉴얼(별도 과제)</span></li></ul></div></div>
+      </div>
+
+      <div class="block">
+        <h3><span class="phase-tag">Phase 4</span>화면 설계 &amp; 데이터 모델</h3>
+        <div class="wireframe-grid">
+        <div class="wireframe-canvas"><svg class="wireframe-svg" viewBox="0 0 600 260" role="img" aria-label="메인 배너 관리 CMS · AS-IS → TO-BE 화면 와이어프레임">
+<rect class="frame" x="1" y="1" width="598" height="258" rx="14"/>
+<text class="breadcrumb" x="18" y="26">메인 배너 관리 CMS · AS-IS → TO-BE</text>
+<line class="hr" x1="0" y1="38" x2="600" y2="38"/>
+<rect class="region" x="16" y="50" width="268" height="180" rx="6"/>
+<text class="region-label" x="150.0" y="139.0" text-anchor="middle">AS-IS</text>
+<text class="region-sub" x="150.0" y="154.0" text-anchor="middle">HTML 태그 수동 입력 · 순서 변경 불가 · 미리보기 없음</text><g class="pin"><circle cx="28" cy="50" r="11"/><text x="28" y="54.5" text-anchor="middle">1</text></g><rect class="region hl" x="316" y="50" width="268" height="180" rx="6"/>
+<text class="region-label" x="450.0" y="139.0" text-anchor="middle">TO-BE</text>
+<text class="region-sub" x="450.0" y="154.0" text-anchor="middle">GUI 컬러 에디터 · 상하 이동 · 실시간 미리보기 · Toggle</text><g class="pin"><circle cx="328" cy="50" r="11"/><text x="328" y="54.5" text-anchor="middle">2</text></g>
+</svg></div>
+        <ol class="legend-list"><li><span class="legend-n">1</span><div><strong>AS-IS</strong><span>팝업 관리 시스템을 우회 활용, HTML 문자열 통짜 저장으로 세부 제어·순서 변경 불가</span></div></li><li><span class="legend-n">2</span><div><strong>TO-BE</strong><span>제목/내용/URL/게시기간을 구조화된 필드로 분리, GUI 에디터·순서관리·Toggle로 개편</span></div></li></ol>
+    </div>
+      </div>
+
+      <div class="block">
+        <h3><span class="phase-tag">Phase 2~3</span>정책 &amp; 상태 전이</h3>
+        <div class="state-block">
+            <svg class="state-svg" viewBox="0 0 601 80" role="img" aria-label="상태 전이 다이어그램">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<rect class="pill default" x="20.0" y="20.0" width="100" height="40" rx="20"/>
+<text class="pill-label" x="70.0" y="45.0" text-anchor="middle">등록</text>
+<line class="arrow" x1="120.0" y1="40.0" x2="154.0" y2="40.0" marker-end="url(#arr)"/>
+<rect class="pill progress" x="154.0" y="20.0" width="145" height="40" rx="20"/>
+<text class="pill-label" x="226.5" y="45.0" text-anchor="middle">게시기간 도래</text>
+<line class="arrow" x1="299.0" y1="40.0" x2="333.0" y2="40.0" marker-end="url(#arr)"/>
+<rect class="pill positive" x="333.0" y="20.0" width="100" height="40" rx="20"/>
+<text class="pill-label" x="383.0" y="45.0" text-anchor="middle">노출 ON</text>
+<line class="arrow" x1="433.0" y1="40.0" x2="467.0" y2="40.0" marker-end="url(#arr)"/>
+<rect class="pill negative" x="467.0" y="20.0" width="114" height="40" rx="20"/>
+<text class="pill-label" x="524.0" y="45.0" text-anchor="middle">노출 종료</text>
+</svg>
+            <p class="diagram-caption">스케줄 기반 자동 전이와 관리자 수동 Toggle을 병행</p>
+        </div><div class="table-wrap"><table class="data-table"><thead><tr><th>관리 항목</th><th>AS-IS</th><th>TO-BE</th></tr></thead><tbody><tr><td>등록 방식</td><td>개별 단건 등록</td><td>최대 4개 일괄 등록</td></tr><tr><td>디자인 설정</td><td>HTML 태그 수동 입력</td><td>컬러 팔레트 &amp; GUI 에디터</td></tr><tr><td>순서 변경</td><td>기능 없음</td><td>상하 이동 버튼</td></tr><tr><td>미리보기</td><td>부재(등록 후 확인)</td><td>로그인 시 실시간 미리보기</td></tr><tr><td>운영 상태</td><td>게시/미게시 텍스트</td><td>Toggle ON/OFF</td></tr></tbody></table></div>
+      </div>
+
+      <div class="block">
+        <h3><span class="phase-tag">Phase 5</span>예외 처리</h3>
+        <div class="edge-grid"><div class="edge-card"><span class="tag">정책</span><p>게시기간 중복 시 최신 등록 우선 노출로 휴먼 에러 차단</p></div><div class="edge-card"><span class="tag">검증</span><p>필수 항목(제목/게시기간) 미입력 시 저장 차단</p></div><div class="edge-card"><span class="tag">정책</span><p>4개 초과 일괄 등록 시도 시 제한 안내</p></div></div>
+      </div>
+
+      <div class="block impact-block">
+        <h3>Collaboration &amp; Impact</h3>
+        <div class="impact-stats"><div class="stat"><span class="stat-v">75%</span><span class="stat-l">운영 시간 단축</span></div><div class="stat"><span class="stat-v">0건</span><span class="stat-l">디자인/오타 에러</span></div><div class="stat"><span class="stat-v">30%</span><span class="stat-l">운영 공수 절감</span></div></div><p class="impact-text">문제 인식 → 클라이언트 컨설팅(운영 데이터 기반 제안) → 상세 설계·ASIS-TOBE 비교표 순으로 진행해, 코드 기반 관리를 비전문가도 운영 가능한 UI 기반으로 전환했습니다.</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<section class="case" id="case-06">
+  <div class="case-head">
+    <div class="case-no" aria-hidden="true">06</div>
+    <div class="case-headtext">
+      
+      <h2>가톨릭대학교 입학처 홈페이지 신규 구축</h2>
+      <span class="badge">콘텐츠 타입 기반 설계</span>
+      <p class="summary">총 151개 페이지를 6종 콘텐츠 타입으로 표준화해 IA를 설계하고, 동적 신청폼·승인 상태 전이·이원화된 개인정보 동의 체계까지 데이터 기준으로 명세화</p>
+    </div>
+    <div class="case-meta"><table class="meta-table"><tbody><tr><th>기간</th><td>2023.04 – 2023.08 (착수~오픈)</td></tr><tr><th>참여 인원</th><td>기획 1 · 개발 · 퍼블리싱 · 디자인</td></tr><tr><th>담당 역할</th><td>기획(PM) — Front/Admin 기획서 v0.3~v0.5 작성</td></tr></tbody></table></div>
+  </div>
+
+  <details class="case-detail" id="detail-06" open>
+    <summary class="case-detail-toggle">
+      <span class="cdt-label">Phase 1~5 상세 접기</span>
+      <svg class="chevron" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </summary>
+    <div class="case-body">
+      <div class="block">
+        <h3><span class="phase-tag">Phase 1</span>문제 정의 &amp; Scope</h3>
+        <ul class="problem-list"><li>6개 전형 카테고리(수시/정시/편입 등)의 게시판·자료실이 각각 별도 관리되어 콘텐츠 운영이 파편화</li><li>고교방문설명회·1:1상담 등 신청형 프로그램이 매번 개별 개발되어 재사용성이 낮음</li><li>클라이언트가 디자인 시안(A/B/C안)을 1~4차에 걸쳐 반복 수정 요청 → 항목별 관리자 제어 범위 확정 필요</li></ul>
+        <div class="scope-grid"><div class="scope-col in"><h4>Scope In</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>전체 사이트 IA/메뉴구조 설계(151p, 디자인 77·개발 74)</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Front/Admin 스토리보드(관리자·메뉴·게시판·프로그램·고교코드 관리)</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>신청형 프로그램 동적 신청폼 및 승인 프로세스</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>개인정보 수집·이용 동의(필수/선택 이원화)</span></li></ul></div><div class="scope-col out"><h4>Scope Out</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>서버·인프라 아키텍처 설계</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>대학 자체 입학전형 정책 결정, 학생부성적산출 등은 외부 Link 연동으로 대체</span></li></ul></div></div>
+      </div>
+
+      <div class="block">
+        <h3><span class="phase-tag">Phase 4</span>화면 설계 &amp; 데이터 모델</h3>
+        <div class="diagram-card">
+            <div class="diagram-canvas"><svg class="tree-svg" viewBox="0 0 640 170" role="img" aria-label="메뉴 (1건) 콘텐츠 타입 분기 다이어그램">
+<defs><marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<rect class="pill root" x="235.0" y="10" width="170" height="44" rx="10"/>
+<text class="pill-label" x="320.0" y="37.0" text-anchor="middle">메뉴 (1건)</text>
+<line class="arrow2" x1="320.0" y1="54" x2="320.0" y2="80"/>
+<line class="hr2" x1="35.75" y1="80" x2="604.25" y2="80"/>
+<line class="arrow2" x1="35.75" y1="80" x2="35.75" y2="110" marker-end="url(#arr2)"/>
+<rect class="pill leaf" x="-23.25" y="110" width="118" height="40" rx="8"/>
+<text class="pill-label small" x="35.75" y="134.0" text-anchor="middle">내용편집</text>
+<line class="arrow2" x1="130.5" y1="80" x2="130.5" y2="110" marker-end="url(#arr2)"/>
+<rect class="pill leaf" x="71.5" y="110" width="118" height="40" rx="8"/>
+<text class="pill-label small" x="130.5" y="134.0" text-anchor="middle">게시판</text>
+<line class="arrow2" x1="225.25" y1="80" x2="225.25" y2="110" marker-end="url(#arr2)"/>
+<rect class="pill leaf" x="166.25" y="110" width="118" height="40" rx="8"/>
+<text class="pill-label small" x="225.25" y="134.0" text-anchor="middle">링크</text>
+<line class="arrow2" x1="320.0" y1="80" x2="320.0" y2="110" marker-end="url(#arr2)"/>
+<rect class="pill leaf" x="261.0" y="110" width="118" height="40" rx="8"/>
+<text class="pill-label small" x="320.0" y="134.0" text-anchor="middle">PDF뷰어</text>
+<line class="arrow2" x1="414.75" y1="80" x2="414.75" y2="110" marker-end="url(#arr2)"/>
+<rect class="pill leaf" x="355.75" y="110" width="118" height="40" rx="8"/>
+<text class="pill-label small" x="414.75" y="134.0" text-anchor="middle">파일다운로드</text>
+<line class="arrow2" x1="509.5" y1="80" x2="509.5" y2="110" marker-end="url(#arr2)"/>
+<rect class="pill leaf" x="450.5" y="110" width="118" height="40" rx="8"/>
+<text class="pill-label small" x="509.5" y="134.0" text-anchor="middle">프로그램</text>
+<line class="arrow2" x1="604.25" y1="80" x2="604.25" y2="110" marker-end="url(#arr2)"/>
+<rect class="pill leaf" x="545.25" y="110" width="118" height="40" rx="8"/>
+<text class="pill-label small" x="604.25" y="134.0" text-anchor="middle">메뉴복사</text>
+</svg></div>
+            <p class="diagram-caption">메뉴 1건이 7종 콘텐츠 타입 중 하나를 가지는 구조 — 동일 타입은 스키마를 공유해 신규 페이지도 개발 재작업 없이 대응</p>
+        </div><div class="field-block">
+            <div class="badge-row"><span class="field-badge">Text</span><span class="field-badge">Date</span><span class="field-badge">Phone</span><span class="field-badge">Email</span><span class="field-badge">School</span><span class="field-badge">Select</span><span class="field-badge">Radio</span><span class="field-badge">Checkbox</span></div>
+            <p class="diagram-caption">프로그램별 신청폼에 8종 필드 타입을 자유 조합 · 옵션별 정원 합은 전체 신청제한인원을 초과할 수 없도록 교차 검증</p>
+        </div><div class="wireframe-grid">
+        <div class="wireframe-canvas"><svg class="wireframe-svg" viewBox="0 0 600 320" role="img" aria-label="입학도우미 &gt; 고교방문 입시설명회 신청 화면 와이어프레임">
+<rect class="frame" x="1" y="1" width="598" height="318" rx="14"/>
+<text class="breadcrumb" x="18" y="26">입학도우미 &gt; 고교방문 입시설명회 신청</text>
+<line class="hr" x1="0" y1="38" x2="600" y2="38"/>
+<rect class="region" x="16" y="50" width="272" height="54" rx="6"/>
+<text class="region-label" x="152.0" y="76.0" text-anchor="middle">고교 검색</text>
+<text class="region-sub" x="152.0" y="91.0" text-anchor="middle">마스터데이터 자동완성 / 신규 등록 분기</text><g class="pin"><circle cx="28" cy="50" r="11"/><text x="28" y="54.5" text-anchor="middle">1</text></g><rect class="region" x="300" y="50" width="284" height="54" rx="6"/>
+<text class="region-label" x="442.0" y="76.0" text-anchor="middle">희망일자 1안 · 2안</text>
+<text class="region-sub" x="442.0" y="91.0" text-anchor="middle">캘린더 선택</text><g class="pin"><circle cx="312" cy="50" r="11"/><text x="312" y="54.5" text-anchor="middle">2</text></g><rect class="region" x="16" y="116" width="568" height="64" rx="6"/>
+<text class="region-label" x="300.0" y="152.0" text-anchor="middle">참석 예정인원 · 담당교사 · 연락처</text><g class="pin"><circle cx="28" cy="116" r="11"/><text x="28" y="120.5" text-anchor="middle">3</text></g><rect class="region hl" x="16" y="192" width="568" height="46" rx="6"/>
+<text class="region-label" x="300.0" y="219.0" text-anchor="middle">신청하기 → 승인대기 등록</text><g class="pin"><circle cx="28" cy="192" r="11"/><text x="28" y="196.5" text-anchor="middle">4</text></g><rect class="region" x="16" y="250" width="568" height="54" rx="6"/>
+<text class="region-label" x="300.0" y="281.0" text-anchor="middle">신청 조회(이름·휴대전화·고교명) · 상태별 수정/재신청</text><g class="pin"><circle cx="28" cy="250" r="11"/><text x="28" y="254.5" text-anchor="middle">5</text></g>
+</svg></div>
+        <ol class="legend-list"><li><span class="legend-n">1</span><div><strong>고교 검색</strong><span>고교코드 마스터 조회 자동완성, 미존재 시 신규등록(우편번호 API)으로 분기</span></div></li><li><span class="legend-n">2</span><div><strong>희망일자</strong><span>1안·2안 캘린더 선택, 활성화된 날짜는 인원 제한 없이 신청 가능</span></div></li><li><span class="legend-n">3</span><div><strong>참석 정보</strong><span>학년별 참석 예정인원 + 담당교사 직함/성함/연락처</span></div></li><li><span class="legend-n">4</span><div><strong>신청 등록</strong><span>제출 시 상태값 '승인대기'로 저장</span></div></li><li><span class="legend-n">5</span><div><strong>조회/재신청</strong><span>승인대기만 수정 가능, 승인완료는 잠금, 승인취소는 재신청 허용</span></div></li></ol>
+    </div>
+      </div>
+
+      <div class="block">
+        <h3><span class="phase-tag">Phase 2~3</span>정책 &amp; 상태 전이</h3>
+        <div class="state-block">
+            <svg class="state-svg" viewBox="0 0 550 130" role="img" aria-label="상태 전이 다이어그램">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<rect class="pill default" x="20.0" y="24.0" width="100" height="40" rx="20"/>
+<text class="pill-label" x="70.0" y="49.0" text-anchor="middle">신청</text>
+<line class="arrow" x1="120.0" y1="44" x2="154.0" y2="44" marker-end="url(#arr)"/>
+<rect class="pill progress" x="154.0" y="24.0" width="106" height="40" rx="20"/>
+<text class="pill-label" x="207.0" y="49.0" text-anchor="middle">승인대기</text>
+<line class="arrow" x1="260.0" y1="44" x2="306.0" y2="6" marker-end="url(#arr)"/>
+<rect class="pill positive" x="306.0" y="-14.0" width="106" height="40" rx="20"/>
+<text class="pill-label" x="359.0" y="11.0" text-anchor="middle">승인완료</text>
+<line class="arrow" x1="260.0" y1="44" x2="306.0" y2="90" marker-end="url(#arr)"/>
+<rect class="pill negative" x="306.0" y="70.0" width="224" height="40" rx="20"/>
+<text class="pill-label" x="418.0" y="95.0" text-anchor="middle">승인취소 → 재신청 가능</text>
+</svg>
+            <p class="diagram-caption">승인대기만 수정 가능 · 승인완료는 잠금 · 승인취소는 동일 정보로 재신청 허용</p>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3><span class="phase-tag">Phase 5</span>예외 처리</h3>
+        <div class="edge-grid"><div class="edge-card"><span class="tag">검증</span><p>고교 검색 결과 없음 → 신규 고교 등록(우편번호 API)으로 분기</p></div><div class="edge-card"><span class="tag">검증</span><p>옵션별 정원 합이 전체 정원 초과 시 저장 차단 + 안내 문구</p></div><div class="edge-card"><span class="tag">정책</span><p>신청기간 종료 시 리스트 상태 자동 '마감' 전환</p></div><div class="edge-card"><span class="tag">권한</span><p>관리자 5회 로그인 실패 시 계정 자동 비활성화, IP는 와일드카드(*)로 대역 등록</p></div><div class="edge-card"><span class="tag">데이터</span><p>고교코드 일괄업로드 시 '신규 추가'와 '삭제 후 교체'를 체크박스로 분리</p></div></div>
+      </div>
+
+      
+    </div>
+  </details>
+</section>
+  </main>
+
+  <section class="gallery-section" id="gallery">
+  <div class="gallery-head">
+    <span class="eyebrow">Real Deliverables</span>
+    <h2>실제 기획서 산출물</h2>
+    <p class="summary">위 사례들의 근거가 된 실제 산출물입니다. 화면설계(스토리보드)뿐 아니라 메뉴구조도(IA)·테스트케이스까지, 기획 단계별로 실제 작성한 문서의 구조와 밀도를 확인할 수 있습니다.</p>
+    <p class="gallery-note">고객사 기밀 보호를 위해 세부 텍스트는 모자이크 처리했습니다.</p>
+  </div>
+  <div class="gallery-group">
+  <h3 class="gallery-group-title">가톨릭대학교 입학처 <span class="badge">Case 06</span> <span class="gallery-period mono">2023.04 – 2023.08</span> <a class="gallery-org-link" href="#case-06">사례 보기 →</a></h3>
+  <div class="gallery-grid">
+    <figure class="gallery-card kind-wire">
+  <img src="gallery/cuk_front_12-12_mosaic.jpg" alt="가톨릭대학교 입학처 기획서 — Front · p.12 — 게시판형 목록 화면 — 브레드크럼 내비게이션 + 번호 주석" loading="lazy">
+  <figcaption><span class="gcap-kind">화면설계</span><span class="gcap-tag">Front · p.12</span><span class="gcap-desc">게시판형 목록 화면 — 브레드크럼 내비게이션 + 번호 주석</span></figcaption>
+</figure>
+<figure class="gallery-card kind-wire">
+  <img src="gallery/cuk_front_48-48_mosaic.jpg" alt="가톨릭대학교 입학처 기획서 — Front · p.48 — 신청 프로그램 접수 현황 — 승인 상태 배지 노출" loading="lazy">
+  <figcaption><span class="gcap-kind">화면설계</span><span class="gcap-tag">Front · p.48</span><span class="gcap-desc">신청 프로그램 접수 현황 — 승인 상태 배지 노출</span></figcaption>
+</figure>
+<figure class="gallery-card kind-wire">
+  <img src="gallery/cuk_admin_26-26_mosaic.jpg" alt="가톨릭대학교 입학처 기획서 — Admin · p.26 — 메뉴 관리 — 트리 구조 + 콘텐츠 타입 선택" loading="lazy">
+  <figcaption><span class="gcap-kind">화면설계</span><span class="gcap-tag">Admin · p.26</span><span class="gcap-desc">메뉴 관리 — 트리 구조 + 콘텐츠 타입 선택</span></figcaption>
+</figure>
+<figure class="gallery-card kind-menu">
+  <img src="gallery/cuk_menu_mosaic.jpg" alt="가톨릭대학교 입학처 기획서 — IA(Front) v0.3 — 전체 메뉴구조도 — Depth·콘텐츠 타입·Page ID 매핑 스프레드시트" loading="lazy">
+  <figcaption><span class="gcap-kind">메뉴구조도</span><span class="gcap-tag">IA(Front) v0.3</span><span class="gcap-desc">전체 메뉴구조도 — Depth·콘텐츠 타입·Page ID 매핑 스프레드시트</span></figcaption>
+</figure>
+  </div>
+</div>
+<div class="gallery-group">
+  <h3 class="gallery-group-title">안양대학교 입학처 <span class="badge">참고 프로젝트</span> <span class="gallery-period mono">2024.04 – 2024.08</span></h3>
+  <div class="gallery-grid">
+    <figure class="gallery-card kind-wire">
+  <img src="gallery/any_front_08-08_mosaic.jpg" alt="안양대학교 입학처 기획서 — Front · p.8 — 메인 화면 — GNB 및 검색 영역 와이어프레임" loading="lazy">
+  <figcaption><span class="gcap-kind">화면설계</span><span class="gcap-tag">Front · p.8</span><span class="gcap-desc">메인 화면 — GNB 및 검색 영역 와이어프레임</span></figcaption>
+</figure>
+<figure class="gallery-card kind-wire">
+  <img src="gallery/any_front_21-21_mosaic.jpg" alt="안양대학교 입학처 기획서 — Front · p.21 — 게시판 리스트 — 비공개글 확인번호 조회 팝업" loading="lazy">
+  <figcaption><span class="gcap-kind">화면설계</span><span class="gcap-tag">Front · p.21</span><span class="gcap-desc">게시판 리스트 — 비공개글 확인번호 조회 팝업</span></figcaption>
+</figure>
+<figure class="gallery-card kind-wire">
+  <img src="gallery/any_admin_09-09_mosaic.jpg" alt="안양대학교 입학처 기획서 — Admin · p.9 — 관리자 그룹 권한 설정 — 대메뉴 단위 체크박스" loading="lazy">
+  <figcaption><span class="gcap-kind">화면설계</span><span class="gcap-tag">Admin · p.9</span><span class="gcap-desc">관리자 그룹 권한 설정 — 대메뉴 단위 체크박스</span></figcaption>
+</figure>
+<figure class="gallery-card kind-menu">
+  <img src="gallery/any_menu_mosaic.jpg" alt="안양대학교 입학처 기획서 — 메뉴구조도 확정안 — AS-IS/TO-BE 대조표 — 전형별 메뉴 재설계 근거를 항목 단위로 명시" loading="lazy">
+  <figcaption><span class="gcap-kind">메뉴구조도</span><span class="gcap-tag">메뉴구조도 확정안</span><span class="gcap-desc">AS-IS/TO-BE 대조표 — 전형별 메뉴 재설계 근거를 항목 단위로 명시</span></figcaption>
+</figure>
+<figure class="gallery-card kind-test">
+  <img src="gallery/any_testcase_mosaic.jpg" alt="안양대학교 입학처 기획서 — 단위테스트목록 — 서브시스템·업무구분별 단위테스트 ID 관리 시트 — 1·2차 테스트 결과 트래킹" loading="lazy">
+  <figcaption><span class="gcap-kind">테스트케이스</span><span class="gcap-tag">단위테스트목록</span><span class="gcap-desc">서브시스템·업무구분별 단위테스트 ID 관리 시트 — 1·2차 테스트 결과 트래킹</span></figcaption>
+</figure>
+  </div>
+</div>
+<div class="gallery-group">
+  <h3 class="gallery-group-title">PMS 프로젝트 관리 시스템 <span class="badge">참고 프로젝트</span> <span class="gallery-period mono">2025.06 – 2025.10</span> <a class="gallery-org-link" href="#case-02">사례 보기 →</a></h3>
+  <div class="gallery-grid">
+    <figure class="gallery-card kind-wire">
+  <img src="gallery/pms_front_27_mosaic.jpg" alt="PMS 프로젝트 관리 시스템 기획서 — Front · 대시보드 — 프로젝트 현황·캘린더·통계 위젯이 결합된 메인 대시보드 화면 설계" loading="lazy">
+  <figcaption><span class="gcap-kind">화면설계</span><span class="gcap-tag">Front · 대시보드</span><span class="gcap-desc">프로젝트 현황·캘린더·통계 위젯이 결합된 메인 대시보드 화면 설계</span></figcaption>
+</figure>
+<figure class="gallery-card kind-wire">
+  <img src="gallery/pms_front_34_mosaic.jpg" alt="PMS 프로젝트 관리 시스템 기획서 — Front · Workflow — 사용자 초기 비밀번호 변경 유도 플로우 — 조건 분기가 포함된 업무 흐름도" loading="lazy">
+  <figcaption><span class="gcap-kind">화면설계</span><span class="gcap-tag">Front · Workflow</span><span class="gcap-desc">사용자 초기 비밀번호 변경 유도 플로우 — 조건 분기가 포함된 업무 흐름도</span></figcaption>
+</figure>
+<figure class="gallery-card kind-wire">
+  <img src="gallery/pms_admin_13_mosaic.jpg" alt="PMS 프로젝트 관리 시스템 기획서 — Admin · 통계 — 대학별 이용 현황 통계 화면 — 기간 검색·차트·랭킹 테이블 설계" loading="lazy">
+  <figcaption><span class="gcap-kind">화면설계</span><span class="gcap-tag">Admin · 통계</span><span class="gcap-desc">대학별 이용 현황 통계 화면 — 기간 검색·차트·랭킹 테이블 설계</span></figcaption>
+</figure>
+<figure class="gallery-card kind-ia">
+  <img src="gallery/pms_ia_mosaic.jpg" alt="PMS 프로젝트 관리 시스템 기획서 — 재구축 IA — Page ID·CRUD 여부·연동 API까지 명시한 데이터 기준 IA 스프레드시트" loading="lazy">
+  <figcaption><span class="gcap-kind">IA</span><span class="gcap-tag">재구축 IA</span><span class="gcap-desc">Page ID·CRUD 여부·연동 API까지 명시한 데이터 기준 IA 스프레드시트</span></figcaption>
+</figure>
+  </div>
+</div>
+</section>
+
+  <footer class="site-footer">
+    Phase 1(요구사항·범위) → Phase 2(정책·상태) → Phase 3(데이터 정의) → Phase 4(흐름·화면) → Phase 5(예외처리·명세) — 김민영 서비스 기획 사례집
+  </footer>
+</div>
+
+<script>
+(function(){
+  document.querySelectorAll('.case-card').forEach(function(card){
+    card.addEventListener('click', function(){
+      var id = card.getAttribute('data-detail');
+      var d = document.getElementById(id);
+      if (d) d.open = true;
+    });
+  });
+  document.querySelectorAll('.case-detail').forEach(function(d){
+    var label = d.querySelector('.cdt-label');
+    if (!label) return;
+    d.addEventListener('toggle', function(){
+      label.textContent = d.open ? 'Phase 1~5 상세 접기' : 'Phase 1~5 상세 보기';
+    });
+  });
+  var btn = document.getElementById('expandAllBtn');
+  if (btn) {
+    btn.addEventListener('click', function(){
+      var details = document.querySelectorAll('.case-detail');
+      var anyClosed = Array.prototype.some.call(details, function(d){ return !d.open; });
+      details.forEach(function(d){ d.open = anyClosed; });
+      btn.textContent = anyClosed ? '전체 사례 접기' : '전체 사례 펼쳐보기';
+    });
+  }
+})();
+</script>
