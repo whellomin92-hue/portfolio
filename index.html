@@ -347,6 +347,7 @@ a{color:var(--accent);}
 }
 .gallery-card.kind-menu,.gallery-card.kind-ia{border-top-color:var(--positive);}
 .gallery-card.kind-test{border-top-color:var(--mark);}
+.gallery-card.kind-policy{border-top-color:var(--negative);}
 .gallery-card img{display:block;width:100%;height:auto;border-bottom:1px solid var(--border);background:var(--surface-2);}
 .gallery-card figcaption{padding:10px 12px 12px;display:flex;flex-direction:column;gap:4px;}
 .gcap-kind{
@@ -354,12 +355,14 @@ a{color:var(--accent);}
 }
 .kind-menu .gcap-kind,.kind-ia .gcap-kind{color:var(--positive);}
 .kind-test .gcap-kind{color:var(--mark);}
+.kind-policy .gcap-kind{color:var(--negative);}
 .gcap-tag{
   font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;color:var(--accent);
   background:var(--accent-soft);border-radius:5px;padding:2px 7px;width:fit-content;letter-spacing:.02em;
 }
 .kind-menu .gcap-tag,.kind-ia .gcap-tag{color:var(--positive);background:var(--positive-soft);}
 .kind-test .gcap-tag{color:var(--mark);background:var(--mark-soft);}
+.kind-policy .gcap-tag{color:var(--negative);background:var(--negative-soft);}
 .gcap-desc{font-size:12.5px;color:var(--text-muted);line-height:1.5;}
 .nav-pill-gallery{border-color:var(--accent);color:var(--accent);}
 
@@ -1122,6 +1125,14 @@ footer.site-footer{
 <figure class="gallery-card kind-ia">
   <img src="gallery/pms_ia_mosaic.jpg" alt="PMS 프로젝트 관리 시스템 기획서 — 재구축 IA — Page ID·CRUD 여부·연동 API까지 명시한 데이터 기준 IA 스프레드시트" loading="lazy">
   <figcaption><span class="gcap-kind">IA</span><span class="gcap-tag">재구축 IA</span><span class="gcap-desc">Page ID·CRUD 여부·연동 API까지 명시한 데이터 기준 IA 스프레드시트</span></figcaption>
+</figure>
+<figure class="gallery-card kind-policy">
+  <img src="gallery/pms_privacy_mosaic.jpg" alt="PMS 프로젝트 관리 시스템 기획서 — 개인정보처리방침 — 수집 목적·항목·보유기간을 조항 단위로 정의한 개인정보처리방침 문서" loading="lazy">
+  <figcaption><span class="gcap-kind">정책문서</span><span class="gcap-tag">개인정보처리방침</span><span class="gcap-desc">수집 목적·항목·보유기간을 조항 단위로 정의한 개인정보처리방침 문서</span></figcaption>
+</figure>
+<figure class="gallery-card kind-policy">
+  <img src="gallery/pms_terms_mosaic.jpg" alt="PMS 프로젝트 관리 시스템 기획서 — 이용약관 · 수집동의 — 회원가입 시 노출되는 개인정보 수집동의 문구와 이용약관 조항 구성" loading="lazy">
+  <figcaption><span class="gcap-kind">정책문서</span><span class="gcap-tag">이용약관 · 수집동의</span><span class="gcap-desc">회원가입 시 노출되는 개인정보 수집동의 문구와 이용약관 조항 구성</span></figcaption>
 </figure>
   </div>
 </div>
