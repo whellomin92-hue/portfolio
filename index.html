@@ -255,6 +255,21 @@ a{color:var(--accent);}
 .scope-col.out .ic{color:var(--negative);}
 .ic{width:15px;height:15px;flex:none;margin-top:2px;}
 
+/* real-screen AS-IS / TO-BE comparison */
+.compare-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:16px;}
+@media (min-width:640px){.compare-grid{grid-template-columns:1fr 1fr;}}
+.compare-shot{margin:0;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--surface);box-shadow:var(--shadow);}
+.compare-shot img{display:block;width:100%;height:auto;border-bottom:1px solid var(--border);background:var(--surface-2);}
+.compare-shot figcaption{padding:10px 14px 14px;font-size:12.5px;color:var(--text-muted);line-height:1.5;}
+.compare-tag{
+  display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;
+  border-radius:5px;padding:2px 8px;margin:0 8px 6px 0;letter-spacing:.03em;vertical-align:middle;
+}
+.compare-tag.asis{color:var(--negative);background:var(--negative-soft);}
+.compare-tag.tobe{color:var(--positive);background:var(--positive-soft);}
+.compare-breakdown{margin:0;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--surface-2);padding:8px;}
+.compare-breakdown img{display:block;width:100%;height:auto;border-radius:8px;}
+
 /* wireframe */
 .wire-subtitle{
   font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.01em;
@@ -609,7 +624,22 @@ footer.site-footer{
         <ul class="problem-list"><li>10년 전 UI 스타일을 답습해 정보 과잉·복잡한 내비게이션 문제가 누적</li><li>메인 화면에 팝업이 중첩 노출되어 브랜드 노출이 저해되고, 긴급 공지마다 하드코딩으로 대응</li></ul>
         <div class="scope-grid"><div class="scope-col in"><h4>Scope In</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>메인 UI/UX 전면 리뉴얼(그리드·반응형)</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>입시 캘린더 신규 기획·설계</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>CMS 연동 사이드바 팝업 시스템</span></li></ul></div><div class="scope-col out"><h4>Scope Out</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>학사정보시스템 등 백엔드 DB 구조 변경</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>원서접수 프로세스 자체 개편</span></li></ul></div></div>
       </div>
-
+      <div class="block">
+        <h3><span class="phase-tag">실제 화면</span>AS-IS → TO-BE</h3>
+        <div class="compare-grid">
+          <figure class="compare-shot asis">
+            <img src="gallery/c01_asis.jpg" alt="AS-IS 화면 캡처" loading="lazy">
+            <figcaption><span class="compare-tag asis">AS-IS</span>AS-IS — 팝업 3~4개가 중첩 노출되어 메인 비주얼을 가리고, 공지사항이 산재</figcaption>
+          </figure>
+          <figure class="compare-shot tobe">
+            <img src="gallery/c01_tobe.jpg" alt="TO-BE 화면 캡처" loading="lazy">
+            <figcaption><span class="compare-tag tobe">TO-BE</span>TO-BE — 팝업을 사이드바 탭으로 통합, 비주얼과 핵심 카피가 그대로 노출</figcaption>
+          </figure>
+        </div>
+        <figure class="compare-breakdown">
+          <img src="gallery/c01_breakdown.jpg" alt="AS-IS/TO-BE 세부 개선 포인트 4가지 — 사이드바 팝업 전환, 콘텐츠 그룹화, 반응형 디자인 고도화, 입시 캘린더 도입" loading="lazy">
+        </figure>
+      </div>
       <div class="block">
         <h3><span class="phase-tag">Phase 4</span>화면 설계 &amp; 데이터 모델</h3>
         <div class="wireframe-grid">
@@ -687,7 +717,20 @@ footer.site-footer{
         <ul class="problem-list"><li>프로젝트 관리·업무요청(VOC)·피드백이 구두·파편화된 방식으로 진행되어 히스토리 관리와 우선순위 조율이 어려움</li><li>정보통신망법 등 관련 법령 준수를 위한 개인정보 파기·휴면 계정 관리 체계 부재</li></ul>
         <div class="scope-grid"><div class="scope-col in"><h4>Scope In</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>FRONT: 계정 접속·대시보드·게시판·알림·스케줄</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>ADMIN: 계정관리·권한관리·프로젝트 통계·게시글 관리</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>로그인/회원가입/휴면/비밀번호 정책 수립</span></li></ul></div><div class="scope-col out"><h4>Scope Out</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>레거시 데이터 자동 마이그레이션 도구</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>결제·과금 기능(내부 협업 도구 성격에 한정)</span></li></ul></div></div>
       </div>
-
+      <div class="block">
+        <h3><span class="phase-tag">실제 화면</span>AS-IS → TO-BE</h3>
+        <div class="compare-grid">
+          <figure class="compare-shot asis">
+            <img src="gallery/c02_asis.jpg" alt="AS-IS 화면 캡처" loading="lazy">
+            <figcaption><span class="compare-tag asis">AS-IS</span>AS-IS — 그룹웨어형 게시판 UI로 프로젝트·업무요청이 목록으로만 나열, 우선순위·진행상태 구분 없음</figcaption>
+          </figure>
+          <figure class="compare-shot tobe">
+            <img src="gallery/c02_tobe.jpg" alt="TO-BE 화면 캡처" loading="lazy">
+            <figcaption><span class="compare-tag tobe">TO-BE</span>TO-BE — 프로젝트 현황·캘린더·통계 위젯을 결합한 대시보드로 재구축, 요청 상태를 배지로 한눈에 구분</figcaption>
+          </figure>
+        </div>
+        
+      </div>
       <div class="block">
         <h3><span class="phase-tag">Phase 4</span>화면 설계 &amp; 데이터 모델</h3>
         <div class="wireframe-grid">
@@ -763,7 +806,7 @@ footer.site-footer{
         <ul class="problem-list"><li>90여 개 대학의 상이한 발표 일정에 따른 트래픽 변동성과 장애 리스크, 발표 유형(최초/충원 등) 미표준화 시 데이터 노출 오류 위험</li><li>발표 피크 타임 서버 과부하·DB 교착(Lock)·응답 지연 우려</li><li>사용자 관점(유입/이탈)과 서버 관점(리소스) 데이터를 각각 다른 도구로 봐야 해 통합 판단이 어려움</li></ul>
         <div class="scope-grid"><div class="scope-col in"><h4>Scope In</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>대학별 발표 일정 전수조사·운영 시트화 + CMS/하드코딩 세팅 표준화</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>TRS 기반 데이터 정합성 모니터링 + 배포·발표 일정 교차 검증(Red Zone 회피)</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>GA4·T-con 병행 실시간 트래픽/서버 모니터링 및 임계치 선제 조치 프로세스</span></li></ul></div><div class="scope-col out"><h4>Scope Out</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>개별 대학의 입시요강 정책 결정</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>서버 인프라 증설 등 물리 아키텍처 설계</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>접속 대기 시스템(대기열) 자체 개발</span></li></ul></div></div>
       </div>
-
+      
       <div class="block">
         <h3><span class="phase-tag">Phase 4</span>운영 프로세스 &amp; 데이터 흐름</h3>
         <p class="wire-subtitle">사전 운영 설계 — 발표 일정·배포 표준화</p>
@@ -872,7 +915,7 @@ footer.site-footer{
         <ul class="problem-list"><li>오프라인 행사 신청을 받을 안정적이고 직관적인 신청 프로그램 부재</li><li>짧은 오픈 기간에 신청이 몰리는 트래픽 대응 및 무장애 운영 요구</li><li>1~6지망 학과 선택, 중복 신청 방지 등 세부 검증 로직 필요</li></ul>
         <div class="scope-grid"><div class="scope-col in"><h4>Scope In</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>사용자 신청 Front-End(캘린더 UI·지망 선택)</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>신청 검증 로직(Validation)</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>관리자 CMS(리스트 통합·엑셀 추출·취소 제어)</span></li></ul></div><div class="scope-col out"><h4>Scope Out</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>행사 현장 운영(출석 체크 등)</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>학과/장소 마스터 데이터 신설·변경 프로세스</span></li></ul></div></div>
       </div>
-
+      
       <div class="block">
         <h3><span class="phase-tag">Phase 4</span>화면 설계 &amp; 데이터 모델</h3>
         <div class="wireframe-grid">
@@ -912,7 +955,7 @@ footer.site-footer{
   <div class="case-head">
     <div class="case-no" aria-hidden="true">05</div>
     <div class="case-headtext">
-      
+      <p class="eyebrow">순천향대학교 입학처</p>
       <h2>메인 배너 관리 시스템(CMS) 개선</h2>
       <span class="badge">AS-IS → TO-BE</span>
       <p class="summary">팝업 관리 시스템을 우회 활용하던 배너 관리 방식의 비효율을 GUI 기반 전용 CMS로 개편해 운영 시간을 75% 단축</p>
@@ -931,7 +974,20 @@ footer.site-footer{
         <ul class="problem-list"><li>기존 팝업 관리 시스템을 우회 활용한 배너 관리로 운영 비효율·데이터 관리 혼선</li><li>텍스트 컬러·줄바꿈 등 세부 디자인 제어 시 직접 HTML 코딩 필요</li><li>노출 순서 변경·스케줄링 자동화 미흡으로 실시간 대응 공수 과다</li></ul>
         <div class="scope-grid"><div class="scope-col in"><h4>Scope In</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>배너 전용 CMS 신규 설계(팝업 CMS와 분리)</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>GUI 컬러/템플릿 에디터, 순서 관리, 실시간 미리보기, 게시 Toggle</span></li></ul></div><div class="scope-col out"><h4>Scope Out</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>배너 콘텐츠(이미지·카피) 제작(디자인팀 영역)</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>사이트 전체 CMS 통합 리뉴얼(별도 과제)</span></li></ul></div></div>
       </div>
-
+      <div class="block">
+        <h3><span class="phase-tag">실제 화면</span>AS-IS → TO-BE</h3>
+        <div class="compare-grid">
+          <figure class="compare-shot asis">
+            <img src="gallery/c05_asis.jpg" alt="AS-IS 화면 캡처" loading="lazy">
+            <figcaption><span class="compare-tag asis">AS-IS</span>AS-IS — 팝업 관리 시스템을 우회 활용, 제목 필드에 &lt;span&gt; HTML 태그를 직접 입력해 줄바꿈·서식을 통짜 문자열로 관리</figcaption>
+          </figure>
+          <figure class="compare-shot tobe">
+            <img src="gallery/c05_tobe.jpg" alt="TO-BE 화면 캡처" loading="lazy">
+            <figcaption><span class="compare-tag tobe">TO-BE</span>TO-BE — 배너 전용 CMS로 분리, 내용별 색상 지정·상하 이동·게시기간 설정을 구조화된 필드/GUI로 제공</figcaption>
+          </figure>
+        </div>
+        
+      </div>
       <div class="block">
         <h3><span class="phase-tag">Phase 4</span>화면 설계 &amp; 데이터 모델</h3>
         <div class="wireframe-grid">
@@ -1006,7 +1062,7 @@ footer.site-footer{
         <ul class="problem-list"><li>6개 전형 카테고리(수시/정시/편입 등)의 게시판·자료실이 각각 별도 관리되어 콘텐츠 운영이 파편화</li><li>고교방문설명회·1:1상담 등 신청형 프로그램이 매번 개별 개발되어 재사용성이 낮음</li><li>클라이언트가 디자인 시안(A/B/C안)을 1~4차에 걸쳐 반복 수정 요청 → 항목별 관리자 제어 범위 확정 필요</li></ul>
         <div class="scope-grid"><div class="scope-col in"><h4>Scope In</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>전체 사이트 IA/메뉴구조 설계(151p, 디자인 77·개발 74)</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Front/Admin 스토리보드(관리자·메뉴·게시판·프로그램·고교코드 관리)</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>신청형 프로그램 동적 신청폼 및 승인 프로세스</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>개인정보 수집·이용 동의(필수/선택 이원화)</span></li></ul></div><div class="scope-col out"><h4>Scope Out</h4><ul><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>서버·인프라 아키텍처 설계</span></li><li><svg viewBox="0 0 16 16" class="ic"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>대학 자체 입학전형 정책 결정, 학생부성적산출 등은 외부 Link 연동으로 대체</span></li></ul></div></div>
       </div>
-
+      
       <div class="block">
         <h3><span class="phase-tag">Phase 4</span>화면 설계 &amp; 데이터 모델</h3>
         <div class="diagram-card">
