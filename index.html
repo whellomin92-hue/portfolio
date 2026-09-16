@@ -258,9 +258,9 @@ a{color:var(--accent);}
 /* real-screen AS-IS / TO-BE comparison */
 .compare-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:16px;}
 @media (min-width:640px){.compare-grid{grid-template-columns:1fr 1fr;}}
-.compare-shot{margin:0;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--surface);box-shadow:var(--shadow);}
-.compare-shot img{display:block;width:100%;height:auto;border-bottom:1px solid var(--border);background:var(--surface-2);}
-.compare-shot figcaption{padding:10px 14px 14px;font-size:12.5px;color:var(--text-muted);line-height:1.5;}
+.compare-shot{display:flex;flex-direction:column;margin:0;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--surface);box-shadow:var(--shadow);}
+.compare-shot img{display:block;flex:none;width:100%;height:auto;border-bottom:1px solid var(--border);background:var(--surface-2);}
+.compare-shot figcaption{margin-top:auto;padding:10px 14px 14px;font-size:12.5px;color:var(--text-muted);line-height:1.5;}
 .compare-tag{
   display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;
   border-radius:5px;padding:2px 8px;margin:0 8px 6px 0;letter-spacing:.03em;vertical-align:middle;
