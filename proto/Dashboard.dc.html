@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>관리자 대시보드</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  body { margin: 0; font-family: -apple-system, "Apple SD Gothic Neo", "Pretendard", "Malgun Gothic", sans-serif; background: #F2F3F6; }
+  .card { background: #ffffff; border-radius: 10px; padding: 20px 22px; box-shadow: 0 1px 3px rgba(20,25,40,.06); box-sizing: border-box; }
+  .card-title { font-size: 15px; font-weight: 700; color: #1B2340; }
+  .more-link { font-size: 12px; color: #9297A3; cursor: pointer; }
+  .more-link:hover { color: #E4004C; }
+  .task-tab { cursor: pointer; transition: color .15s ease; }
+  .task-tab:hover { color: #1B2340; }
+  .stat-tab { cursor: pointer; transition: color .15s ease; }
+  .side-item { cursor: pointer; transition: background .15s ease, color .15s ease; }
+  .side-item:hover { background: #EFF1F5; }
+  .cal-nav-btn { cursor: pointer; transition: background .15s ease; }
+  .cal-nav-btn:hover { background: #EFF1F5; }
+  .fade-swap { animation: fadeIn .18s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</helmet>
+
+<div style="width: 1440px; height: 900px; box-sizing: border-box; display: flex; background: #F2F3F6; overflow: hidden;">
+  <a href="../index.html#case-01" style="position: fixed; right: 20px; bottom: 20px; z-index: 9999; display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; border-radius: 999px; background: rgba(18,19,26,0.88); color: #fff; font-size: 13px; font-weight: 700; text-decoration: none; box-shadow: 0 6px 18px rgba(0,0,0,0.18);">← 포트폴리오로 돌아가기</a>
+
+  <!-- Sidebar -->
+  <div style="width: 224px; flex-shrink: 0; display: flex; flex-direction: column; background: #ffffff; border-right: 1px solid #E7E9EE;">
+    <div style="height: 64px; flex-shrink: 0; background: #E4670B; display: flex; align-items: center; justify-content: space-between; padding: 0 18px; box-sizing: border-box;">
+      <span style="color: #fff; font-size: 17px; font-weight: 800;">관리자</span>
+      <svg width="18" height="14" viewBox="0 0 18 14" fill="none"><rect width="18" height="2" rx="1" fill="#fff"></rect><rect y="6" width="18" height="2" rx="1" fill="#fff"></rect><rect y="12" width="18" height="2" rx="1" fill="#fff"></rect></svg>
+    </div>
+
+    <div style="padding: 16px 16px 8px;">
+      <button style="width: 100%; box-sizing: border-box; padding: 11px 0; border-radius: 6px; border: 1px solid #1B2340; background: #fff; color: #1B2340; font-size: 13px; font-weight: 700; cursor: pointer;">
+        + 프로젝트 생성
+      </button>
+    </div>
+
+    <div style="display: flex; flex-direction: column; padding: 6px 12px; gap: 2px;">
+      <div class="side-item" style="padding: 11px 12px; border-radius: 6px; background: #1B2340; color: #fff; font-size: 13.5px; font-weight: 700;">대시보드</div>
+      <div class="side-item" style="padding: 11px 12px; border-radius: 6px; color: #4A4F5C; font-size: 13.5px;">내프로젝트</div>
+      <div class="side-item" style="padding: 11px 12px; border-radius: 6px; color: #4A4F5C; font-size: 13.5px;">미확인 알림</div>
+      <div class="side-item" style="padding: 11px 12px; border-radius: 6px; color: #4A4F5C; font-size: 13.5px;">더보기</div>
+    </div>
+
+    <div style="height: 1px; background: #EDEEF2; margin: 10px 20px;"></div>
+
+    <div style="display: flex; flex-direction: column; padding: 0 12px; gap: 2px;">
+      <div class="side-item" style="padding: 11px 12px; border-radius: 6px; color: #9297A3; font-size: 13px;">전체 업무</div>
+      <div class="side-item" style="padding: 11px 12px; border-radius: 6px; color: #9297A3; font-size: 13px;">통계 상세</div>
+    </div>
+
+    <div style="flex: 1;"></div>
+
+    <div style="padding: 16px;">
+      <div style="width: 100%; box-sizing: border-box; padding: 11px 0; border-radius: 6px; background: #F0F1F4; color: #6B7080; font-size: 13px; font-weight: 700; text-align: center;">관리자 메뉴</div>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div style="flex: 1; display: flex; flex-direction: column; min-width: 0;">
+
+    <!-- Top bar -->
+    <div style="height: 64px; flex-shrink: 0; background: #fff; border-bottom: 1px solid #E7E9EE; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; box-sizing: border-box;">
+      <span style="font-size: 16px; font-weight: 800; color: #1B2340; letter-spacing: 1px;">TOP</span>
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <span style="font-size: 12px; color: #9297A3;">남은 시간: 00분</span>
+        <div style="width: 30px; height: 30px; border-radius: 50%; background: #F0F1F4; display: flex; align-items: center; justify-content: center; position: relative;">
+          <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M7 0C5 0 3.5 1.6 3.5 3.6V6.8C3.5 7.6 3.2 8.4 2.6 9L1.5 10.2C1 10.7 1.3 11.6 2 11.6H12C12.7 11.6 13 10.7 12.5 10.2L11.4 9C10.8 8.4 10.5 7.6 10.5 6.8V3.6C10.5 1.6 9 0 7 0Z" fill="#6B7080"></path><circle cx="7" cy="14.2" r="1.4" fill="#6B7080"></circle></svg>
+          <div style="position: absolute; top: -2px; right: -2px; width: 14px; height: 14px; border-radius: 50%; background: #E4004C; color: #fff; font-size: 9px; font-weight: 700; display: flex; align-items: center; justify-content: center;">6</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div style="flex: 1; padding: 22px 28px; box-sizing: border-box; display: flex; gap: 20px; overflow: hidden;">
+
+      <!-- Left column -->
+      <div style="width: 62%; display: flex; flex-direction: column; gap: 20px; min-width: 0;">
+
+        <!-- 프로젝트 관리 -->
+        <div class="card">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+            <span class="card-title">프로젝트 관리</span>
+            <span class="more-link">더보기</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 18px; border-bottom: 1px solid #EDEEF2; padding-bottom: 10px; margin-bottom: 10px;">
+            <sc-for list="{{taskTabs}}" as="tab" hint-placeholder-count="4">
+              <span class="task-tab" onClick="{{tab.onClick}}" style="font-size: 13px; font-weight: {{tab.weight}}; color: {{tab.color}};">
+                {{tab.label}} <sc-if value="{{tab.showCount}}" hint-placeholder-val="{{false}}"><span style="color: #E4004C; font-weight: 800;">{{tab.count}}</span></sc-if>
+              </span>
+            </sc-for>
+          </div>
+          <div class="fade-swap" style="display: flex; flex-direction: column; gap: 2px;">
+            <sc-for list="{{taskItems}}" as="t" hint-placeholder-count="4">
+              <div style="display: flex; align-items: center; gap: 12px; padding: 9px 0;">
+                <span style="flex-shrink: 0; width: 46px; text-align: center; padding: 4px 0; border-radius: 4px; background: {{t.badgeBg}}; color: #fff; font-size: 11px; font-weight: 700;">{{t.status}}</span>
+                <span style="flex: 1; font-size: 13px; color: #2C3040; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{t.label}}</span>
+                <span style="flex-shrink: 0; font-size: 12px; color: #9297A3; width: 56px;">{{t.person}}</span>
+                <span style="flex-shrink: 0; font-size: 12px; color: #B3B7C2; width: 84px; text-align: right;">{{t.date}}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- 내 프로젝트 -->
+        <div class="card">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+            <span class="card-title">내 프로젝트</span>
+            <span class="more-link">더보기</span>
+          </div>
+          <div style="display: flex; gap: 16px;">
+            <sc-for list="{{myProjects}}" as="p" hint-placeholder-count="4">
+              <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                <div style="width: 56px; height: 56px; border-radius: 50%; background: {{p.color}}; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 15px; font-weight: 800;">{{p.initial}}</div>
+                <span style="font-size: 11.5px; color: #4A4F5C; text-align: center; line-height: 1.4;">{{p.label}}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- 통계 -->
+        <div class="card" style="flex: 1;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <span class="card-title">통계</span>
+              <span class="stat-tab" onClick="{{onStatMonth}}" style="font-size: 12.5px; font-weight: {{statMonthWeight}}; color: {{statMonthColor}};">월</span>
+              <span class="stat-tab" onClick="{{onStatYear}}" style="font-size: 12.5px; font-weight: {{statYearWeight}}; color: {{statYearColor}};">연도</span>
+            </div>
+            <span class="more-link">더보기</span>
+          </div>
+          <div class="fade-swap" style="display: flex; gap: 12px;">
+            <sc-for list="{{statPills}}" as="s" hint-placeholder-count="5">
+              <div style="flex: 1; border-radius: 8px; background: {{s.color}}; padding: 12px 10px; color: #fff; display: flex; flex-direction: column; gap: 6px;">
+                <span style="font-size: 12px; font-weight: 700;">{{s.label}}</span>
+                <span style="font-size: 18px; font-weight: 800;">{{s.count}}</span>
+                <span style="font-size: 11px; opacity: .85;">{{s.pct}}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column -->
+      <div style="width: 38%; display: flex; flex-direction: column; gap: 20px; min-width: 0;">
+
+        <!-- 캘린더 -->
+        <div class="card">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+            <span class="card-title">캘린더</span>
+            <span class="more-link">더보기</span>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 12px;">
+            <span class="cal-nav-btn" onClick="{{onPrevMonth}}" style="width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #6B7080;">‹</span>
+            <span style="font-size: 14px; font-weight: 700; color: #1B2340; width: 110px; text-align: center;">{{monthLabel}}</span>
+            <span class="cal-nav-btn" onClick="{{onNextMonth}}" style="width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #6B7080;">›</span>
+          </div>
+          <div class="fade-swap">
+            <div style="display: grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap: 4px; margin-bottom: 4px;">
+              <sc-for list="{{weekdays}}" as="w" hint-placeholder-count="7">
+                <span style="text-align: center; font-size: 11px; font-weight: 700; color: {{w.color}};">{{w.label}}</span>
+              </sc-for>
+            </div>
+            <sc-for list="{{weeks}}" as="week" hint-placeholder-count="5">
+              <div style="display: grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap: 4px; margin-bottom: 4px;">
+                <sc-for list="{{week.days}}" as="d" hint-placeholder-count="7">
+                  <div style="aspect-ratio: 1; display: flex; align-items: center; justify-content: center;">
+                    <span style="width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: {{d.weight}}; color: {{d.color}}; background: {{d.bg}};">{{d.num}}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px solid #EDEEF2;">
+            <sc-for list="{{events}}" as="ev" hint-placeholder-count="2">
+              <div style="display: flex; gap: 8px; font-size: 12px; color: #4A4F5C;">
+                <span style="font-weight: 700; color: #1B2340; flex-shrink: 0;">{{ev.day}}일</span>
+                <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ev.text}}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- 미확인 알림 -->
+        <div class="card" style="flex: 1;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+            <span class="card-title">미확인 알림</span>
+            <span class="more-link">더보기</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <sc-for list="{{alerts}}" as="a" hint-placeholder-count="2">
+              <div style="display: flex; gap: 10px; align-items: flex-start;">
+                <div style="width: 7px; height: 7px; border-radius: 50%; background: #E4004C; margin-top: 6px; flex-shrink: 0;"></div>
+                <div style="display: flex; flex-direction: column; gap: 3px;">
+                  <span style="font-size: 11.5px; color: #9297A3;">{{a.time}} · {{a.who}}</span>
+                  <span style="font-size: 13px; color: #2C3040;">{{a.text}}</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { taskTab: 'progress', statTab: 'month', monthIdx: 0 };
+
+    this.taskData = {
+      progress: { count: '10', items: [
+        { status: '요청', label: '입학처 홈페이지가 다운됐습니다. 처리해주세요.', person: '김민수', date: '2026-01-30', badgeBg: '#E4004C' },
+        { status: '요청', label: '수시 2차 합격자 발표 인트로 제작 요청드립니다.', person: '이도현', date: '2026-01-30', badgeBg: '#E4004C' },
+        { status: '진행', label: '합격자 발표 인트로 제작 요청드립니다.', person: '박서준', date: '2026-01-30', badgeBg: '#3DAA5C' },
+        { status: '완료', label: '홍보용 팝업 요청드립니다.', person: '최유진', date: '2026-01-30', badgeBg: '#8E1F35' },
+        { status: '보류', label: '원서수정 페이지 제작 요청드립니다.', person: '정하늘', date: '2026-01-30', badgeBg: '#8A8F3D' },
+        { status: '피드백', label: '면접비 납부 조회페이지 작업요청드립니다.', person: '김민수', date: '2026-01-30', badgeBg: '#D89B00' },
+      ]},
+      requested: { count: '2', items: [
+        { status: '요청', label: '입학처 홈페이지가 다운됐습니다. 처리해주세요.', person: '김민수', date: '2026-01-30', badgeBg: '#E4004C' },
+        { status: '요청', label: '수시 2차 합격자 발표 인트로 제작 요청드립니다.', person: '이도현', date: '2026-01-30', badgeBg: '#E4004C' },
+      ]},
+      urgent: { count: '2', items: [
+        { status: '요청', label: '지원 접수 오류 문의 폭주, 확인 요청드립니다.', person: '이도현', date: '2026-01-31', badgeBg: '#E4004C' },
+        { status: '진행', label: '실기평가 일정 페이지 수정 요청드립니다.', person: '박서준', date: '2026-02-01', badgeBg: '#3DAA5C' },
+      ]},
+      done: { count: '3', items: [
+        { status: '완료', label: '홍보용 팝업 요청드립니다.', person: '최유진', date: '2026-01-28', badgeBg: '#8E1F35' },
+        { status: '완료', label: '원서접수 안내 배너 교체 요청드립니다.', person: '정하늘', date: '2026-01-25', badgeBg: '#8E1F35' },
+        { status: '완료', label: '면접비 납부 조회페이지 작업요청드립니다.', person: '김민수', date: '2026-01-20', badgeBg: '#8E1F35' },
+      ]},
+    };
+
+    this.months = [
+      {
+        label: '2026년 1월',
+        weeks: [
+          [{n:29,dim:true},{n:30,dim:true},{n:1},{n:2},{n:3},{n:4},{n:5}],
+          [{n:6,ev:true},{n:7},{n:8},{n:9},{n:10},{n:11},{n:12}],
+          [{n:13},{n:14},{n:15},{n:16},{n:17,today:true},{n:18},{n:19}],
+          [{n:20,hl:true},{n:21},{n:22},{n:23},{n:24},{n:25},{n:26}],
+          [{n:27},{n:28},{n:29},{n:30,ev:true},{n:31},{n:1,dim:true},{n:2,dim:true}],
+        ],
+        events: [
+          { day: 6, text: '[A대] 수시모집 최초 합격자 발표 14:00' },
+          { day: 20, text: '[B대] 정시모집 입시설명회 신청' },
+          { day: 30, text: '[C대] 정시모집 입시설명회 신청마감' },
+        ],
+      },
+      {
+        label: '2026년 2월',
+        weeks: [
+          [{n:1},{n:2},{n:3},{n:4},{n:5,ev:true},{n:6},{n:7}],
+          [{n:8},{n:9},{n:10},{n:11},{n:12},{n:13},{n:14,hl:true}],
+          [{n:15},{n:16},{n:17},{n:18},{n:19},{n:20},{n:21}],
+          [{n:22},{n:23},{n:24},{n:25},{n:26},{n:27},{n:28}],
+        ],
+        events: [
+          { day: 5, text: '[D대] 신입생 오리엔테이션 안내' },
+          { day: 14, text: '[A대] 정시모집 등록 마감' },
+        ],
+      },
+    ];
+  }
+
+  renderVals() {
+    const tabMeta = [
+      { key: 'progress', label: '진행중 업무', count: this.taskData.progress.count },
+      { key: 'requested', label: '요청중 업무', count: this.taskData.requested.count },
+      { key: 'urgent', label: '임박한 업무', count: this.taskData.urgent.count },
+      { key: 'done', label: '완료된 업무', count: this.taskData.done.count },
+    ];
+    const activeTab = this.state.taskTab;
+
+    const taskTabs = tabMeta.map((t) => ({
+      label: t.label,
+      count: t.count,
+      showCount: t.key === activeTab,
+      weight: t.key === activeTab ? '800' : '500',
+      color: t.key === activeTab ? '#1B2340' : '#9297A3',
+      onClick: () => this.setState({ taskTab: t.key }),
+    }));
+
+    const month = this.months[this.state.monthIdx];
+    const weeks = month.weeks.map((week) => ({
+      days: week.map((d) => {
+        let bg = 'transparent', color = '#2C3040', weight = '500';
+        if (d.dim) { color = '#C7CAD3'; }
+        if (d.today) { bg = '#1B2340'; color = '#ffffff'; weight = '800'; }
+        else if (d.hl) { bg = '#3DAA5C'; color = '#ffffff'; weight = '800'; }
+        else if (d.ev) { color = '#E4004C'; weight = '800'; }
+        return { num: d.n, bg, color, weight };
+      }),
+    }));
+
+    const statBase = this.state.statTab === 'month'
+      ? [
+          { label: '요청', count: '20', pct: '15%', color: '#0071C1' },
+          { label: '진행', count: '25', pct: '15%', color: '#6EB573' },
+          { label: '완료', count: '1,400', pct: '88%', color: '#CA0000' },
+          { label: '보류', count: '210', pct: '20%', color: '#7BBD41' },
+          { label: '피드백', count: '50', pct: '15%', color: '#D89B00' },
+        ]
+      : [
+          { label: '요청', count: '240', pct: '15%', color: '#0071C1' },
+          { label: '진행', count: '300', pct: '15%', color: '#6EB573' },
+          { label: '완료', count: '16,800', pct: '88%', color: '#CA0000' },
+          { label: '보류', count: '2,520', pct: '20%', color: '#7BBD41' },
+          { label: '피드백', count: '600', pct: '15%', color: '#D89B00' },
+        ];
+
+    return {
+      taskTabs,
+      taskItems: this.taskData[activeTab].items,
+
+      myProjects: [
+        { initial: 'A', color: '#0071C1', label: 'A대학교 입학처 유지보수' },
+        { initial: 'B', color: '#3DAA5C', label: 'B대학교 입학처 상담솔루션' },
+        { initial: 'C', color: '#E4670B', label: 'C대학교 입학처 실기평가' },
+        { initial: 'D', color: '#8A56C7', label: 'D대학교 입학처 실기평가' },
+      ],
+
+      statMonthWeight: this.state.statTab === 'month' ? '800' : '500',
+      statMonthColor: this.state.statTab === 'month' ? '#1B2340' : '#9297A3',
+      statYearWeight: this.state.statTab === 'year' ? '800' : '500',
+      statYearColor: this.state.statTab === 'year' ? '#1B2340' : '#9297A3',
+      onStatMonth: () => this.setState({ statTab: 'month' }),
+      onStatYear: () => this.setState({ statTab: 'year' }),
+      statPills: statBase,
+
+      monthLabel: month.label,
+      onPrevMonth: () => this.setState({ monthIdx: this.state.monthIdx === 0 ? this.months.length - 1 : this.state.monthIdx - 1 }),
+      onNextMonth: () => this.setState({ monthIdx: (this.state.monthIdx + 1) % this.months.length }),
+      weekdays: [
+        { label: '일', color: '#E4004C' }, { label: '월', color: '#4A4F5C' }, { label: '화', color: '#4A4F5C' },
+        { label: '수', color: '#4A4F5C' }, { label: '목', color: '#4A4F5C' }, { label: '금', color: '#4A4F5C' },
+        { label: '토', color: '#0071C1' },
+      ],
+      weeks,
+      events: month.events,
+
+      alerts: [
+        { time: '1시간 전', who: 'B대 입학처 강태우', text: '모의논술 프로그램 제작요청드립니다.' },
+        { time: '14:34', who: 'C대 입학처 오세훈', text: '합격자 발표용 인트로 디자인 요청드립니다.' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

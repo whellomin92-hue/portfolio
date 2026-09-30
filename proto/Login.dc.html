@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>로그인 화면</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  body { margin: 0; font-family: -apple-system, "Apple SD Gothic Neo", "Pretendard", "Malgun Gothic", sans-serif; background: #F4F5F7; }
+  .login-input::placeholder { color: #B3B7C2; }
+  .login-input:focus { outline: none; border-color: #E4004C; background: #ffffff; }
+  .primary-btn:hover { background: #C4003F; }
+  .ghost-link:hover { color: #E4004C; }
+  .modal-btn-primary:hover { background: #C4003F; }
+  .modal-btn-secondary:hover { background: #0F1B33; }
+  .demo-chip { transition: background .15s ease; }
+  .demo-chip:hover { background: #E9EBF0; }
+  .overlay-in { animation: fadeIn .18s ease; }
+  .card-in { animation: popIn .22s cubic-bezier(.2,.8,.2,1); }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes popIn { from { opacity: 0; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+</style>
+</helmet>
+
+<div style="width: 1440px; height: 900px; box-sizing: border-box; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden;">
+  <a href="../index.html#case-01" style="position: fixed; left: 20px; top: 20px; z-index: 9999; display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; border-radius: 999px; background: rgba(18,19,26,0.88); color: #fff; font-size: 13px; font-weight: 700; text-decoration: none; box-shadow: 0 6px 18px rgba(0,0,0,0.18);">← 포트폴리오로 돌아가기</a>
+
+  <!-- Login card -->
+  <div style="width: 420px; display: flex; flex-direction: column; align-items: center; gap: 28px;">
+
+    <div style="display: flex; align-items: baseline; gap: 6px;">
+      <span style="font-size: 30px; font-weight: 800; color: #E4004C; letter-spacing: -0.5px;">Uway</span>
+      <span style="font-size: 30px; font-weight: 300; color: #1B2340; letter-spacing: -0.5px;">Apply</span>
+    </div>
+
+    <div style="width: 100%; display: flex; flex-direction: column; gap: 12px;">
+
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <input class="login-input" type="text" placeholder="아이디를 입력해 주세요" value="{{idVal}}" onChange="{{onIdChange}}" style="width: 100%; box-sizing: border-box; padding: 14px 16px; border-radius: 6px; border: 1px solid {{idBorder}}; background: #F0F1F4; font-size: 14px; color: #1B2340;">
+        <sc-if value="{{hasIdError}}" hint-placeholder-val="{{false}}">
+          <span style="font-size: 12px; color: #E4004C; padding-left: 2px;">{{idError}}</span>
+        </sc-if>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <input class="login-input" type="password" placeholder="비밀번호를 입력해 주세요" value="{{pwVal}}" onChange="{{onPwChange}}" style="width: 100%; box-sizing: border-box; padding: 14px 16px; border-radius: 6px; border: 1px solid {{pwBorder}}; background: #F0F1F4; font-size: 14px; color: #1B2340;">
+        <sc-if value="{{hasPwError}}" hint-placeholder-val="{{false}}">
+          <span style="font-size: 12px; color: #E4004C; padding-left: 2px;">{{pwError}}</span>
+        </sc-if>
+      </div>
+
+      <button class="primary-btn" onClick="{{onLoginClick}}" style="width: 100%; padding: 15px 0; border: none; border-radius: 6px; background: #E4004C; color: #ffffff; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 4px;">
+        로그인
+      </button>
+
+      <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #6B7080; margin-top: 4px; cursor: pointer;">
+        <input type="checkbox" checked="" style="width: 15px; height: 15px; accent-color: #E4004C;">
+        아이디 저장
+      </label>
+    </div>
+
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+      <div style="display: flex; align-items: center; gap: 10px; font-size: 13px;">
+        <span class="ghost-link" style="color: #1B2340; font-weight: 600; cursor: pointer;">회원가입</span>
+        <span style="color: #D8DAE2;">|</span>
+        <span class="ghost-link" style="color: #1B2340; font-weight: 600; cursor: pointer;" onClick="{{onShowPwChange}}">아이디 / 비밀번호 찾기</span>
+      </div>
+      <span style="font-size: 12px; color: #9297A3;">승인된 회원만 로그인 가능합니다.</span>
+    </div>
+
+    <div class="demo-chip" style="width: 100%; box-sizing: border-box; padding: 12px 14px; border-radius: 8px; background: #ECEEF2; font-size: 11.5px; line-height: 1.6; color: #6B7080;">
+      데모용 계정 상태 — 아이디에 <b>locked</b> / <b>dormant</b> / <b>pending</b> 을 입력하고 로그인을 누르면 화면설계서에 정의된 각 예외 상태를 확인할 수 있습니다.
+    </div>
+
+    <div style="text-align: center; font-size: 11px; color: #B3B7C2; line-height: 1.7; margin-top: 8px;">
+      서울특별시 서초구 효령로55길 23 (우) 06654<br>
+      Copyright ⓒ (주) 유웨이어플라이 All Rights Reserved.
+    </div>
+  </div>
+
+  <!-- Pending modal -->
+  <sc-if value="{{showPending}}" hint-placeholder-val="{{false}}">
+    <div class="overlay-in" style="position: absolute; inset: 0; background: rgba(15,20,35,0.5); display: flex; align-items: center; justify-content: center;">
+      <div class="card-in" style="width: 320px; background: #fff; border-radius: 10px; padding: 32px 24px 24px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,.25);">
+        <div style="font-size: 14px; color: #1B2340; line-height: 1.6; margin-bottom: 20px;">
+          승인되지 않은 계정입니다.<br>승인이 완료되면 문자로 전달드립니다.
+        </div>
+        <button class="modal-btn-primary" onClick="{{onCloseModal}}" style="width: 100%; padding: 12px 0; border: none; border-radius: 6px; background: #E4004C; color: #fff; font-size: 14px; font-weight: 700; cursor: pointer;">확인</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- Dormant modal -->
+  <sc-if value="{{showDormant}}" hint-placeholder-val="{{false}}">
+    <div class="overlay-in" style="position: absolute; inset: 0; background: rgba(15,20,35,0.5); display: flex; align-items: center; justify-content: center;">
+      <div class="card-in" style="width: 320px; background: #fff; border-radius: 10px; padding: 32px 24px 24px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,.25);">
+        <div style="font-size: 14px; color: #1B2340; line-height: 1.6; margin-bottom: 20px;">
+          휴면계정입니다.<br>이용이 필요한 경우, 담당 작업자에게 연락해주세요.
+        </div>
+        <button class="modal-btn-primary" onClick="{{onCloseModal}}" style="width: 100%; padding: 12px 0; border: none; border-radius: 6px; background: #E4004C; color: #fff; font-size: 14px; font-weight: 700; cursor: pointer;">확인</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- Locked modal -->
+  <sc-if value="{{showLocked}}" hint-placeholder-val="{{false}}">
+    <div class="overlay-in" style="position: absolute; inset: 0; background: rgba(15,20,35,0.5); display: flex; align-items: center; justify-content: center;">
+      <div class="card-in" style="width: 340px; background: #fff; border-radius: 10px; padding: 32px 24px 24px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,.25);">
+        <div style="font-size: 14px; color: #1B2340; line-height: 1.6; margin-bottom: 20px;">
+          해당 계정은 비밀번호를 5번 틀리게 입력하여 비활성 되었습니다.<br>관리자에게 문의하세요.
+        </div>
+        <button class="modal-btn-primary" onClick="{{onCloseModal}}" style="width: 100%; padding: 12px 0; border: none; border-radius: 6px; background: #E4004C; color: #fff; font-size: 14px; font-weight: 700; cursor: pointer;">확인</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- Password change reminder modal -->
+  <sc-if value="{{showPwChange}}" hint-placeholder-val="{{false}}">
+    <div class="overlay-in" style="position: absolute; inset: 0; background: rgba(15,20,35,0.5); display: flex; align-items: center; justify-content: center;">
+      <div class="card-in" style="width: 460px; background: #fff; border-radius: 10px; padding: 28px; box-shadow: 0 20px 50px rgba(0,0,0,.25);">
+        <div style="font-size: 17px; font-weight: 700; color: #1B2340; margin-bottom: 14px;">회원님의 비밀번호를 변경해주세요</div>
+        <div style="font-size: 12.5px; color: #6B7080; line-height: 1.7; margin-bottom: 18px;">
+          (주) 유웨이어플라이에서는 개인정보보호를 위해 3개월 이상 비밀번호를 변경하지 않은 경우 비밀번호 변경을 안내하고 있습니다. 변경 시, 타인이 추측하기 쉬운 비밀번호는 도용위험성이 높으니 영어/숫자/특수문자를 조합하여 안전하게 설정해주시기 바랍니다.
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+          <input class="login-input" type="password" placeholder="현재 비밀번호를 입력해주세요" style="width: 100%; box-sizing: border-box; padding: 12px 14px; border-radius: 6px; border: 1px solid #E1E3E9; background: #F7F8FA; font-size: 13px;">
+          <input class="login-input" type="password" placeholder="새 비밀번호를 입력해주세요" style="width: 100%; box-sizing: border-box; padding: 12px 14px; border-radius: 6px; border: 1px solid #E1E3E9; background: #F7F8FA; font-size: 13px;">
+          <input class="login-input" type="password" placeholder="새 비밀번호를 다시 입력해주세요" style="width: 100%; box-sizing: border-box; padding: 12px 14px; border-radius: 6px; border: 1px solid #E1E3E9; background: #F7F8FA; font-size: 13px;">
+        </div>
+        <div style="font-size: 11px; color: #B3B7C2; line-height: 1.6; margin-bottom: 18px;">
+          ※ 영문자, 숫자 및 특수문자 혼합 8~15자리
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <button class="modal-btn-secondary" onClick="{{onCloseModal}}" style="flex: 1; padding: 13px 0; border: none; border-radius: 6px; background: #1B2340; color: #fff; font-size: 14px; font-weight: 700; cursor: pointer;">다음에 하기</button>
+          <button class="modal-btn-primary" onClick="{{onCloseModal}}" style="flex: 1; padding: 13px 0; border: none; border-radius: 6px; background: #E4004C; color: #fff; font-size: 14px; font-weight: 700; cursor: pointer;">변경하기</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- Success -->
+  <sc-if value="{{showSuccess}}" hint-placeholder-val="{{false}}">
+    <div class="overlay-in" style="position: absolute; inset: 0; background: rgba(15,20,35,0.5); display: flex; align-items: center; justify-content: center;">
+      <div class="card-in" style="width: 320px; background: #fff; border-radius: 10px; padding: 32px 24px 24px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,.25);">
+        <div style="font-size: 14px; color: #1B2340; line-height: 1.6; margin-bottom: 20px;">
+          로그인 되었습니다.
+        </div>
+        <a href="Dashboard.dc.html" style="display: block; width: 100%; box-sizing: border-box; padding: 12px 0; border-radius: 6px; background: #1B2340; color: #fff; font-size: 14px; font-weight: 700; text-decoration: none;">관리자 대시보드로 이동</a>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { id: '', pw: '', idError: null, pwError: null, modal: null };
+  }
+
+  onIdChange(e) {
+    this.setState({ id: e.target.value, idError: null });
+  }
+
+  onPwChange(e) {
+    this.setState({ pw: e.target.value, pwError: null });
+  }
+
+  onLoginClick() {
+    if (!this.state.id) {
+      this.setState({ idError: '아이디를 입력해 주세요.' });
+      return;
+    }
+    if (!this.state.pw) {
+      this.setState({ pwError: '비밀번호를 입력해 주세요.' });
+      return;
+    }
+    if (this.state.id === 'locked') { this.setState({ modal: 'locked' }); return; }
+    if (this.state.id === 'dormant') { this.setState({ modal: 'dormant' }); return; }
+    if (this.state.id === 'pending') { this.setState({ modal: 'pending' }); return; }
+    this.setState({ modal: 'success' });
+  }
+
+  renderVals() {
+    const m = this.state.modal;
+    return {
+      idVal: this.state.id,
+      pwVal: this.state.pw,
+      idError: this.state.idError,
+      pwError: this.state.pwError,
+      hasIdError: !!this.state.idError,
+      hasPwError: !!this.state.pwError,
+      idBorder: this.state.idError ? '#E4004C' : '#E1E3E9',
+      pwBorder: this.state.pwError ? '#E4004C' : '#E1E3E9',
+      onIdChange: (e) => this.onIdChange(e),
+      onPwChange: (e) => this.onPwChange(e),
+      onLoginClick: () => this.onLoginClick(),
+      onShowPwChange: () => this.setState({ modal: 'pwChange' }),
+      onCloseModal: () => this.setState({ modal: null }),
+      showPending: m === 'pending',
+      showDormant: m === 'dormant',
+      showLocked: m === 'locked',
+      showPwChange: m === 'pwChange',
+      showSuccess: m === 'success',
+    };
+  }
+}
+</script>
+</body>
+</html>
