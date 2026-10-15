@@ -201,9 +201,10 @@
   <nav class="side-nav" aria-label="사례 이동">
     <a href="#case-01" data-nav="1"><span>신청·승인 시스템</span><i></i></a>
     <a href="#case-02" data-nav="2"><span>PMS 재구축</span><i></i></a>
-    <a href="#case-03" data-nav="3"><span>배너 CMS</span><i></i></a>
-    <a href="#case-04" data-nav="4"><span>데이터 기반 운영</span><i></i></a>
-    <a href="#case-05" data-nav="5"><span>기획 문서</span><i></i></a>
+    <a href="#case-03" data-nav="3"><span>AI 프로토타이핑</span><i></i></a>
+    <a href="#case-04" data-nav="4"><span>배너 CMS</span><i></i></a>
+    <a href="#case-05" data-nav="5"><span>데이터 기반 운영</span><i></i></a>
+    <a href="#case-06" data-nav="6"><span>기획 문서</span><i></i></a>
   </nav>
   <div class="mini-contact"><b>김민영</b> · <a href="mailto:hellomin92@naver.com">hellomin92@naver.com</a></div>
 
@@ -217,7 +218,7 @@
       신청·승인처럼 상태가 바뀌는 기능과 백오피스를,<br><span style="color: #E4004C;">상태와 예외부터 설계하는 기획자</span>
     </h1>
     <p class="cover-lead">
-      대학(B)이 수험생(C)에게 제공하는 B2B2C 입시 서비스에서 사용자 화면과 관리자 화면을 함께 기획하고 직접 운영했습니다. 하이컨시 공고의 주요 업무 순서대로 4가지 사례와 기획 문서를 정리했습니다.
+      대학(B)이 수험생(C)에게 제공하는 B2B2C 입시 서비스에서 사용자 화면과 관리자 화면을 함께 기획하고 직접 운영했습니다. 하이컨시 공고의 주요 업무 순서대로 5가지 사례와 기획 문서를 정리했습니다.
     </p>
     <div class="cover-stats">
       <div class="stat"><b>1.8만 명</b><span>동시 접속 구간<br>무장애 운영</span></div>
@@ -228,9 +229,10 @@
     <nav class="toc" aria-label="사례 목차">
       <a href="#case-01"><i>01</i>신청·승인 시스템</a>
       <a href="#case-02"><i>02</i>PMS 재구축 · 백오피스</a>
-      <a href="#case-03"><i>03</i>배너 CMS · 관리자 편의</a>
-      <a href="#case-04"><i>04</i>데이터 기반 운영</a>
-      <a href="#case-05"><i>05</i>기획 문서</a>
+      <a href="#case-03"><i>03</i>AI 프로토타이핑</a>
+      <a href="#case-04"><i>04</i>배너 CMS · 관리자 편의</a>
+      <a href="#case-05"><i>05</i>데이터 기반 운영</a>
+      <a href="#case-06"><i>06</i>기획 문서</a>
     </nav>
     <div class="cover-contact">
       <a href="mailto:hellomin92@naver.com">✉ hellomin92@naver.com</a>
@@ -265,19 +267,120 @@
 
   <section data-case="2" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
     <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
-      <div style="flex: 1.05; min-width: 0;"><div class="step-dots"><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot active"></div></div><span class="badge-pill">02 · PMS 재구축 — 처리 프로세스</span><h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">요청부터 완료까지<br><span style="color: #E4004C;">7개 처리 상태</span>를 정의</h2><p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 26px; max-width: 480px;">요청 · 재요청 · 처리 중 · 처리 완료 · 피드백 · 보류 · 요청 취소로 처리 상태를 정의하고, 게시글에서 상태를 바꾸면 <b style="color: #F2F3F6;">메일·SMS 알림과 수정 이력</b>이 남도록 설계했습니다. 알림은 프로젝트 전체 / 내 게시물만 / 미수신 중에서 고를 수 있습니다.</p><div class="card" style="background: #1B1D28; margin-bottom: 22px;"><div style="font-size: 13px; color: #8B90A0; margin-bottom: 8px;">예외 상태가 많은 로그인·계정 화면은 AI로 클릭 가능한 프로토타입을 만들어 전달했습니다</div><div style="font-size: 14px; color: #B5B9C4;">데모 아이디 <b style="color: #fff;">locked · dormant · pending</b></div></div><div style="display: flex; gap: 14px; flex-wrap: wrap;"><a class="btn-big glow-pulse" target="_blank" href="https://whellomin92-hue.github.io/portfolio/proto/Login.dc.html">▶ 로그인 프로토타입</a><a class="btn-big-ghost" target="_blank" href="https://whellomin92-hue.github.io/portfolio/proto/Dashboard.dc.html">관리자 대시보드 →</a></div></div>
+      <div style="flex: 1.05; min-width: 0;"><div class="step-dots"><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot active"></div></div><span class="badge-pill">02 · PMS 재구축 — 처리 프로세스</span><h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">요청부터 완료까지<br><span style="color: #E4004C;">7개 처리 상태</span>를 정의</h2><p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 26px; max-width: 480px;">요청 · 재요청 · 처리 중 · 처리 완료 · 피드백 · 보류 · 요청 취소로 처리 상태를 정의하고, 게시글에서 상태를 바꾸면 <b style="color: #F2F3F6;">메일·SMS 알림과 수정 이력</b>이 남도록 설계했습니다. 알림은 프로젝트 전체 / 내 게시물만 / 미수신 중에서 고를 수 있습니다.</p><div class="card" style="background: #1B1D28;"><ul style="margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.95; color: #D5D7DE;"><li>상태가 바뀌면 참여자에게 메일·SMS 자동 발송</li><li>게시글 수정 이력 조회로 요청 변경 내역 추적</li><li>로그인·계정 화면의 예외 상태는 03에서 클릭 가능한 프로토타입으로 검증</li></ul></div></div>
       <div style="flex: 0.95; min-width: 0;"><div style="display: flex; flex-direction: column; gap: 12px;"><div style="border-radius: 14px; overflow: hidden; background: #1E2028; border: 1px solid #2E313D;"><div style="display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: #23262F;"><div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div><span style="margin-left: 8px; font-size: 11px; color: #A3A7B3; font-weight: 700;">처리 프로세스 — 상태 전이 플로우</span></div><div style="padding: 0;"><button type="button" class="gal-card" data-src="./assets/pms/pms_workflow.jpg" data-cap="PMS 재구축 · 관리자 초기 WorkFlow — 처리 상태 전이" style="width:100%; padding: 0; border: 0; background: #fff;"><img src="./assets/pms/pms_workflow.jpg" alt="PMS 처리 상태 워크플로우" style="width: 100%; display: block;"></button></div></div><div style="border-radius: 14px; overflow: hidden; background: #1E2028; border: 1px solid #2E313D;"><div style="display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: #23262F;"><div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div><span style="margin-left: 8px; font-size: 11px; color: #A3A7B3; font-weight: 700;">화면설계 FRONT — 게시글 처리상태 변경</span></div><div style="padding: 0;"><button type="button" class="gal-card" data-src="./assets/pms/pms_post_status.jpg" data-cap="PMS 재구축 · 화면설계 FRONT — 게시글 뷰, 처리상태 변경" style="width:100%; padding: 0; border: 0; background: #fff;"><img src="./assets/pms/pms_post_status.jpg" alt="PMS 게시글 처리상태 변경 화면설계" style="width: 100%; display: block;"></button></div></div></div></div>
     </div>
   </section>
 
-  <!-- 02-A 운영 효율화 · 문제 정의 -->
+  <!-- 01 AI 화면설계 -->
   <section data-case="3" id="case-03" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
     <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
 
       <!-- Left: copy -->
       <div style="flex: 1.05; min-width: 0;">
         <div class="step-dots"><div class="step-dot active"></div><div class="step-dot"></div></div>
-        <span class="badge-pill">03 · 배너 CMS — 문제</span>
+        <span class="badge-pill">03 · AI 프로토타이핑 — 문제</span>
+        <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">상태 하나 바뀔 때마다<br><span style="color: #E4004C;">슬라이드를 복제</span>하던 설계서</h2>
+        <p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 26px; max-width: 480px;">
+          로그인 5회 실패 잠금, 휴면계정, 승인대기, 비밀번호 변경 안내처럼 예외 상태가 늘어날수록 같은 화면을 슬라이드로 계속 복제해야 했고, 결과물은 <b style="color: #F2F3F6;">클릭해볼 수 없는 정적 이미지</b>였습니다. PMS 재구축의 로그인·계정 화면에서 겪은 문제입니다.
+        </p>
+        <div class="contrib"><span>2025 · PMS 재구축 중</span><span>본인 단독 제작</span><span class="k">기여도 100%</span></div><div class="card" style="background: #1B1D28;">
+          <ul style="margin: 0; padding-left: 18px; font-size: 15px; color: #E9EAEF; line-height: 1.9;">
+            <li>상태 변화마다 슬라이드 복제</li>
+            <li>클릭 불가한 정적 이미지로만 흐름 전달</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Right: 기존 PPT 설계서 (X) -->
+      <div style="flex: 0.95; min-width: 0;">
+        <div style="border-radius: 14px; overflow: hidden; background: #1E2028; border: 1px solid #2E313D;">
+          <div style="display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: #23262F;">
+            <div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div>
+            <span style="margin-left: 8px; font-size: 11px; color: #6B7080; font-weight: 700;">BEFORE — 실제 작성한 PPT 화면설계서</span>
+          </div>
+          <div style="position: relative;">
+            <img src="./assets/cd840c5cdff1b37462145d6c97e35dee.jpg" alt="기존 PPT 화면설계서" style="width: 100%; display: block; filter: grayscale(0.5) brightness(0.6);">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" style="position: absolute; inset: 0; width: 100%; height: 100%;">
+              <line x1="5" y1="6" x2="95" y2="94" stroke="#E4004C" vector-effect="non-scaling-stroke" style="stroke-width: 7px; stroke-linecap: round;"></line>
+              <line x1="95" y1="6" x2="5" y2="94" stroke="#E4004C" vector-effect="non-scaling-stroke" style="stroke-width: 7px; stroke-linecap: round;"></line>
+            </svg>
+            <span style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: #12131A; color: #fff; font-size: 14px; font-weight: 800; padding: 9px 16px; border-radius: 999px; border: 1.5px solid #E4004C; white-space: nowrap;">설계서를 그대로 변환하지 않음</span>
+          </div>
+          <div style="padding: 12px 16px; background: #1E2028;">
+            <div style="font-size: 10.5px; color: #6B7080;">상태 변화마다 슬라이드 복제 · 클릭 불가한 정적 이미지</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- 01-B AI 화면설계 · 해결 -->
+  <section data-case="3" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+
+      <!-- Left: copy -->
+      <div style="flex: 1.05; min-width: 0;">
+        <div class="step-dots"><div class="step-dot"></div><div class="step-dot active"></div></div>
+        <span class="badge-pill">03 · AI 프로토타이핑 — 해결</span>
+        <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">상태가 많은 화면은, PPT 대신<br><span style="color: #E4004C;">클릭되는 프로토타입</span>으로</h2>
+        <p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 26px; max-width: 480px;">
+          전체 화면설계는 기존 방식으로 작성하고, 로그인·계정 상태처럼 예외가 많은 화면은 요구사항·정책·상태값·예외처리를 스크립트로 정리해 AI로 <b style="color: #F2F3F6;">브라우저에서 바로 클릭해볼 수 있는 프로토타입</b>을 만들었습니다.
+        </p>
+        <div class="card" style="margin-bottom: 28px; background: #1B1D28;">
+          <div style="font-size: 13px; color: #8B90A0; margin-bottom: 8px;">프로토타입에서 직접 확인할 수 있는 예외 상태</div>
+          <div style="font-size: 15px; color: #E9EAEF; line-height: 1.7;">로그인 5회 실패 잠금 · 휴면계정 · 승인대기 · 비밀번호 변경 안내<br><span style="color: #B5B9C4; font-size: 14px;">데모 아이디 <b style="color: #fff;">locked · dormant · pending</b> 으로 로그인해보세요.</span></div>
+        </div>
+        <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+          <a class="btn-big glow-pulse" target="_blank" href="https://whellomin92-hue.github.io/portfolio/proto/Login.dc.html">▶ 로그인 프로토타입 체험하기</a>
+          <a class="btn-big-ghost" target="_blank" href="https://whellomin92-hue.github.io/portfolio/proto/Dashboard.dc.html">관리자 대시보드 열기 →</a>
+        </div>
+      </div>
+
+      <!-- Right: 스크립트 → 프로토타입 -->
+      <div class="flow-col" style="flex: 0.95; min-width: 0; display: flex; flex-direction: column; gap: 10px;">
+
+        <div style="border-radius: 12px; overflow: hidden; background: #161821; border: 1px solid #3A3D4A;">
+          <div style="display: flex; align-items: center; gap: 6px; padding: 9px 14px; background: #1E2028;">
+            <div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div>
+            <span style="margin-left: 8px; font-size: 11px; color: #C7CAD3; font-weight: 700;">STEP — 직접 작성한 프로토타입 스크립트</span>
+          </div>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap; padding: 12px 14px 0;"><span style="font-size: 11px; font-weight: 700; color: #F2F3F6; background: #2A2D3A; padding: 4px 9px; border-radius: 999px;">요구사항</span><span style="font-size: 11px; font-weight: 700; color: #F2F3F6; background: #2A2D3A; padding: 4px 9px; border-radius: 999px;">정책</span><span style="font-size: 11px; font-weight: 700; color: #F2F3F6; background: #2A2D3A; padding: 4px 9px; border-radius: 999px;">상태값</span><span style="font-size: 11px; font-weight: 700; color: #F2F3F6; background: #2A2D3A; padding: 4px 9px; border-radius: 999px;">예외처리</span><span style="font-size: 11px; font-weight: 700; color: #F2F3F6; background: #2A2D3A; padding: 4px 9px; border-radius: 999px;">화면 레퍼런스</span></div>
+          <div class="script-body" style="position: relative; padding: 10px 14px 14px; overflow: hidden;">
+            <div aria-hidden="true" style="filter: blur(3.2px); user-select: none; pointer-events: none;"><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #6FA8FF;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">1</span>// 1. 요구사항</div><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #D5D8DF;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">2</span>대상: 관리자 로그인 · 회원가입 · 비밀번호 변경</div><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #D5D8DF;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">3</span>레이아웃: 기존 화면 레퍼런스(첨부) 기준, 폼 폭 420px</div><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #6FA8FF;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">4</span>// 2. 정책 · 상태값</div><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #FF7AA8;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">5</span>state: active | locked | dormant | pending</div><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #D5D8DF;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">6</span>로그인 실패 카운트 N회 초과 시 locked 전환, 안내 팝업 노출</div><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #D5D8DF;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">7</span>장기 미접속 시 dormant, 승인 전 계정은 pending 안내</div><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #6FA8FF;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">8</span>// 3. 예외 처리</div><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #D5D8DF;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">9</span>비밀번호 변경 주기 도래 시 [변경하기]/[다음에 하기] 분기</div><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #D5D8DF;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">10</span>입력값 검증 메시지 · 버튼 비활성 조건 정의</div><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #6FA8FF;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">11</span>// 4. 출력 조건</div><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #D5D8DF;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">12</span>브라우저에서 클릭 가능한 단일 HTML, 상태별 화면 전환 포함</div></div>
+            <span style="position: absolute; right: 14px; bottom: 14px; background: rgba(18,19,26,0.9); color: #F2F3F6; font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 999px; border: 1px solid #3A3D4A;">🔒 스크립트 내용 비공개</span>
+          </div>
+        </div>
+
+        <div class="mock-arrow" style="align-self: center; line-height: 0;">
+          <svg width="18" height="20" viewBox="0 0 18 20" fill="none"><path d="M9 0V16M9 19L2 11M9 19L16 11" stroke="#E4004C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
+
+        <div style="border-radius: 12px; overflow: hidden; background: #F4F5F7; border: 2px solid #E4004C; box-shadow: 0 20px 50px rgba(228,0,76,0.22);">
+          <div style="display: flex; align-items: center; gap: 6px; padding: 9px 14px; background: #E9EBF0;">
+            <div class="win-dot" style="background: #E4004C;"></div><div class="win-dot" style="background: #FEBF00;"></div><div class="win-dot" style="background: #3DAA5C;"></div>
+            <span style="margin-left: 8px; font-size: 11px; color: #6B7080; font-weight: 700;">AFTER — 클릭 가능한 프로토타입</span>
+          </div>
+          <div style="padding: 20px 22px 16px; display: flex; flex-direction: column; align-items: center; gap: 9px;">
+            <div style="display: flex; align-items: baseline; gap: 4px;">
+              <span style="font-size: 17px; font-weight: 800; color: #E4004C;">Uway</span><span style="font-size: 17px; font-weight: 300; color: #1B2340;">Apply</span>
+            </div>
+            <div style="width: 100%; height: 28px; background: #fff; border: 1px solid #E1E3E9; border-radius: 5px;"></div>
+            <div style="width: 100%; height: 28px; background: #fff; border: 1px solid #E1E3E9; border-radius: 5px;"></div>
+            <div style="width: 100%; height: 32px; background: #E4004C; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #fff; font-weight: 700;">로그인</div>
+            <div style="font-size: 10.5px; color: #3DAA5C; font-weight: 700;">● 실제 클릭 · 상태 전환 동작</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- 02-A 운영 효율화 · 문제 정의 -->
+  <section data-case="4" id="case-04" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+
+      <!-- Left: copy -->
+      <div style="flex: 1.05; min-width: 0;">
+        <div class="step-dots"><div class="step-dot active"></div><div class="step-dot"></div></div>
+        <span class="badge-pill">04 · 배너 CMS — 문제</span>
         <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">배너 하나 바꾸는데<br><span style="color: #E4004C;">코드를 직접 손대야</span> 함</h2>
         <p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 26px; max-width: 480px;">
           순천향대학교 입학처는 배너 전용 관리 도구가 없어, <b style="color: #F2F3F6;">팝업 관리 시스템을 우회로 활용</b>하고 있었습니다. 색상 하나 바꾸려 해도 HTML 태그를 직접 입력해야 했고, 등록 순서를 바꿀 방법도 미리보기도 없었습니다.
@@ -305,13 +408,13 @@
     </div>
   </section>
   <!-- 02-C 운영 효율화 · 결과 -->
-  <section data-case="3" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+  <section data-case="4" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
     <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
 
       <!-- Left: copy -->
       <div style="flex: 1.05; min-width: 0;">
         <div class="step-dots"><div class="step-dot"></div><div class="step-dot active"></div></div>
-        <span class="badge-pill">03 · 배너 CMS — 해결과 결과</span>
+        <span class="badge-pill">04 · 배너 CMS — 해결과 결과</span>
         <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">운영 시간<br><span style="color: #E4004C;">75% 단축</span></h2>
         <p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 26px; max-width: 480px;">
           컬러 에디터·순서 관리·실시간 미리보기를 갖춘 배너 전용 CMS로, 코드 없이도 운영이 가능한 구조를 만들었습니다. 운영 데이터를 근거로 전용 CMS를 고객사에 먼저 제안하고, AS-IS/TO-BE 비교표와 상세 화면설계까지 직접 작성했습니다.
@@ -335,13 +438,13 @@
     </div>
   </section>
   <!-- 03-A 무장애 운영 · 문제 정의 -->
-  <section data-case="4" id="case-04" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+  <section data-case="5" id="case-05" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
     <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
 
       <!-- Left: copy -->
       <div style="flex: 1.05; min-width: 0;">
-        <div class="step-dots"><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div></div>
-        <span class="badge-pill">04 · 데이터 기반 운영 — 문제</span>
+        <div class="step-dots"><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div></div>
+        <span class="badge-pill">05 · 데이터 기반 운영 — 문제</span>
         <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">90여 개 대학이<br><span style="color: #E4004C;">동시에 발표</span>하는데 기준이 없음</h2>
         <p style="font-size: 13.5px; color: #6B7080; margin-bottom: 14px;">대입 합격자 발표 시스템 운영 및 배포 최적화</p>
         <div class="contrib"><span>2023.02 – 2025.10</span><span>PL</span><span class="k">기여도 100%</span><span>대학(B) → 수험생(C) B2B2C</span></div>
@@ -383,71 +486,14 @@
       </div>
     </div>
   </section>
-  <!-- 03-B 무장애 운영 · 해결 과정(설계) -->
-  <section data-case="4" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
-    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
-
-      <!-- Left: copy -->
-      <div style="flex: 1.05; min-width: 0;">
-        <div class="step-dots"><div class="step-dot"></div><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div></div>
-        <span class="badge-pill">04 · 데이터 기반 운영 — 해결 과정 ① 설계</span>
-        <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">일정을 표준화하고,<br><span style="color: #E4004C;">이중 방어 체계</span>를 설계</h2>
-        <p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 8px; max-width: 480px;">
-          발표 전에는 운영 시트로 배포 리스크를 사전 차단하고, 발표 당일에는 사용자·서버 데이터를 하나의 타임라인에서 교차 판단하는 구조를 직접 설계했습니다.
-        </p>
-      </div>
-
-      <!-- Right: process steps -->
-      <div style="flex: 0.95; min-width: 0; display: flex; flex-direction: column; gap: 14px;">
-        <div class="card" style="padding: 14px 16px;">
-          <div style="font-size: 11px; color: #8B90A0; margin-bottom: 10px;">실제 운영 시트 — 대학별 발표 일정 &amp; Red Zone 관리 (담당자명 마스킹)</div>
-          <img src="./assets/787e4238195e333a0f7ce566162b56e7.png" style="width: 100%; display: block; border-radius: 6px;">
-        </div>
-        <div class="card" style="padding: 20px 22px;">
-          <div style="font-size: 11px; color: #8B90A0; font-weight: 700; margin-bottom: 12px; letter-spacing: .5px;">사전 운영 설계</div>
-          <div style="display: flex; flex-direction: column; margin-bottom: 4px;">
-            <div style="display: flex; gap: 14px;">
-              <div style="display: flex; flex-direction: column; align-items: center;">
-                <div style="width: 24px; height: 24px; border-radius: 50%; background: #E4004C; color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">1</div>
-                <div style="width: 2px; flex: 1; background: #3A3D4A; margin: 3px 0;"></div>
-              </div>
-              <div style="padding-bottom: 14px;">
-                <div style="font-size: 13.5px; font-weight: 700; color: #F2F3F6; margin-bottom: 3px;">운영 시트 표준화</div>
-                <div style="font-size: 12px; color: #9297A3; line-height: 1.5;">대학별 발표 유형·CMS 세팅값·배포 금지 기간을 하나의 시트로 매핑</div>
-              </div>
-            </div>
-            <div style="display: flex; gap: 14px;">
-              <div style="display: flex; flex-direction: column; align-items: center;">
-                <div style="width: 24px; height: 24px; border-radius: 50%; background: #E4004C; color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">2</div>
-                <div style="width: 2px; flex: 1; background: #3A3D4A; margin: 3px 0;"></div>
-              </div>
-              <div style="padding-bottom: 14px;">
-                <div style="font-size: 13.5px; font-weight: 700; color: #F2F3F6; margin-bottom: 3px;">배포 스케줄 교차 검증</div>
-                <div style="font-size: 12px; color: #9297A3; line-height: 1.5;">신규 배포 요청과 발표 스케줄을 대조해 Red Zone(트래픽 밀집 구간) 회피</div>
-              </div>
-            </div>
-            <div style="display: flex; gap: 14px;">
-              <div style="display: flex; flex-direction: column; align-items: center;">
-                <div style="width: 24px; height: 24px; border-radius: 50%; background: #3DAA5C; color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">✓</div>
-              </div>
-              <div>
-                <div style="font-size: 13.5px; font-weight: 700; color: #F2F3F6; margin-bottom: 3px;">발표 시각 자동 전이</div>
-                <div style="font-size: 12px; color: #9297A3; line-height: 1.5;">발표 시각 도달 여부에 따라 시스템이 자동으로 노출 전환</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
   <!-- 03-D 무장애 운영 · 해결 과정(실시간 모니터링) -->
-  <section data-case="4" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+  <section data-case="5" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
     <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
 
       <!-- Left: copy -->
       <div style="flex: 1.05; min-width: 0;">
-        <div class="step-dots"><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot active"></div><div class="step-dot"></div></div>
-        <span class="badge-pill">04 · 데이터 기반 운영 — 해결 과정 ② 모니터링</span>
+        <div class="step-dots"><div class="step-dot"></div><div class="step-dot active"></div><div class="step-dot"></div></div>
+        <span class="badge-pill">05 · 데이터 기반 운영 — 실시간 관제</span>
         <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">발표 당일에는<br><span style="color: #E4004C;">실시간 트래픽</span> 모니터링</h2>
         <p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; max-width: 480px;">
           도메인별 접속 상태를 실시간으로 확인하며, GA4(유입)·T-con(서버 커넥션) 데이터를 하나의 타임라인에서 교차 확인해 80% 도달 시 선제 조치 3종을 실행했습니다.
@@ -489,13 +535,13 @@
     </div>
   </section>
   <!-- 03-E 무장애 운영 · 결과 -->
-  <section data-case="4" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+  <section data-case="5" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
     <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
 
       <!-- Left: copy -->
       <div style="flex: 1.05; min-width: 0;">
-        <div class="step-dots"><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot active"></div></div>
-        <span class="badge-pill">04 · 데이터 기반 운영 — 결과</span>
+        <div class="step-dots"><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot active"></div></div>
+        <span class="badge-pill">05 · 데이터 기반 운영 — 결과</span>
         <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">입시 집중기간<br><span style="color: #E4004C;">배포 사고율 0%</span></h2>
         <p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 28px; max-width: 480px;">
           표준화된 세팅과 이중 방어 체계로, 8월부터 익년 2월까지 이어지는 입시 집중기간 내내 서비스 가용성을 유지했습니다.
@@ -528,13 +574,13 @@
     </div>
   </section>
   <!-- 05-C 기획서 작성 능력 · 결과 -->
-  <section data-case="5" id="case-05" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+  <section data-case="6" id="case-06" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
     <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
 
       <!-- Left: copy -->
       <div style="flex: 1.05; min-width: 0;">
         
-        <span class="badge-pill">05 · 기획 문서 — 실제 산출물</span>
+        <span class="badge-pill">06 · 기획 문서 — 실제 산출물</span>
         <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">실제로 작성한 산출물로<br><span style="color: #E4004C;">증명하는 문서 밀도</span></h2>
         <p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 26px; max-width: 480px;">
           화면설계뿐 아니라 <b style="color: #F2F3F6;">메뉴구조도(IA), 정책 문서</b>까지 — 기획 단계별로 실제 작성한 문서의 구조와 밀도를 확인할 수 있습니다.
