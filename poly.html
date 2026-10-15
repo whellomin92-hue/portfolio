@@ -449,7 +449,7 @@
 
       <!-- Left: copy -->
       <div style="flex: 1.05; min-width: 0;">
-        <div class="step-dots"><div class="step-dot active"></div><div class="step-dot"></div></div>
+        <div class="step-dots"><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div></div>
         <span class="badge-pill">05 · 데이터 기반 운영 — 문제</span>
         <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">90여 개 대학이<br><span style="color: #E4004C;">동시에 발표</span>하는데 기준이 없음</h2>
         <p style="font-size: 13.5px; color: #6B7080; margin-bottom: 14px;">대입 합격자 발표 시스템 운영 및 배포 최적화</p>
@@ -492,13 +492,118 @@
       </div>
     </div>
   </section>
+  <!-- 03-B 무장애 운영 · 해결 과정(설계) -->
+  <section data-case="5" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+
+      <!-- Left: copy -->
+      <div style="flex: 1.05; min-width: 0;">
+        <div class="step-dots"><div class="step-dot"></div><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div></div>
+        <span class="badge-pill">05 · 데이터 기반 운영 — 해결 과정 ① 설계</span>
+        <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">일정을 표준화하고,<br><span style="color: #E4004C;">이중 방어 체계</span>를 설계</h2>
+        <p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 8px; max-width: 480px;">
+          발표 전에는 운영 시트로 배포 리스크를 사전 차단하고, 발표 당일에는 사용자·서버 데이터를 하나의 타임라인에서 교차 판단하는 구조를 직접 설계했습니다.
+        </p>
+      </div>
+
+      <!-- Right: process steps -->
+      <div style="flex: 0.95; min-width: 0; display: flex; flex-direction: column; gap: 14px;">
+        <div class="card" style="padding: 14px 16px;">
+          <div style="font-size: 11px; color: #8B90A0; margin-bottom: 10px;">실제 운영 시트 — 대학별 발표 일정 &amp; Red Zone 관리 (담당자명 마스킹)</div>
+          <img src="./assets/787e4238195e333a0f7ce566162b56e7.png" style="width: 100%; display: block; border-radius: 6px;">
+        </div>
+        <div class="card" style="padding: 20px 22px;">
+          <div style="font-size: 11px; color: #8B90A0; font-weight: 700; margin-bottom: 12px; letter-spacing: .5px;">사전 운영 설계</div>
+          <div style="display: flex; flex-direction: column; margin-bottom: 4px;">
+            <div style="display: flex; gap: 14px;">
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="width: 24px; height: 24px; border-radius: 50%; background: #E4004C; color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">1</div>
+                <div style="width: 2px; flex: 1; background: #3A3D4A; margin: 3px 0;"></div>
+              </div>
+              <div style="padding-bottom: 14px;">
+                <div style="font-size: 13.5px; font-weight: 700; color: #F2F3F6; margin-bottom: 3px;">운영 시트 표준화</div>
+                <div style="font-size: 12px; color: #9297A3; line-height: 1.5;">대학별 발표 유형·CMS 세팅값·배포 금지 기간을 하나의 시트로 매핑</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 14px;">
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="width: 24px; height: 24px; border-radius: 50%; background: #E4004C; color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">2</div>
+                <div style="width: 2px; flex: 1; background: #3A3D4A; margin: 3px 0;"></div>
+              </div>
+              <div style="padding-bottom: 14px;">
+                <div style="font-size: 13.5px; font-weight: 700; color: #F2F3F6; margin-bottom: 3px;">배포 스케줄 교차 검증</div>
+                <div style="font-size: 12px; color: #9297A3; line-height: 1.5;">신규 배포 요청과 발표 스케줄을 대조해 Red Zone(트래픽 밀집 구간) 회피</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 14px;">
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="width: 24px; height: 24px; border-radius: 50%; background: #3DAA5C; color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">✓</div>
+              </div>
+              <div>
+                <div style="font-size: 13.5px; font-weight: 700; color: #F2F3F6; margin-bottom: 3px;">발표 시각 자동 전이</div>
+                <div style="font-size: 12px; color: #9297A3; line-height: 1.5;">발표 시각 도달 여부에 따라 시스템이 자동으로 노출 전환</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- 03-D 무장애 운영 · 해결 과정(실시간 모니터링) -->
+  <section data-case="5" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+
+      <!-- Left: copy -->
+      <div style="flex: 1.05; min-width: 0;">
+        <div class="step-dots"><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot active"></div><div class="step-dot"></div></div>
+        <span class="badge-pill">05 · 데이터 기반 운영 — 해결 과정 ② 모니터링</span>
+        <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">발표 당일에는<br><span style="color: #E4004C;">실시간 트래픽</span> 모니터링</h2>
+        <p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; max-width: 480px;">
+          도메인별 접속 상태를 실시간으로 확인하며, GA4(유입)·T-con(서버 커넥션) 데이터를 하나의 타임라인에서 교차 확인해 80% 도달 시 선제 조치 3종을 실행했습니다.
+        </p>
+      </div>
+
+      <!-- Right: monitoring evidence (GA4 + T-con) -->
+      <div class="monitor-col" style="flex: 0.95; min-width: 0; display: flex; flex-direction: column; gap: 12px;">
+
+        <div style="border-radius: 12px; overflow: hidden; background: #F4F5F7; border: 1px solid #2E313D;">
+          <div style="display: flex; align-items: center; gap: 6px; padding: 9px 14px; background: #E9EBF0;">
+            <div class="win-dot" style="background: #E4004C;"></div><div class="win-dot" style="background: #FEBF00;"></div><div class="win-dot" style="background: #3DAA5C;"></div>
+            <span style="margin-left: 8px; font-size: 11px; color: #4A4D5A; font-weight: 800;">사용자 관점 — GA4 실시간 개요</span>
+          </div>
+          <div style="padding: 10px;"><div style="position: relative; border-radius: 6px; overflow: hidden;">
+            <img src="./assets/monitor-ga4.jpg" alt="GA4 실시간 개요 — 분 단위 활성 사용자와 유입 경로" style="width: 100%; display: block;">
+            <div style="position: absolute; left: 18.4%; top: 34.2%; width: 32.8%; height: 29.0%; border: 2px solid #E4004C; border-radius: 4px; box-shadow: 0 0 0 3px rgba(228,0,76,0.18);"><span style="position: absolute; bottom: calc(100% + 4px); left: 0; white-space: nowrap; background: #E4004C; color: #fff; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 4px;">분 단위 활성 사용자</span></div><div style="position: absolute; left: 18.4%; top: 64.6%; width: 20.4%; height: 35.0%; border: 2px solid #E4004C; border-radius: 4px; box-shadow: 0 0 0 3px rgba(228,0,76,0.18);"><span style="position: absolute; right: 6px; bottom: 6px; white-space: nowrap; background: #E4004C; color: #fff; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 4px;">유입 경로</span></div>
+          </div></div>
+        </div>
+
+        <div style="display: flex; gap: 12px; align-items: stretch;">
+          <div style="flex: 0 0 auto; border-radius: 12px; overflow: hidden; background: #fff; border: 1px solid #2E313D;">
+            <div style="display: flex; align-items: center; gap: 6px; padding: 9px 14px; background: #E9EBF0;">
+              <span style="font-size: 11px; color: #4A4D5A; font-weight: 800;">서버 관점 — 사내 관제(T-con)</span>
+            </div>
+            <img class="tcon-img" src="./assets/monitor-tcon.png" alt="T-con 도메인별 접속 커넥션 수" style="display: block; width: 190px; margin: 8px auto;">
+          </div>
+          <div class="card" style="flex: 1; min-width: 0; background: #1B1D28; display: flex; flex-direction: column; justify-content: center;">
+            <div style="font-size: 12px; color: #8B90A0; margin-bottom: 6px;">두 데이터를 같은 시간축에서 교차 확인</div>
+            <div style="font-size: 16px; color: #F2F3F6; font-weight: 800; margin-bottom: 12px;">임계치 <span style="color: #E4004C;">80%</span> 도달 시 선제 조치</div>
+            <ol style="margin: 0; padding-left: 18px; font-size: 14px; color: #E9EAEF; line-height: 1.9;">
+              <li>정적 리소스 캐싱 강화</li>
+              <li>불필요한 스크립트 일시 차단</li>
+              <li>DB 쿼리 모니터링 강화</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   <!-- 03-E 무장애 운영 · 결과 -->
   <section data-case="5" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
     <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
 
       <!-- Left: copy -->
       <div style="flex: 1.05; min-width: 0;">
-        <div class="step-dots"><div class="step-dot"></div><div class="step-dot active"></div></div>
+        <div class="step-dots"><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot active"></div></div>
         <span class="badge-pill">05 · 데이터 기반 운영 — 결과</span>
         <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">입시 집중기간<br><span style="color: #E4004C;">배포 사고율 0%</span></h2>
         <p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 28px; max-width: 480px;">
