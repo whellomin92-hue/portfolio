@@ -1,0 +1,885 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>김민영 포트폴리오 · 하이컨시 PO 지원</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+  body { margin: 0; font-family: -apple-system, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; background: #12131A; color: #F2F3F6; }
+  a { color: inherit; }
+  .panel { min-height: 100vh; scroll-snap-align: start; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; padding: 80px 10vw; }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in-view { opacity: 1; transform: translateY(0); }
+  .num { font-size: 15px; font-weight: 800; color: #E4004C; letter-spacing: 2px; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 22px; border-radius: 8px; background: #E4004C; color: #fff; text-decoration: none; font-size: 14px; font-weight: 700; transition: background .15s ease; }
+  .btn-primary:hover { background: #C4003F; }
+  .btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 14px 22px; border-radius: 8px; border: 1px solid #3A3D4A; color: #F2F3F6; text-decoration: none; font-size: 14px; font-weight: 700; transition: border-color .15s ease, color .15s ease; }
+  .btn-ghost:hover { border-color: #E4004C; color: #E4004C; }
+  .card { background: #1B1D28; border-radius: 12px; padding: 24px; }
+  .bounce { animation: bounce 2s ease-in-out infinite; }
+  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+  .btn-big { display: inline-flex; align-items: center; gap: 10px; padding: 19px 30px; border-radius: 10px; background: #E4004C; color: #fff; text-decoration: none; font-size: 17px; font-weight: 800; transition: background .15s ease, transform .15s ease; box-shadow: 0 14px 32px rgba(228,0,76,0.35); }
+  .btn-big:hover { background: #C4003F; transform: translateY(-2px); }
+  .btn-big-ghost { display: inline-flex; align-items: center; gap: 10px; padding: 18px 28px; border-radius: 10px; border: 2px solid #3A3D4A; color: #F2F3F6; text-decoration: none; font-size: 17px; font-weight: 800; transition: border-color .15s ease, color .15s ease, transform .15s ease; }
+  .btn-big-ghost:hover { border-color: #E4004C; color: #E4004C; transform: translateY(-2px); }
+  .badge-pill { display: inline-block; font-size: 14px; font-weight: 800; color: #fff; background: #E4004C; letter-spacing: 1px; padding: 7px 16px; border-radius: 999px; }
+  .glow-pulse { animation: glowPulse 2.4s ease-in-out infinite; }
+  @keyframes glowPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(228,0,76,0.35); } 50% { box-shadow: 0 0 0 14px rgba(228,0,76,0); } }
+  .win-dot { width: 9px; height: 9px; border-radius: 50%; }
+  .mock-arrow { animation: arrowPulse 1.6s ease-in-out infinite; }
+  @keyframes arrowPulse { 0%,100% { transform: translateY(0); opacity: .6; } 50% { transform: translateY(4px); opacity: 1; } }
+  .step-dots { display: flex; gap: 6px; align-items: center; margin-bottom: 14px; }
+  .step-dot { width: 22px; height: 3px; border-radius: 2px; background: #3A3D4A; }
+  .step-dot.active { background: #E4004C; width: 34px; }
+  .step-label { font-size: 12px; color: #6B7080; font-weight: 700; letter-spacing: .5px; margin-bottom: 6px; }
+
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  /* ===== 추가: 첫 화면 ===== */
+  .cover { padding-top: 64px !important; padding-bottom: 40px !important; }
+  .cover-top { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .cover-name { font-size: 22px; font-weight: 800; color: #fff; }
+  .cover-role { font-size: 15px; color: #B5B9C4; }
+  .cover-h1 { font-size: 48px; font-weight: 800; line-height: 1.32; margin: 22px 0 18px; max-width: 1000px; letter-spacing: -1px; }
+  .cover-lead { font-size: 18px; color: #C7CAD3; max-width: 640px; line-height: 1.7; margin: 0 0 30px; }
+  .cover-stats { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 26px; }
+  .stat { background: #1B1D28; border: 1px solid #2A2D3A; border-radius: 12px; padding: 18px 22px; min-width: 170px; }
+  .stat b { display: block; font-size: 34px; font-weight: 800; color: #E4004C; letter-spacing: -0.5px; }
+  .stat span { display: block; font-size: 14px; color: #C7CAD3; line-height: 1.5; margin-top: 4px; }
+  .toc { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+  .toc a { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border: 1px solid #3A3D4A; border-radius: 999px; font-size: 14px; font-weight: 700; color: #E9EAEF; text-decoration: none; transition: border-color .15s, color .15s; }
+  .toc a:hover { border-color: #E4004C; color: #E4004C; }
+  .toc i { font-style: normal; color: #E4004C; font-weight: 800; }
+  .cover-contact { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; font-size: 15px; }
+  .cover-contact a { color: #E9EAEF; text-decoration: none; }
+  .cover-contact a:hover { color: #E4004C; }
+  .pdf-link { padding: 8px 14px; border-radius: 8px; background: #23262F; }
+
+  /* ===== 추가: 고정 내비 ===== */
+  .side-nav { position: fixed; right: 28px; top: 50%; transform: translateY(-50%); z-index: 50; display: flex; flex-direction: column; gap: 14px; transition: opacity .3s; }
+  .side-nav a { display: flex; align-items: center; justify-content: flex-end; gap: 10px; text-decoration: none; }
+  .side-nav i { width: 8px; height: 8px; border-radius: 50%; background: #4A4D5A; transition: all .25s; }
+  .side-nav span { font-size: 12px; font-weight: 700; color: #8A8FA0; opacity: 0; transform: translateX(6px); transition: all .25s; }
+  .side-nav:hover span, .side-nav a.active span { opacity: 1; transform: none; }
+  .side-nav a.active i { background: #E4004C; height: 22px; border-radius: 4px; }
+  .side-nav a.active span { color: #fff; }
+  .mini-contact { position: fixed; left: 28px; top: 22px; z-index: 50; font-size: 13px; color: #B5B9C4; transition: opacity .3s; }
+  .mini-contact a { color: #B5B9C4; text-decoration: none; }
+  .mini-contact a:hover { color: #E4004C; }
+  body.on-cover .side-nav, body.on-cover .mini-contact { opacity: 0; pointer-events: none; }
+
+  /* ===== 추가: 가독성 (작은 회색 글씨 보정) ===== */
+  [style*="color: #6B7080"] { color: #8E93A3 !important; }
+  [style*="color: #8B90A0"] { color: #A3A7B3 !important; }
+  [style*="color: #9297A3"] { color: #AEB2BD !important; }
+  [style*="color: #C7CAD3"] { color: #D5D8DF !important; }
+  [style*="font-size: 16.5px"] { font-size: 17.5px !important; }
+  [style*="font-size: 13px"] { font-size: 14px !important; }
+  [style*="font-size: 13.5px"] { font-size: 14.5px !important; }
+  .step-label { color: #8E93A3; }
+
+  /* ===== 추가: 모션 선호 설정 존중 ===== */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { transition: none; opacity: 1; transform: none; }
+    .bounce, .glow-pulse, .mock-arrow { animation: none; }
+  }
+
+  /* ===== 추가: 태블릿·모바일 ===== */
+  @media (max-width: 1400px) {
+    .side-nav span { display: none; }
+  }
+  @media (max-width: 1100px) {
+    .mini-contact { display: none; }
+  }
+  @media (max-width: 900px) {
+    html { scroll-snap-type: none; }
+    body { overflow-x: hidden; }
+    .panel { min-height: auto !important; padding: 72px 20px !important; scroll-snap-align: none; }
+    .cover { min-height: 100svh !important; padding-top: 48px !important; }
+    .split { flex-direction: column !important; align-items: stretch !important; gap: 32px !important; }
+    .split > div { width: 100%; flex: none !important; }
+    .panel h2 { font-size: 30px !important; line-height: 1.35 !important; }
+    .cover-h1 { font-size: 32px; }
+    .cover-lead { font-size: 16px; }
+    .stat { flex: 1 1 140px; min-width: 0; padding: 14px 16px; }
+    .stat b { font-size: 26px; }
+    .side-nav { display: none; }
+    .btn-big, .btn-big-ghost { font-size: 15px; padding: 15px 20px; }
+    img { max-width: 100%; height: auto; }
+  }
+
+
+  /* ===== 추가: 낮은 화면(노트북) 대응 ===== */
+  @media (min-width: 901px) and (max-height: 820px) {
+    .panel { padding-top: 48px !important; padding-bottom: 48px !important; }
+    .panel h2 { font-size: 38px !important; margin: 16px 0 16px !important; }
+    [style*="font-size: 16.5px"] { font-size: 16px !important; line-height: 1.75 !important; }
+    .before-img { height: 84px !important; }
+    .script-body { max-height: 190px; }
+    .flow-col { gap: 4px !important; }
+    .shot-stack .shot-main { width: 100%; max-width: 360px; margin: 0 auto; }
+    .shot-stack .shot-sub .shot-clip { max-height: 110px !important; }
+    .shot-stack { gap: 8px !important; padding: 10px !important; }
+    .tcon-img { width: 150px !important; }
+    .monitor-col .card { padding: 16px !important; }
+    .btn-big, .btn-big-ghost { padding: 14px 22px; font-size: 15px; }
+  }
+
+  /* ===== 추가: 인쇄/PDF 저장 시 내용이 비지 않도록 (안전장치) ===== */
+  @media print {
+    html { scroll-snap-type: none; }
+    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .side-nav, .mini-contact, .scroll-hint { display: none !important; }
+    .panel { min-height: auto !important; page-break-after: always; break-after: page; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  /* ===== 추가: 산출물 갤러리 ===== */
+  .gal-win { border-radius: 14px; overflow: hidden; background: #1E2028; border: 1px solid #2E313D; }
+  .gal-tabs { display: flex; gap: 6px; padding: 12px 14px 0; flex-wrap: wrap; }
+  .gal-tab { font: inherit; font-size: 13px; font-weight: 700; color: #B5B9C4; background: #23262F; border: 1px solid #2E313D; border-radius: 999px; padding: 7px 14px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; transition: all .15s; }
+  .gal-tab span { font-size: 11px; color: #8B90A0; }
+  .gal-tab:hover { border-color: #E4004C; color: #fff; }
+  .gal-tab.active { background: #E4004C; border-color: #E4004C; color: #fff; }
+  .gal-tab.active span { color: #FFD6E3; }
+  .gal-grid { display: none; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; padding: 12px 14px 16px; }
+  .gal-grid.active { display: grid; }
+  .gal-period { grid-column: 1 / -1; font-size: 11.5px; color: #8B90A0; font-weight: 700; }
+  .gal-card { font: inherit; text-align: left; background: #23262F; border: 1px solid #2E313D; border-radius: 8px; padding: 6px; cursor: zoom-in; display: flex; flex-direction: column; gap: 4px; min-width: 0; transition: border-color .15s, transform .15s; }
+  .gal-card:hover { border-color: #E4004C; transform: translateY(-2px); }
+  .gal-thumb { display: block; aspect-ratio: 16 / 10; overflow: hidden; border-radius: 5px; background: #fff; }
+  .gal-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+  .gal-kind { font-size: 11px; font-weight: 800; color: #E4004C; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .gal-desc { font-size: 11.5px; color: #C7CAD3; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .gal-lightbox { position: fixed; inset: 0; z-index: 200; background: rgba(8,9,13,0.92); display: none; flex-direction: column; align-items: center; justify-content: center; padding: 48px 24px; gap: 14px; cursor: zoom-out; }
+  .gal-lightbox.open { display: flex; }
+  .gal-lightbox img { max-width: min(1200px, 100%); max-height: calc(100vh - 140px); object-fit: contain; border-radius: 8px; background: #fff; }
+  .gal-lcap { font-size: 14px; color: #E9EAEF; text-align: center; }
+  .gal-close { position: absolute; top: 18px; right: 22px; font: inherit; font-size: 20px; color: #fff; background: none; border: 0; cursor: pointer; }
+  @media (max-width: 900px) { .gal-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 901px) and (max-height: 820px) { .gal-desc { display: none; } .gal-grid { gap: 8px; padding: 10px 12px 12px; } }
+  /* ===== 하이컨시 지원용 추가 ===== */
+  .contrib { display: flex; flex-wrap: wrap; gap: 6px 8px; margin: 0 0 22px; }
+  .contrib span { font-size: 12.5px; font-weight: 700; color: #E9EAEF; background: #23262F; border: 1px solid #2E313D; padding: 5px 11px; border-radius: 999px; }
+  .contrib span.k { color: #FF8DB3; border-color: #4A1A2C; background: #2A0F1A; }
+  .jd-row { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 14px; padding: 12px 0; border-bottom: 1px solid #2E313D; font-size: 14.5px; color: #E9EAEF; line-height: 1.6; align-items: start; }
+  .jd-row:last-child { border-bottom: 0; }
+  .jd-row a { display: inline-block; font-size: 12.5px; font-weight: 800; color: #fff; background: #E4004C; text-decoration: none; padding: 3px 10px; border-radius: 999px; margin: 0 6px 6px 0; }
+  .jd-row a.sub { background: #23262F; color: #E9EAEF; border: 1px solid #3A3D4A; }
+  .jd-row em { font-style: normal; font-size: 11px; font-weight: 800; color: #FFB86B; margin-left: 6px; }
+  .flow-node { padding: 12px 14px; border-radius: 10px; background: #23262F; border: 1px solid #2E313D; text-align: center; font-size: 14px; font-weight: 700; color: #F2F3F6; }
+  .flow-node small { display: block; font-size: 11.5px; color: #A3A7B3; font-weight: 600; margin-top: 2px; }
+  .flow-node.hl { background: #2A0F1A; border-color: #E4004C; color: #fff; }
+  .flow-node.hl small { color: #FF8DB3; }
+  .flow-arrow { text-align: center; color: #E4004C; font-size: 14px; line-height: 1; }
+  .mini-tbl { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .mini-tbl th, .mini-tbl td { text-align: left; padding: 9px 10px; border-bottom: 1px solid #2E313D; vertical-align: top; color: #D5D8DF; }
+  .mini-tbl th { font-size: 11.5px; color: #A3A7B3; font-weight: 800; }
+  .mini-tbl td:first-child { color: #F2F3F6; font-weight: 700; white-space: nowrap; }
+  .personal-pill { display: inline-block; font-size: 12.5px; font-weight: 800; color: #1A1206; background: #FFB86B; padding: 6px 12px; border-radius: 999px; margin-left: 6px; vertical-align: middle; }
+  .phone-sk { width: 230px; max-width: 100%; margin: 0 auto; border: 2px solid #3A3D4A; border-radius: 26px; padding: 14px 12px; background: #1B1D28; display: flex; flex-direction: column; gap: 8px; }
+  .phone-sk .blk { border: 1px dashed #4A4D5A; border-radius: 8px; padding: 8px 10px; font-size: 12px; color: #B5B9C4; line-height: 1.5; }
+  .phone-sk .blk b { display: block; color: #F2F3F6; font-size: 13px; }
+  .phone-sk .blk.hl { border: 1.5px solid #E4004C; background: #2A0F1A; }
+  .phone-sk .cta { text-align: center; border-radius: 8px; padding: 9px; background: #E4004C; color: #fff; font-size: 12.5px; font-weight: 800; }
+  @media (max-width: 900px) { .jd-row { grid-template-columns: minmax(0, 1fr); gap: 6px; } .mini-tbl td:first-child { white-space: normal; } }
+
+</style>
+</helmet>
+
+<div style="width: 100%;">
+
+  <div class="gal-lightbox" aria-hidden="true"><button type="button" class="gal-close" aria-label="닫기">✕</button><img alt=""><div class="gal-lcap"></div></div>
+  <nav class="side-nav" aria-label="사례 이동">
+    <a href="#case-01" data-nav="1"><span>신청·승인 시스템</span><i></i></a>
+    <a href="#case-02" data-nav="2"><span>백오피스 PMS</span><i></i></a>
+    <a href="#case-03" data-nav="3"><span>배너 CMS</span><i></i></a>
+    <a href="#case-04" data-nav="4"><span>데이터 기반 운영</span><i></i></a>
+    <a href="#case-05" data-nav="5"><span>학원 관리 앱</span><i></i></a>
+    <a href="#case-06" data-nav="6"><span>기획 문서</span><i></i></a>
+  </nav>
+  <div class="mini-contact"><b>김민영</b> · <a href="mailto:hellomin92@naver.com">hellomin92@naver.com</a></div>
+
+  <!-- Cover -->
+  <section data-case="0" class="panel cover" style="align-items: flex-start; background: linear-gradient(180deg, #14151D 0%, #12131A 100%);">
+    <div class="cover-top">
+      <span class="cover-name">김민영</span>
+      <span class="cover-role">하이컨시 교육 앱 서비스 기획자(PO) 지원 · 기획 2년 9개월 + 프론트엔드 개발 1년 2개월</span>
+    </div>
+    <h1 class="cover-h1">
+      신청·승인처럼 상태가 바뀌는 기능을,<br><span style="color: #E4004C;">상태와 예외부터 설계하는 기획자</span>
+    </h1>
+    <p class="cover-lead">
+      수험생이 쓰는 화면과 교직원이 쓰는 관리자 화면을 함께 기획하고 직접 운영했습니다. 대학(B)이 수험생(C)에게 제공하는 B2B2C 입시 서비스에서 쌓은 6가지 장면을 하이컨시 공고 순서대로 정리했습니다.
+    </p>
+    <div class="cover-stats">
+      <div class="stat"><b>1.8만 명</b><span>동시 접속 구간<br>무장애 운영</span></div>
+      <div class="stat"><b>75%</b><span>배너 CMS 개편<br>운영 시간 단축</span></div>
+      <div class="stat"><b>0건</b><span>입시 집중기간<br>장애·배포 사고</span></div>
+      <div class="stat"><b>40여 개</b><span>직접 담당한<br>대학 고객사</span></div>
+    </div>
+    <nav class="toc" aria-label="사례 목차">
+      <a href="#jd"><i>00</i>공고 연결표</a>
+      <a href="#case-01"><i>01</i>신청·승인 시스템</a>
+      <a href="#case-02"><i>02</i>백오피스 PMS</a>
+      <a href="#case-03"><i>03</i>배너 CMS</a>
+      <a href="#case-04"><i>04</i>데이터 기반 운영</a>
+      <a href="#case-05"><i>05</i>학원 관리 앱</a>
+      <a href="#case-06"><i>06</i>기획 문서</a>
+    </nav>
+    <div class="cover-contact">
+      <a href="mailto:hellomin92@naver.com">✉ hellomin92@naver.com</a>
+      <a class="pdf-link" href="https://whellomin92-hue.github.io/portfolio/portfolio.pdf" target="_blank">PDF 포트폴리오 받기 ↓</a>
+    </div>
+    <div style="flex: 1;"></div>
+    <div class="bounce scroll-hint" style="align-self: center; display: flex; flex-direction: column; align-items: center; gap: 6px; color: #8A8FA0;">
+      <span style="font-size: 12px;">Scroll</span>
+      <svg width="14" height="9" viewBox="0 0 14 9" fill="none"><path d="M1 1L7 7L13 1" stroke="#8A8FA0" stroke-width="2" stroke-linecap="round"></path></svg>
+    </div>
+  </section>
+  <section data-case="0" id="jd" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+      <div style="flex: 1.05; min-width: 0;"><div class="step-dots"><div class="step-dot active"></div></div><span class="badge-pill">00 · 하이컨시 공고 연결표</span><h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">공고의 주요 업무마다<br><span style="color: #E4004C;">증명할 사례</span>를 연결했습니다</h2><p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 26px; max-width: 480px;">공고의 주요 업무와 우대 사항을 기준으로 사례를 다시 배열했습니다. 실무에서 기획한 서비스는 <b style="color: #F2F3F6;">모바일·PC 반응형 웹</b>이고, 네이티브 앱 출시 경험은 없어 앱 기획은 05번 개인 프로젝트로 따로 준비했습니다.</p><div class="card" style="background: #1B1D28;"><div style="font-size: 13px; color: #8B90A0; margin-bottom: 6px;">각 사례 첫 장에 표시한 것</div><div style="font-size: 15px; color: #E9EAEF; line-height: 1.7;">기간 · 역할 · 팀 구성 · 내 기여</div></div></div>
+      <div style="flex: 0.95; min-width: 0;"><div style="border-radius: 14px; overflow: hidden; background: #1E2028; border: 1px solid #2E313D;"><div style="display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: #23262F;"><div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div><span style="margin-left: 8px; font-size: 11px; color: #A3A7B3; font-weight: 700;">하이컨시 공고 항목 → 이 포트폴리오에서 볼 곳</span></div><div style="padding: 6px 18px;"><div class="jd-row"><div>수강 신청·출결관리 등 핵심 기능 기획</div><div><a href="#case-01">01 신청·승인</a><a class="sub" href="#case-05">05 학원 앱</a></div></div><div class="jd-row"><div>LMS 백오피스 기획 · 관리자 편의성과 데이터 정합성</div><div><a href="#case-02">02 PMS</a><a class="sub" href="#case-03">03 배너 CMS</a></div></div><div class="jd-row"><div>데이터 분석으로 개선점 도출 · QA 및 이슈 대응</div><div><a href="#case-04">04 데이터 기반 운영</a></div></div><div class="jd-row"><div>요구사항 정의서·화면설계서 · Figma</div><div><a href="#case-06">06 기획 문서</a><a class="sub" href="#case-02">02 프로토타입</a></div></div><div class="jd-row"><div>B2B2C 서비스 기획<em>우대</em></div><div><a href="#case-04">04 대학→수험생</a><a class="sub" href="#case-05">05 학원→학생·학부모</a></div></div><div class="jd-row"><div>출결/수강/결제 시스템 기획<em>우대</em></div><div><a href="#case-01">01 신청·승인</a><a class="sub" href="#case-05">05 출결·회차·결제</a></div></div><div class="jd-row"><div>앱 서비스 기획</div><div><a href="#case-05">05 학원 관리 앱 (개인 프로젝트)</a></div></div></div></div></div>
+    </div>
+  </section>
+
+  <section data-case="1" id="case-01" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+      <div style="flex: 1.05; min-width: 0;"><div class="step-dots"><div class="step-dot active"></div><div class="step-dot"></div></div><span class="badge-pill">01 · 신청·승인 시스템 — 문제</span><h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">신청이 몰려도<br><span style="color: #E4004C;">중복과 오류가 없어야</span> 하는 시스템</h2><p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 26px; max-width: 480px;">KNU(경북대) 오픈캠퍼스는 오프라인 입시 행사 신청을 받을 시스템이 새로 필요했습니다. 신청이 몰릴 때 <b style="color: #F2F3F6;">중복 신청과 데이터 오류를 막는 것</b>이 핵심 과제였고, 신청·승인·거절 프로세스와 신청자·관리자 화면을 함께 설계했습니다.</p><div class="contrib"><span>2024.04 – 05</span><span class="k">PL · 기획 단독</span><span>기획 1 · 개발 1 · 퍼블 1 · 디자인 1</span></div><div class="card" style="background: #1B1D28;"><div style="font-size: 13px; color: #8B90A0; margin-bottom: 6px;">내 기여</div><ul style="margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.95; color: #D5D7DE;"><li>신청·승인·거절 프로세스와 중복 검증 규칙 정의</li><li>신청자 화면·관리자 화면 설계, 서비스 정책 정의서 작성</li><li>오픈 후 행사 종료까지 직접 운영</li></ul></div></div>
+      <div style="flex: 0.95; min-width: 0;"><div style="border-radius: 14px; overflow: hidden; background: #1E2028; border: 1px solid #2E313D;"><div style="display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: #23262F;"><div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div><span style="margin-left: 8px; font-size: 11px; color: #A3A7B3; font-weight: 700;">신청 흐름 — 검증을 두 번 거는 구조</span></div><div style="padding: 18px;"><div style="display: flex; flex-direction: column; gap: 8px;"><div class="flow-node">학과(지망) 선택<small>1지망 필수 · 2~6지망 선택</small></div><div class="flow-arrow">▼</div><div class="flow-node hl">검증 ① 선택 직후<small>동일 날짜 1인 1전공 · 같은 날 같은 학과 중복 차단</small></div><div class="flow-arrow">▼</div><div class="flow-node">최종 신청</div><div class="flow-arrow">▼</div><div class="flow-node hl">검증 ② 신청 시점<small>같은 규칙으로 한 번 더 확인</small></div><div class="flow-arrow">▼</div><div style="display: flex; gap: 8px;"><div class="flow-node" style="flex: 1; border-color: #2E7D5B; color: #7FE0AE;">승인</div><div class="flow-node" style="flex: 1;">거절</div></div><div style="font-size: 11.5px; color: #8B90A0; text-align: center; margin-top: 6px;">정책 정의서 내용을 포트폴리오용으로 다시 그린 요약도</div></div></div></div></div>
+    </div>
+  </section>
+
+  <section data-case="1" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+      <div style="flex: 1.05; min-width: 0;"><div class="step-dots"><div class="step-dot"></div><div class="step-dot active"></div></div><span class="badge-pill">01 · 신청·승인 시스템 — 정책과 결과</span><h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">예외까지 정책으로 정해<br><span style="color: #E4004C;">신청 정보 오류 0건</span></h2><p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 26px; max-width: 480px;">취소 가능 기간이 지나면 취소 버튼을 자동으로 비활성화하고, 기간 외 요청은 관리자가 처리하도록 정리했습니다. 관리자 화면에는 <b style="color: #F2F3F6;">지망별 엑셀 추출과 권한별 개인정보 마스킹</b>을 넣었습니다.</p><div style="display: flex; gap: 14px; flex-wrap: wrap;"><div class="card" style="flex: 1 1 120px; text-align: center; padding: 18px 10px;"><div style="font-size: 24px; font-weight: 800; color: #E4004C;">0건</div><div style="font-size: 11px; color: #8B90A0; margin-top: 4px;">운영 기간 시스템 장애</div></div><div class="card" style="flex: 1 1 120px; text-align: center; padding: 18px 10px;"><div style="font-size: 24px; font-weight: 800; color: #E4004C;">0건</div><div style="font-size: 11px; color: #8B90A0; margin-top: 4px;">신청 정보 오류</div></div><div class="card" style="flex: 1 1 120px; text-align: center; padding: 18px 10px;"><div style="font-size: 24px; font-weight: 800; color: #E4004C;">직접 운영</div><div style="font-size: 11px; color: #8B90A0; margin-top: 4px;">오픈 후 행사 종료까지</div></div></div><div style="font-size: 14px; color: #B5B9C4; line-height: 1.7; margin-top: 18px;">하이컨시의 수강 신청·출결도 상태가 바뀌고 예외가 많은 기능입니다. 화면보다 상태와 예외를 먼저 정의하는 이 방식으로 접근하겠습니다.</div></div>
+      <div style="flex: 0.95; min-width: 0;"><div style="display: flex; flex-direction: column; gap: 12px;"><div class="card" style="background: #1B1D28;"><div style="font-size: 12px; color: #8B90A0; margin-bottom: 14px;">KNU 오픈캠퍼스 · 서비스 정책 정의서 발췌</div><div style="display: flex; flex-direction: column; gap: 10px;"><div style="padding: 14px 16px; border-radius: 8px; background: #23262F;"><div style="font-size: 12px; color: #E4004C; font-weight: 800; margin-bottom: 4px;">취소 예외</div><div style="font-size: 15px; color: #F2F3F6; font-weight: 700; margin-bottom: 6px;">기간이 지나면 버튼 자동 비활성</div><div style="font-size: 13.5px; color: #C7CAD3; line-height: 1.65;">기간 외 취소 요청은 관리자가 처리</div></div><div style="padding: 14px 16px; border-radius: 8px; background: #23262F;"><div style="font-size: 12px; color: #E4004C; font-weight: 800; margin-bottom: 4px;">관리자 기능</div><div style="font-size: 15px; color: #F2F3F6; font-weight: 700; margin-bottom: 6px;">지망별 엑셀 추출 · 개인정보 마스킹</div><div style="font-size: 13.5px; color: #C7CAD3; line-height: 1.65;">지망별 데이터를 개별 컬럼으로 분리해 추출, 관리자 권한별 마스킹</div></div></div></div><div style="border-radius: 14px; overflow: hidden; background: #1E2028; border: 1px solid #2E313D;"><div style="display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: #23262F;"><div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div><span style="margin-left: 8px; font-size: 11px; color: #A3A7B3; font-weight: 700;">같은 유형 산출물 — 가톨릭대 신청 프로그램 접수 현황(승인 상태 배지)</span></div><div style="padding: 0;"><button type="button" class="gal-card" data-src="./assets/gallery/cuk_front_48.jpg" data-cap="가톨릭대 입학처 · 화면설계 Front p.48 — 신청 프로그램 접수 현황, 승인 상태 배지 (세부 텍스트 모자이크)" style="width:100%; padding: 0; border: 0; background: #fff;"><img src="./assets/gallery/cuk_front_48.jpg" alt="가톨릭대 신청 프로그램 접수 현황 화면설계" style="width: 100%; display: block;"></button></div></div></div></div>
+    </div>
+  </section>
+
+  <section data-case="2" id="case-02" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+      <div style="flex: 1.05; min-width: 0;"><div class="step-dots"><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div></div><span class="badge-pill">02 · 백오피스 PMS — 문제</span><h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">게시판 글로는<br><span style="color: #E4004C;">처리 상태를 알 수 없었던</span> 요청</h2><p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 26px; max-width: 480px;">고객사의 업무 요청과 피드백이 게시판 글로만 쌓여 처리 상태와 우선순위를 파악할 수 없었습니다. 그래서 요청을 <b style="color: #F2F3F6;">5개 상태와 4단계 우선순위</b>로 정의하고, 이를 한 화면에서 보는 대시보드를 메인으로 설계했습니다.</p><div class="contrib"><span>2025.06 – 10</span><span class="k">PL · 기획 리드</span><span>기획 2 · 개발 2 · 퍼블 1 · 디자인 1</span><span>퇴사 시점 개발 진행 단계</span></div><div class="card" style="background: #1B1D28;"><div style="font-size: 13px; color: #8B90A0; margin-bottom: 10px;">처리 상태 5종 · 우선순위 4단계</div><div style="display: flex; gap: 6px; flex-wrap: wrap;"><span style="font-size: 13px; font-weight: 800; padding: 6px 12px; border-radius: 6px; background: #23262F; color: #F2F3F6;">요청</span><span style="font-size: 13px; font-weight: 800; padding: 6px 12px; border-radius: 6px; background: #23262F; color: #F2F3F6;">진행</span><span style="font-size: 13px; font-weight: 800; padding: 6px 12px; border-radius: 6px; background: #23262F; color: #F2F3F6;">보류</span><span style="font-size: 13px; font-weight: 800; padding: 6px 12px; border-radius: 6px; background: #23262F; color: #F2F3F6;">피드백</span><span style="font-size: 13px; font-weight: 800; padding: 6px 12px; border-radius: 6px; background: #163A2A; color: #7FE0AE;">완료</span></div></div></div>
+      <div style="flex: 0.95; min-width: 0;"><div style="border-radius: 14px; overflow: hidden; background: #1E2028; border: 1px solid #2E313D;"><div style="display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: #23262F;"><div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div><span style="margin-left: 8px; font-size: 11px; color: #A3A7B3; font-weight: 700;">Front · 대시보드 — 현황·캘린더·통계 위젯</span></div><div style="padding: 0;"><button type="button" class="gal-card" data-src="./assets/gallery/pms_front_27.jpg" data-cap="PMS 구축 · 화면설계 Front · 대시보드 — 현황·캘린더·통계 위젯 메인 대시보드" style="width:100%; padding: 0; border: 0; background: #fff;"><img src="./assets/gallery/pms_front_27.jpg" alt="PMS 대시보드 화면설계" style="width: 100%; display: block;"></button></div></div></div>
+    </div>
+  </section>
+
+  <section data-case="2" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+      <div style="flex: 1.05; min-width: 0;"><div class="step-dots"><div class="step-dot"></div><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div></div><span class="badge-pill">02 · 백오피스 PMS — 정책</span><h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">계정·권한·알림까지<br><span style="color: #E4004C;">정책정의서로 명세</span></h2><p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 26px; max-width: 480px;">장기 미접속 계정이 그대로 남아 개인정보 휴면·파기 기준이 없었습니다. <b style="color: #F2F3F6;">관련 법령을 직접 확인해</b> 휴면·파기 절차를 제안하고, 로그인·회원가입·휴면·알림·관리자 메뉴까지 정책정의서와 화면설계서를 작성했습니다.</p><div class="card" style="background: #1B1D28;"><ul style="margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.95; color: #D5D7DE;"><li>보안: 로그인 5회 실패 시 계정 비활성화, 3개월 주기 비밀번호 변경 안내</li><li>권한: 관리자 승인제 가입, 조직(그룹) 트리 기반 권한 관리</li><li>알림: 수신 범위 선택(전체 / 내 게시물 / 미수신), 메일·문자 자동 발송</li></ul></div></div>
+      <div style="flex: 0.95; min-width: 0;"><div style="display: flex; flex-direction: column; gap: 12px;"><div class="card" style="background: #1B1D28;"><div style="font-size: 12px; color: #8B90A0; margin-bottom: 14px;">PMS · 계정 정책정의서 발췌</div><table class="mini-tbl"><thead><tr><th>시점</th><th>처리</th></tr></thead><tbody><tr><td>휴면 30일 전</td><td>휴면 전환 사전 고지</td></tr><tr><td>1년 미접속</td><td>휴면 전환</td></tr><tr><td>휴면 1년 후</td><td>논리 삭제</td></tr><tr><td>3년 후</td><td>물리 삭제</td></tr></tbody></table></div><div style="border-radius: 14px; overflow: hidden; background: #1E2028; border: 1px solid #2E313D;"><div style="display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: #23262F;"><div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div><span style="margin-left: 8px; font-size: 11px; color: #A3A7B3; font-weight: 700;">Admin · 통계 — 대학별 이용 현황</span></div><div style="padding: 0;"><button type="button" class="gal-card" data-src="./assets/gallery/pms_admin_13.jpg" data-cap="PMS 구축 · 화면설계 Admin · 통계 — 대학별 이용 현황 통계 화면" style="width:100%; padding: 0; border: 0; background: #fff;"><img src="./assets/gallery/pms_admin_13.jpg" alt="PMS 관리자 통계 화면설계" style="width: 100%; display: block;"></button></div></div></div></div>
+    </div>
+  </section>
+
+  <!-- 01 AI 화면설계 -->
+  <section data-case="2" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+
+      <!-- Left: copy -->
+      <div style="flex: 1.05; min-width: 0;">
+        <div class="step-dots"><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot active"></div><div class="step-dot"></div></div>
+        <span class="badge-pill">02 · 백오피스 PMS — 예외 화면 프로토타이핑</span>
+        <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">상태 하나 바뀔 때마다<br><span style="color: #E4004C;">슬라이드를 복제</span>하던 설계서</h2>
+        <p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 26px; max-width: 480px;">
+          로그인 5회 실패 잠금, 휴면계정, 승인대기, 비밀번호 변경 안내처럼 예외 상태가 늘어날수록 같은 화면을 슬라이드로 계속 복제해야 했고, 결과물은 <b style="color: #F2F3F6;">클릭해볼 수 없는 정적 이미지</b>였습니다.
+        </p>
+        <div class="card" style="background: #1B1D28;">
+          <ul style="margin: 0; padding-left: 18px; font-size: 15px; color: #E9EAEF; line-height: 1.9;">
+            <li>상태 변화마다 슬라이드 복제</li>
+            <li>클릭 불가한 정적 이미지로만 흐름 전달</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Right: 기존 PPT 설계서 (X) -->
+      <div style="flex: 0.95; min-width: 0;">
+        <div style="border-radius: 14px; overflow: hidden; background: #1E2028; border: 1px solid #2E313D;">
+          <div style="display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: #23262F;">
+            <div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div>
+            <span style="margin-left: 8px; font-size: 11px; color: #6B7080; font-weight: 700;">BEFORE — 실제 작성한 PPT 화면설계서</span>
+          </div>
+          <div style="position: relative;">
+            <img src="./assets/cd840c5cdff1b37462145d6c97e35dee.jpg" alt="기존 PPT 화면설계서" style="width: 100%; display: block; filter: grayscale(0.5) brightness(0.6);">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" style="position: absolute; inset: 0; width: 100%; height: 100%;">
+              <line x1="5" y1="6" x2="95" y2="94" stroke="#E4004C" vector-effect="non-scaling-stroke" style="stroke-width: 7px; stroke-linecap: round;"></line>
+              <line x1="95" y1="6" x2="5" y2="94" stroke="#E4004C" vector-effect="non-scaling-stroke" style="stroke-width: 7px; stroke-linecap: round;"></line>
+            </svg>
+            <span style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: #12131A; color: #fff; font-size: 14px; font-weight: 800; padding: 9px 16px; border-radius: 999px; border: 1.5px solid #E4004C; white-space: nowrap;">설계서를 그대로 변환하지 않음</span>
+          </div>
+          <div style="padding: 12px 16px; background: #1E2028;">
+            <div style="font-size: 10.5px; color: #6B7080;">상태 변화마다 슬라이드 복제 · 클릭 불가한 정적 이미지</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- 01-B AI 화면설계 · 해결 -->
+  <section data-case="2" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+
+      <!-- Left: copy -->
+      <div style="flex: 1.05; min-width: 0;">
+        <div class="step-dots"><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot active"></div></div>
+        <span class="badge-pill">02 · 백오피스 PMS — AI 프로토타입</span>
+        <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">상태가 많은 화면은, PPT 대신<br><span style="color: #E4004C;">클릭되는 프로토타입</span>으로</h2>
+        <p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 26px; max-width: 480px;">
+          전체 화면설계는 기존 방식으로 작성하고, 로그인·계정 상태처럼 예외가 많은 화면은 요구사항·정책·상태값·예외처리를 스크립트로 정리해 AI로 <b style="color: #F2F3F6;">브라우저에서 바로 클릭해볼 수 있는 프로토타입</b>을 만들었습니다. 재직 중 PMS 로그인·계정 화면에 적용한 방식입니다.
+        </p>
+        <div class="card" style="margin-bottom: 28px; background: #1B1D28;">
+          <div style="font-size: 13px; color: #8B90A0; margin-bottom: 8px;">프로토타입에서 직접 확인할 수 있는 예외 상태</div>
+          <div style="font-size: 15px; color: #E9EAEF; line-height: 1.7;">로그인 5회 실패 잠금 · 휴면계정 · 승인대기 · 비밀번호 변경 안내<br><span style="color: #B5B9C4; font-size: 14px;">데모 아이디 <b style="color: #fff;">locked · dormant · pending</b> 으로 로그인해보세요.</span></div>
+        </div>
+        <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+          <a class="btn-big glow-pulse" target="_blank" href="https://whellomin92-hue.github.io/portfolio/proto/Login.dc.html">▶ 로그인 프로토타입 체험하기</a>
+          <a class="btn-big-ghost" target="_blank" href="https://whellomin92-hue.github.io/portfolio/proto/Dashboard.dc.html">관리자 대시보드 열기 →</a>
+        </div>
+      </div>
+
+      <!-- Right: 스크립트 → 프로토타입 -->
+      <div class="flow-col" style="flex: 0.95; min-width: 0; display: flex; flex-direction: column; gap: 10px;">
+
+        <div style="border-radius: 12px; overflow: hidden; background: #161821; border: 1px solid #3A3D4A;">
+          <div style="display: flex; align-items: center; gap: 6px; padding: 9px 14px; background: #1E2028;">
+            <div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div>
+            <span style="margin-left: 8px; font-size: 11px; color: #C7CAD3; font-weight: 700;">STEP — 직접 작성한 프로토타입 스크립트</span>
+          </div>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap; padding: 12px 14px 0;"><span style="font-size: 11px; font-weight: 700; color: #F2F3F6; background: #2A2D3A; padding: 4px 9px; border-radius: 999px;">요구사항</span><span style="font-size: 11px; font-weight: 700; color: #F2F3F6; background: #2A2D3A; padding: 4px 9px; border-radius: 999px;">정책</span><span style="font-size: 11px; font-weight: 700; color: #F2F3F6; background: #2A2D3A; padding: 4px 9px; border-radius: 999px;">상태값</span><span style="font-size: 11px; font-weight: 700; color: #F2F3F6; background: #2A2D3A; padding: 4px 9px; border-radius: 999px;">예외처리</span><span style="font-size: 11px; font-weight: 700; color: #F2F3F6; background: #2A2D3A; padding: 4px 9px; border-radius: 999px;">화면 레퍼런스</span></div>
+          <div class="script-body" style="position: relative; padding: 10px 14px 14px; overflow: hidden;">
+            <div aria-hidden="true" style="filter: blur(3.2px); user-select: none; pointer-events: none;"><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #6FA8FF;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">1</span>// 1. 요구사항</div><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #D5D8DF;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">2</span>대상: 관리자 로그인 · 회원가입 · 비밀번호 변경</div><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #D5D8DF;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">3</span>레이아웃: 기존 화면 레퍼런스(첨부) 기준, 폼 폭 420px</div><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #6FA8FF;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">4</span>// 2. 정책 · 상태값</div><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #FF7AA8;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">5</span>state: active | locked | dormant | pending</div><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #D5D8DF;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">6</span>로그인 실패 카운트 N회 초과 시 locked 전환, 안내 팝업 노출</div><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #D5D8DF;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">7</span>장기 미접속 시 dormant, 승인 전 계정은 pending 안내</div><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #6FA8FF;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">8</span>// 3. 예외 처리</div><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #D5D8DF;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">9</span>비밀번호 변경 주기 도래 시 [변경하기]/[다음에 하기] 분기</div><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #D5D8DF;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">10</span>입력값 검증 메시지 · 버튼 비활성 조건 정의</div><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #6FA8FF;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">11</span>// 4. 출력 조건</div><div style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.75; white-space: nowrap; color: #D5D8DF;"><span style="color: #4A4D5A; display: inline-block; width: 22px;">12</span>브라우저에서 클릭 가능한 단일 HTML, 상태별 화면 전환 포함</div></div>
+            <span style="position: absolute; right: 14px; bottom: 14px; background: rgba(18,19,26,0.9); color: #F2F3F6; font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 999px; border: 1px solid #3A3D4A;">🔒 스크립트 내용 비공개</span>
+          </div>
+        </div>
+
+        <div class="mock-arrow" style="align-self: center; line-height: 0;">
+          <svg width="18" height="20" viewBox="0 0 18 20" fill="none"><path d="M9 0V16M9 19L2 11M9 19L16 11" stroke="#E4004C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
+
+        <div style="border-radius: 12px; overflow: hidden; background: #F4F5F7; border: 2px solid #E4004C; box-shadow: 0 20px 50px rgba(228,0,76,0.22);">
+          <div style="display: flex; align-items: center; gap: 6px; padding: 9px 14px; background: #E9EBF0;">
+            <div class="win-dot" style="background: #E4004C;"></div><div class="win-dot" style="background: #FEBF00;"></div><div class="win-dot" style="background: #3DAA5C;"></div>
+            <span style="margin-left: 8px; font-size: 11px; color: #6B7080; font-weight: 700;">AFTER — 클릭 가능한 프로토타입</span>
+          </div>
+          <div style="padding: 20px 22px 16px; display: flex; flex-direction: column; align-items: center; gap: 9px;">
+            <div style="display: flex; align-items: baseline; gap: 4px;">
+              <span style="font-size: 17px; font-weight: 800; color: #E4004C;">Uway</span><span style="font-size: 17px; font-weight: 300; color: #1B2340;">Apply</span>
+            </div>
+            <div style="width: 100%; height: 28px; background: #fff; border: 1px solid #E1E3E9; border-radius: 5px;"></div>
+            <div style="width: 100%; height: 28px; background: #fff; border: 1px solid #E1E3E9; border-radius: 5px;"></div>
+            <div style="width: 100%; height: 32px; background: #E4004C; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #fff; font-weight: 700;">로그인</div>
+            <div style="font-size: 10.5px; color: #3DAA5C; font-weight: 700;">● 실제 클릭 · 상태 전환 동작</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- 02-A 운영 효율화 · 문제 정의 -->
+  <section data-case="3" id="case-03" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+
+      <!-- Left: copy -->
+      <div style="flex: 1.05; min-width: 0;">
+        <div class="step-dots"><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div></div>
+        <span class="badge-pill">03 · 배너 CMS — 문제</span>
+        <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">배너 하나 바꾸는데<br><span style="color: #E4004C;">코드를 직접 손대야</span> 함</h2>
+        <p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 26px; max-width: 480px;">
+          순천향대학교 입학처는 배너 전용 관리 도구가 없어, <b style="color: #F2F3F6;">팝업 관리 시스템을 우회로 활용</b>하고 있었습니다. 색상 하나 바꾸려 해도 HTML 태그를 직접 입력해야 했고, 등록 순서를 바꿀 방법도 미리보기도 없었습니다.
+        </p>
+        <div class="contrib"><span>2025.06</span><span class="k">기획 단독</span><span>기획 1 · 개발 1 · 퍼블 1</span></div>
+        <div class="card" style="background: #1B1D28;">
+          <ul style="margin: 0; padding-left: 18px; font-size: 14px; line-height: 2; color: #D5D7DE;">
+            <li>제목·색상 표현마다 HTML 태그 직접 입력</li>
+            <li>노출 순서 변경 기능 없음</li>
+            <li>등록 후에야 결과 확인(미리보기 없음)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Right: AS-IS image placeholder -->
+      <div style="flex: 0.95; min-width: 0;">
+        <div style="border-radius: 14px; overflow: hidden; background: #1E2028; border: 1px solid #2E313D;">
+          <div style="display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: #23262F;">
+            <div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div>
+            <span style="margin-left: 8px; font-size: 11px; color: #6B7080; font-weight: 700;">AS-IS — 팝업 시스템을 우회한 배너 관리 화면</span>
+          </div>
+          <div class="shot-stack" style="padding: 14px; display: flex; flex-direction: column; gap: 12px; color: #A3A7B3;"><div class="shot-main"><div style="font-size: 11px; font-weight: 700; margin: 0 0 6px; color: inherit;">① 배너 등록 — 팝업 등록 화면을 그대로 사용</div><div class="shot-clip" style="border-radius: 6px;  border: 1px solid rgba(0,0,0,0.08);"><div style="position: relative;"><img src="./assets/banner-asis-form.jpg" alt="AS-IS 팝업 관리 등록 화면 — 제목에 HTML 태그 직접 입력" style="width: 100%; display: block;"><div style="position: absolute; left: 15.9%; top: 15.0%; width: 47.4%; height: 6.0%; border: 2px solid #E4004C; border-radius: 4px; box-shadow: 0 0 0 3px rgba(228,0,76,0.18);"><span style="position: absolute; top: calc(100% + 4px); left: 0; white-space: nowrap; background: #E4004C; color: #fff; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 4px;">HTML 태그 직접 입력</span></div></div></div></div><div class="shot-sub"><div style="font-size: 11px; font-weight: 700; margin: 0 0 6px; color: inherit;">② 목록 — 순서 변경 기능 없음, 게시 여부는 텍스트 버튼</div><div class="shot-clip" style="border-radius: 6px; max-height: 150px; overflow: hidden; border: 1px solid rgba(0,0,0,0.08);"><div style="position: relative;"><img src="./assets/banner-asis-list.jpg" alt="AS-IS 팝업 목록 화면 — 순서 변경 기능 없음" style="width: 100%; display: block;"></div></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02-B 운영 효율화 · 해결 과정 -->
+  <section data-case="3" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+
+      <!-- Left: copy -->
+      <div style="flex: 1.05; min-width: 0;">
+        <div class="step-dots"><div class="step-dot"></div><div class="step-dot active"></div><div class="step-dot"></div></div>
+        <span class="badge-pill">03 · 배너 CMS — 해결 과정</span>
+        <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">운영 데이터를 근거로,<br><span style="color: #E4004C;">전용 CMS를 직접 제안</span></h2>
+        <p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 8px; max-width: 480px;">
+          기존 도구를 우회 활용하며 쌓인 운영 비효율을 데이터로 근거를 만들어 클라이언트에게 컨설팅하고, 직접 AS-IS/TO-BE 비교표와 상세 화면설계를 작성해 개발 요청까지 진행했습니다.
+        </p>
+      </div>
+
+      <!-- Right: process steps -->
+      <div style="flex: 0.95; min-width: 0;">
+        <div class="card" style="padding: 28px 26px;">
+          <div style="display: flex; flex-direction: column;">
+            <div style="display: flex; gap: 16px;">
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="width: 30px; height: 30px; border-radius: 50%; background: #E4004C; color: #fff; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">1</div>
+                <div style="width: 2px; flex: 1; background: #3A3D4A; margin: 4px 0;"></div>
+              </div>
+              <div style="padding-bottom: 26px;">
+                <div style="font-size: 15px; font-weight: 700; color: #F2F3F6; margin-bottom: 4px;">문제 인식</div>
+                <div style="font-size: 13px; color: #9297A3; line-height: 1.6;">반복되는 운영 비효율과 데이터 관리 혼선을 직접 파악</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 16px;">
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="width: 30px; height: 30px; border-radius: 50%; background: #E4004C; color: #fff; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">2</div>
+                <div style="width: 2px; flex: 1; background: #3A3D4A; margin: 4px 0;"></div>
+              </div>
+              <div style="padding-bottom: 26px;">
+                <div style="font-size: 15px; font-weight: 700; color: #F2F3F6; margin-bottom: 4px;">클라이언트 컨설팅</div>
+                <div style="font-size: 13px; color: #9297A3; line-height: 1.6;">운영 데이터를 근거로 전용 CMS 도입을 역제안</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 16px;">
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="width: 30px; height: 30px; border-radius: 50%; background: #E4004C; color: #fff; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">3</div>
+                <div style="width: 2px; flex: 1; background: #3A3D4A; margin: 4px 0;"></div>
+              </div>
+              <div style="padding-bottom: 26px;">
+                <div style="font-size: 15px; font-weight: 700; color: #F2F3F6; margin-bottom: 4px;">상세 설계</div>
+                <div style="font-size: 13px; color: #9297A3; line-height: 1.6;">AS-IS/TO-BE 비교표 작성 · GUI 에디터·순서관리·Toggle 구조 정의</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 16px;">
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="width: 30px; height: 30px; border-radius: 50%; background: #3DAA5C; color: #fff; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">✓</div>
+              </div>
+              <div>
+                <div style="font-size: 15px; font-weight: 700; color: #F2F3F6; margin-bottom: 4px;">개발 요청 및 배포</div>
+                <div style="font-size: 13px; color: #9297A3; line-height: 1.6;">코드 기반 관리를 비전문가도 운영 가능한 UI 기반으로 전환</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02-C 운영 효율화 · 결과 -->
+  <section data-case="3" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+
+      <!-- Left: copy -->
+      <div style="flex: 1.05; min-width: 0;">
+        <div class="step-dots"><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot active"></div></div>
+        <span class="badge-pill">03 · 배너 CMS — 결과</span>
+        <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">운영 시간<br><span style="color: #E4004C;">75% 단축</span></h2>
+        <p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 26px; max-width: 480px;">
+          컬러 에디터·순서 관리·실시간 미리보기를 갖춘 배너 전용 CMS로, 코드 없이도 운영이 가능한 구조를 만들었습니다.
+        </p>
+        <div style="display: flex; gap: 28px; margin-bottom: 28px; flex-wrap: wrap;">
+          <div><div style="font-size: 30px; font-weight: 800; color: #E4004C;">75%</div><div style="font-size: 12.5px; color: #8B90A0;">운영 시간 단축</div></div>
+          <div><div style="font-size: 30px; font-weight: 800; color: #E4004C;">0건</div><div style="font-size: 12.5px; color: #8B90A0;">디자인·오타 에러</div></div>
+        </div>
+      </div>
+
+      <!-- Right: TO-BE image placeholder -->
+      <div style="flex: 0.95; min-width: 0;">
+        <div style="border-radius: 14px; overflow: hidden; background: #F4F5F7; border: 2px solid #E4004C; box-shadow: 0 20px 50px rgba(228,0,76,0.22);">
+          <div style="display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: #E9EBF0;">
+            <div class="win-dot" style="background: #E4004C;"></div><div class="win-dot" style="background: #FEBF00;"></div><div class="win-dot" style="background: #3DAA5C;"></div>
+            <span style="margin-left: 8px; font-size: 11px; color: #6B7080; font-weight: 700;">TO-BE — 배너 전용 CMS</span>
+          </div>
+          <div class="shot-stack" style="padding: 14px; display: flex; flex-direction: column; gap: 12px; color: #4A4D5A;"><div class="shot-main"><div style="font-size: 11px; font-weight: 700; margin: 0 0 6px; color: inherit;">① 배너 등록 — 코드 없이 GUI로 편집</div><div class="shot-clip" style="border-radius: 6px;  border: 1px solid rgba(0,0,0,0.08);"><div style="position: relative;"><img src="./assets/banner-tobe-edit.jpg" alt="TO-BE 배너 전용 등록 화면 — 컬러 선택, 순서 이동, 게시기간 설정" style="width: 100%; display: block;"><div style="position: absolute; left: 27.6%; top: 50.8%; width: 7.9%; height: 6.6%; border: 2px solid #E4004C; border-radius: 4px; box-shadow: 0 0 0 3px rgba(228,0,76,0.18);"><span style="position: absolute; left: calc(100% + 6px); top: 50%; transform: translateY(-50%); white-space: nowrap; background: #E4004C; color: #fff; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 4px;">컬러 선택</span></div><div style="position: absolute; left: 75.9%; top: 36.0%; width: 9.6%; height: 7.0%; border: 2px solid #E4004C; border-radius: 4px; box-shadow: 0 0 0 3px rgba(228,0,76,0.18);"><span style="position: absolute; bottom: calc(100% + 4px); left: 0; white-space: nowrap; background: #E4004C; color: #fff; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 4px;">순서 이동</span></div><div style="position: absolute; left: 27.6%; top: 73.8%; width: 26.4%; height: 21.0%; border: 2px solid #E4004C; border-radius: 4px; box-shadow: 0 0 0 3px rgba(228,0,76,0.18);"><span style="position: absolute; bottom: calc(100% + 4px); left: 0; white-space: nowrap; background: #E4004C; color: #fff; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 4px;">게시기간 예약</span></div></div></div></div><div class="shot-sub"><div style="font-size: 11px; font-weight: 700; margin: 0 0 6px; color: inherit;">② 목록 — 노출 ON/OFF 토글 · 미리보기</div><div class="shot-clip" style="border-radius: 6px; max-height: 150px; overflow: hidden; border: 1px solid rgba(0,0,0,0.08);"><div style="position: relative;"><img src="./assets/banner-tobe-list.jpg" alt="TO-BE 배너 목록 — 노출 ON/OFF 토글" style="width: 100%; display: block;"><div style="position: absolute; left: 60.7%; top: 35.5%; width: 4.4%; height: 15.5%; border: 2px solid #E4004C; border-radius: 4px; box-shadow: 0 0 0 3px rgba(228,0,76,0.18);"><span style="position: absolute; bottom: calc(100% + 4px); left: 0; white-space: nowrap; background: #E4004C; color: #fff; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 4px;">ON/OFF</span></div></div></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- 03-A 무장애 운영 · 문제 정의 -->
+  <section data-case="4" id="case-04" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+
+      <!-- Left: copy -->
+      <div style="flex: 1.05; min-width: 0;">
+        <div class="step-dots"><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div></div>
+        <span class="badge-pill">04 · 데이터 기반 운영 — 문제</span>
+        <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">90여 개 대학이<br><span style="color: #E4004C;">동시에 발표</span>하는데 기준이 없음</h2>
+        <p style="font-size: 13.5px; color: #6B7080; margin-bottom: 20px;">대입 합격자 발표 시스템 운영 및 배포 최적화 · 2023.02 – 2025.10 · PL</p>
+        <div class="contrib"><span>2023.02 – 2025.10</span><span class="k">PL · 기획 단독</span><span>기획 1 · 개발 3 · 퍼블 2 · 디자인 3</span><span>대학(B) → 수험생(C) B2B2C</span></div>
+        <p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 26px; max-width: 480px;">
+          대학마다 발표 일정이 제각각이라 <b style="color: #F2F3F6;">트래픽 변동성과 장애 리스크</b>가 컸고, 발표 유형이 표준화되지 않으면 데이터 노출 오류 위험도 있었습니다. 사용자 관점(GA4)과 서버 관점(T-con) 데이터를 각각 다른 도구로 봐야 해 통합 판단도 어려웠습니다.
+        </p>
+        <div class="card" style="background: #1B1D28;">
+          <ul style="margin: 0; padding-left: 18px; font-size: 14px; line-height: 2; color: #D5D7DE;">
+            <li>90여 개 대학의 상이한 발표 일정 → 트래픽 변동성·장애 리스크</li>
+            <li>발표 유형 미표준화 시 데이터 노출 오류 위험</li>
+            <li>발표 피크 타임 서버 과부하·DB 교착(Lock) 우려</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Right: chaotic schedule visual -->
+      <div style="flex: 0.95; min-width: 0;">
+        <div class="card">
+          <div style="font-size: 12px; color: #8B90A0; margin-bottom: 14px;">대학별 발표 일정 (조율 전)</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 6px; background: #23262F;">
+              <span style="font-size: 12px; color: #B5B9C4; width: 70px;">1/17(토)</span>
+              <span style="font-size: 12px; color: #E9EAEF; flex: 1;">A대 · B대 · C대 동시 발표</span>
+              <span style="font-size: 14px;">⚠️</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 6px; background: #23262F;">
+              <span style="font-size: 12px; color: #B5B9C4; width: 70px;">1/20(화)</span>
+              <span style="font-size: 12px; color: #E9EAEF; flex: 1;">D대 발표 + 배포 요청 겹침</span>
+              <span style="font-size: 14px;">⚠️</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 6px; background: #23262F;">
+              <span style="font-size: 12px; color: #B5B9C4; width: 70px;">1/24(토)</span>
+              <span style="font-size: 12px; color: #E9EAEF; flex: 1;">E대 · F대 발표 유형 미표준화</span>
+              <span style="font-size: 14px;">⚠️</span>
+            </div>
+          </div>
+          <div style="font-size: 11.5px; color: #6B7080; margin-top: 12px;">기준 없이 각자 세팅 → 언제, 어떤 대학이 위험한지 아무도 몰랐습니다.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03-B 무장애 운영 · 해결 과정(설계) -->
+  <section data-case="4" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+
+      <!-- Left: copy -->
+      <div style="flex: 1.05; min-width: 0;">
+        <div class="step-dots"><div class="step-dot"></div><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div></div>
+        <span class="badge-pill">04 · 데이터 기반 운영 — 해결 과정 ① 설계</span>
+        <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">일정을 표준화하고,<br><span style="color: #E4004C;">이중 방어 체계</span>를 설계</h2>
+        <p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 8px; max-width: 480px;">
+          발표 전에는 운영 시트로 배포 리스크를 사전 차단하고, 발표 당일에는 사용자·서버 데이터를 하나의 타임라인에서 교차 판단하는 구조를 직접 설계했습니다.
+        </p>
+      </div>
+
+      <!-- Right: process steps -->
+      <div style="flex: 0.95; min-width: 0; display: flex; flex-direction: column; gap: 14px;">
+        <div class="card" style="padding: 14px 16px;">
+          <div style="font-size: 11px; color: #8B90A0; margin-bottom: 10px;">실제 운영 시트 — 대학별 발표 일정 &amp; Red Zone 관리 (담당자명 마스킹)</div>
+          <img src="./assets/787e4238195e333a0f7ce566162b56e7.png" style="width: 100%; display: block; border-radius: 6px;">
+        </div>
+        <div class="card" style="padding: 20px 22px;">
+          <div style="font-size: 11px; color: #8B90A0; font-weight: 700; margin-bottom: 12px; letter-spacing: .5px;">사전 운영 설계</div>
+          <div style="display: flex; flex-direction: column; margin-bottom: 4px;">
+            <div style="display: flex; gap: 14px;">
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="width: 24px; height: 24px; border-radius: 50%; background: #E4004C; color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">1</div>
+                <div style="width: 2px; flex: 1; background: #3A3D4A; margin: 3px 0;"></div>
+              </div>
+              <div style="padding-bottom: 14px;">
+                <div style="font-size: 13.5px; font-weight: 700; color: #F2F3F6; margin-bottom: 3px;">운영 시트 표준화</div>
+                <div style="font-size: 12px; color: #9297A3; line-height: 1.5;">대학별 발표 유형·CMS 세팅값·배포 금지 기간을 하나의 시트로 매핑</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 14px;">
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="width: 24px; height: 24px; border-radius: 50%; background: #E4004C; color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">2</div>
+                <div style="width: 2px; flex: 1; background: #3A3D4A; margin: 3px 0;"></div>
+              </div>
+              <div style="padding-bottom: 14px;">
+                <div style="font-size: 13.5px; font-weight: 700; color: #F2F3F6; margin-bottom: 3px;">배포 스케줄 교차 검증</div>
+                <div style="font-size: 12px; color: #9297A3; line-height: 1.5;">신규 배포 요청과 발표 스케줄을 대조해 Red Zone(트래픽 밀집 구간) 회피</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 14px;">
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="width: 24px; height: 24px; border-radius: 50%; background: #3DAA5C; color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">✓</div>
+              </div>
+              <div>
+                <div style="font-size: 13.5px; font-weight: 700; color: #F2F3F6; margin-bottom: 3px;">발표 시각 자동 전이</div>
+                <div style="font-size: 12px; color: #9297A3; line-height: 1.5;">발표 시각 도달 여부에 따라 시스템이 자동으로 노출 전환</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03-C 무장애 운영 · 해결 과정(협의 메일) -->
+  <section data-case="4" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+
+      <!-- Left: copy -->
+      <div style="flex: 1.05; min-width: 0;">
+        <div class="step-dots"><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div></div>
+        <span class="badge-pill">04 · 데이터 기반 운영 — 해결 과정 ② 협의</span>
+        <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">긴급 요청이 오면<br><span style="color: #E4004C;">리스크부터 설명</span>하고 조율</h2>
+        <p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; max-width: 480px;">
+          Red Zone과 겹치는 긴급 반영 요청이 들어오면, 거절하지 않되 왜 지금은 위험한지부터 투명하게 공유하고 대체 일정을 먼저 제시해 메일로 협의했습니다.
+        </p>
+      </div>
+
+      <!-- Right: negotiation email evidence -->
+      <div style="flex: 0.95; min-width: 0;">
+        <div style="border-radius: 10px; overflow: hidden; background: #fff;">
+          <img src="./assets/69bd33b73f74eb14f9632de6c0b043be.png" style="width: 100%; display: block;">
+        </div>
+        <div style="font-size: 12px; color: #6B7080; margin-top: 12px;">실제 협의 메일 — 배포 스케줄 교차 검증 사례</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03-D 무장애 운영 · 해결 과정(실시간 모니터링) -->
+  <section data-case="4" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+
+      <!-- Left: copy -->
+      <div style="flex: 1.05; min-width: 0;">
+        <div class="step-dots"><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot active"></div><div class="step-dot"></div></div>
+        <span class="badge-pill">04 · 데이터 기반 운영 — 해결 과정 ③ 모니터링</span>
+        <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">발표 당일에는<br><span style="color: #E4004C;">실시간 트래픽</span> 모니터링</h2>
+        <p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; max-width: 480px;">
+          도메인별 접속 상태를 실시간으로 확인하며, GA4(유입)·T-con(서버 커넥션) 데이터를 하나의 타임라인에서 교차 확인해 80% 도달 시 선제 조치 3종을 실행했습니다.
+        </p>
+      </div>
+
+      <!-- Right: monitoring evidence (GA4 + T-con) -->
+      <div class="monitor-col" style="flex: 0.95; min-width: 0; display: flex; flex-direction: column; gap: 12px;">
+
+        <div style="border-radius: 12px; overflow: hidden; background: #F4F5F7; border: 1px solid #2E313D;">
+          <div style="display: flex; align-items: center; gap: 6px; padding: 9px 14px; background: #E9EBF0;">
+            <div class="win-dot" style="background: #E4004C;"></div><div class="win-dot" style="background: #FEBF00;"></div><div class="win-dot" style="background: #3DAA5C;"></div>
+            <span style="margin-left: 8px; font-size: 11px; color: #4A4D5A; font-weight: 800;">사용자 관점 — GA4 실시간 개요</span>
+          </div>
+          <div style="padding: 10px;"><div style="position: relative; border-radius: 6px; overflow: hidden;">
+            <img src="./assets/monitor-ga4.jpg" alt="GA4 실시간 개요 — 분 단위 활성 사용자와 유입 경로" style="width: 100%; display: block;">
+            <div style="position: absolute; left: 18.4%; top: 34.2%; width: 32.8%; height: 29.0%; border: 2px solid #E4004C; border-radius: 4px; box-shadow: 0 0 0 3px rgba(228,0,76,0.18);"><span style="position: absolute; bottom: calc(100% + 4px); left: 0; white-space: nowrap; background: #E4004C; color: #fff; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 4px;">분 단위 활성 사용자</span></div><div style="position: absolute; left: 18.4%; top: 64.6%; width: 20.4%; height: 35.0%; border: 2px solid #E4004C; border-radius: 4px; box-shadow: 0 0 0 3px rgba(228,0,76,0.18);"><span style="position: absolute; right: 6px; bottom: 6px; white-space: nowrap; background: #E4004C; color: #fff; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 4px;">유입 경로</span></div>
+          </div></div>
+        </div>
+
+        <div style="display: flex; gap: 12px; align-items: stretch;">
+          <div style="flex: 0 0 auto; border-radius: 12px; overflow: hidden; background: #fff; border: 1px solid #2E313D;">
+            <div style="display: flex; align-items: center; gap: 6px; padding: 9px 14px; background: #E9EBF0;">
+              <span style="font-size: 11px; color: #4A4D5A; font-weight: 800;">서버 관점 — 사내 관제(T-con)</span>
+            </div>
+            <img class="tcon-img" src="./assets/monitor-tcon.png" alt="T-con 도메인별 접속 커넥션 수" style="display: block; width: 190px; margin: 8px auto;">
+          </div>
+          <div class="card" style="flex: 1; min-width: 0; background: #1B1D28; display: flex; flex-direction: column; justify-content: center;">
+            <div style="font-size: 12px; color: #8B90A0; margin-bottom: 6px;">두 데이터를 같은 시간축에서 교차 확인</div>
+            <div style="font-size: 16px; color: #F2F3F6; font-weight: 800; margin-bottom: 12px;">임계치 <span style="color: #E4004C;">80%</span> 도달 시 선제 조치</div>
+            <ol style="margin: 0; padding-left: 18px; font-size: 14px; color: #E9EAEF; line-height: 1.9;">
+              <li>정적 리소스 캐싱 강화</li>
+              <li>불필요한 스크립트 일시 차단</li>
+              <li>DB 쿼리 모니터링 강화</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03-E 무장애 운영 · 결과 -->
+  <section data-case="4" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+
+      <!-- Left: copy -->
+      <div style="flex: 1.05; min-width: 0;">
+        <div class="step-dots"><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot active"></div></div>
+        <span class="badge-pill">04 · 데이터 기반 운영 — 결과</span>
+        <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">입시 집중기간<br><span style="color: #E4004C;">배포 사고율 0%</span></h2>
+        <p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 28px; max-width: 480px;">
+          표준화된 세팅과 이중 방어 체계로, 8월부터 익년 2월까지 이어지는 입시 집중기간 내내 서비스 가용성을 유지했습니다.
+        </p>
+      </div>
+
+      <!-- Right: big-stat data visual -->
+      <div style="flex: 0.95; min-width: 0; display: flex; flex-direction: column; gap: 14px;">
+
+        <div class="card" style="text-align: center; padding: 32px 24px;">
+          <div style="font-size: 64px; font-weight: 800; color: #E4004C; line-height: 1;">0%</div>
+          <div style="font-size: 14px; color: #B5B9C4; margin-top: 8px;">입시 집중기간(8월~익년 2월) 배포 사고율</div>
+        </div>
+
+        <div style="border-radius: 10px; overflow: hidden; background: #fff;">
+          <img src="./assets/73b7c49ffb8066d7e41da795bd709381.png" style="width: 100%; display: block;">
+        </div>
+
+        <div style="display: flex; gap: 14px;">
+          <div class="card" style="flex: 1; text-align: center; padding: 18px 10px;">
+            <div style="font-size: 24px; font-weight: 800; color: #E4004C;">1.8만</div>
+            <div style="font-size: 11px; color: #8B90A0; margin-top: 4px;">동시 접속자 무장애 수용</div>
+          </div>
+          <div class="card" style="flex: 1; text-align: center; padding: 18px 10px;">
+            <div style="font-size: 24px; font-weight: 800; color: #E4004C;">100%</div>
+            <div style="font-size: 11px; color: #8B90A0; margin-top: 4px;">서비스 가용성</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section data-case="5" id="case-05" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+      <div style="flex: 1.05; min-width: 0;"><div class="step-dots"><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div></div><span class="badge-pill">05 · 앱 서비스 기획 — 개인 프로젝트</span><h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">출결 체크 한 번이<br><span style="color: #E4004C;">차감과 알림까지</span> 이어지게</h2><p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 26px; max-width: 480px;">입시컨설팅 학원이 상담 예약·출결·회차권 결제·수시 지원 관리를 한 곳에서 처리하고, 학생과 학부모는 앱으로 진행 상황을 확인하는 <b style="color: #F2F3F6;">B2B2C 앱</b>을 기획했습니다. 회차 차감을 출결 상태에 묶어 컨설턴트가 출결만 체크하면 차감과 알림이 따로 손대지 않아도 처리되게 했습니다.</p><div style="margin-bottom: 18px;"><span class="personal-pill">개인 프로젝트 · 실제 출시한 서비스가 아닙니다</span></div><div class="contrib"><span>2026.10</span><span class="k">단독 기획</span><span>요구사항 18건 · 운영 정책 · 데이터 설계</span></div></div>
+      <div style="flex: 0.95; min-width: 0;"><div style="border-radius: 14px; overflow: hidden; background: #1E2028; border: 1px solid #2E313D;"><div style="display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: #23262F;"><div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div><span style="margin-left: 8px; font-size: 11px; color: #A3A7B3; font-weight: 700;">핵심 흐름 — 예약 → 출결 → 차감 → 알림</span></div><div style="padding: 18px;"><div style="display: flex; flex-direction: column; gap: 8px;"><div class="flow-node">상담 예약<small>RSV-02 · 학생·학부모 앱</small></div><div class="flow-arrow">▼</div><div class="flow-node hl">출결 체크<small>ATT-01 · 컨설턴트 백오피스</small></div><div class="flow-arrow">▼</div><div class="flow-node">회차 자동 차감<small>ATT-02 · 시스템</small></div><div class="flow-arrow">▼</div><div class="flow-node">학부모 앱에 잔여 회차·알림 반영<small>PAY-03 · NTF-01</small></div><div style="font-size: 12px; color: #FFB86B; text-align: center; margin-top: 8px;">예외 · 잔여 회차가 0이면 예약 버튼 대신 회차권 결제로 안내</div></div></div></div></div>
+    </div>
+  </section>
+
+  <section data-case="5" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+      <div style="flex: 1.05; min-width: 0;"><div class="step-dots"><div class="step-dot"></div><div class="step-dot active"></div><div class="step-dot"></div></div><span class="badge-pill">05 · 앱 서비스 기획 — 정책</span><h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">출결·환불·푸시를<br><span style="color: #E4004C;">정책으로 먼저</span> 정했습니다</h2><p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 26px; max-width: 480px;">출결 상태별 차감 규칙, 학원법 시행령 교습비 반환기준에 따른 환불 자동 계산, 끌 수 없는 거래성 알림과 끌 수 있는 알림을 나눈 <b style="color: #F2F3F6;">푸시 정책</b>을 정의했습니다. 같은 시간대 중복 예약은 01번처럼 선택 직후와 확정 시 두 번 검증합니다.</p><div class="card" style="background: #1B1D28;"><ul style="margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.95; color: #D5D7DE;"><li>출결은 체크 후 24시간 안에만 수정, 수정자·시각·사유 이력 저장</li><li>밤 9시~아침 8시 리마인드는 아침 8시로 미룸</li><li>원서접수 대행은 범위에서 제외: 현황 기록·공유만</li></ul></div></div>
+      <div style="flex: 0.95; min-width: 0;"><div class="card" style="background: #1B1D28;"><div style="font-size: 12px; color: #8B90A0; margin-bottom: 10px;">운영 정책 · 출결 상태별 회차 차감 (ATT)</div><div style="overflow-x: auto;"><table class="mini-tbl"><thead><tr><th>출결 상태</th><th>판정 기준</th><th>회차 차감</th></tr></thead><tbody><tr><td>출석</td><td>시작 10분 이내 입실</td><td>1회</td></tr><tr><td>지각</td><td>10분 초과 입실</td><td>1회</td></tr><tr><td>무단 결석</td><td>취소 기한 후 미출석</td><td>1회</td></tr><tr><td>기한 내 취소</td><td>24시간 전까지 취소</td><td>없음</td></tr><tr><td>학원 사정 취소</td><td>컨설턴트 일정 변경</td><td>없음 · 우선 재예약</td></tr></tbody></table></div></div></div>
+    </div>
+  </section>
+
+  <section data-case="5" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+      <div style="flex: 1.05; min-width: 0;"><div class="step-dots"><div class="step-dot"></div><div class="step-dot"></div><div class="step-dot active"></div></div><span class="badge-pill">05 · 앱 서비스 기획 — 화면과 지표</span><h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">학부모 홈 맨 위에는<br><span style="color: #E4004C;">잔여 회차</span>를 둡니다</h2><p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 26px; max-width: 480px;">가장 잦은 문의를 앱을 열자마자 해결하려는 배치입니다. 예약이 앱으로 넘어와야 출결·차감·알림이 자동으로 이어지기 때문에 <b style="color: #F2F3F6;">앱 예약 비율</b>을 핵심 지표로 정하고, 이벤트 9개로 지표를 모두 계산할 수 있게 설계했습니다.</p><div class="card" style="background: #1B1D28;"><div style="font-size: 12px; color: #8B90A0; margin-bottom: 10px;">목표 지표 — 출시 전 가정치, 첫 달 실측 후 조정</div><div style="overflow-x: auto;"><table class="mini-tbl"><thead><tr><th>지표</th><th>정의</th><th>목표(가정)</th></tr></thead><tbody><tr><td>앱 예약 비율</td><td>앱 예약 ÷ 전체 상담 예약</td><td>3개월 70%</td></tr><tr><td>상담 노쇼율</td><td>미출석 ÷ 예약</td><td>출시 전 대비 절반</td></tr><tr><td>학부모 주간 활성률</td><td>주 1회 이상 접속 ÷ 연결 학부모</td><td>50%</td></tr></tbody></table></div></div></div>
+      <div style="flex: 0.95; min-width: 0;"><div class="phone-sk"><div style="font-size: 11px; color: #8B90A0; text-align: center;">학부모 홈 · PAY-03</div><div class="blk hl"><b>① 잔여 회차 · 결제 내역</b>가장 잦은 문의를 바로 해결</div><div class="blk"><b>② 다음 상담 일정</b>변경·취소 기한 표시</div><div class="blk"><b>③ 상담 리포트</b>컨설턴트 요약과 과제</div><div class="blk"><b>④ 수시 지원 현황</b>마감 임박 건 D-day 강조</div><div class="cta">회차권 결제 (하단 고정)</div></div></div>
+    </div>
+  </section>
+
+  <!-- 05-A 기획서 작성 능력 · 정책까지 문서화 -->
+  <section data-case="6" id="case-06" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+
+      <!-- Left: copy -->
+      <div style="flex: 1.05; min-width: 0;">
+        <div class="step-dots"><div class="step-dot active"></div><div class="step-dot"></div></div>
+        <span class="badge-pill">06 · 기획 문서</span>
+        <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">화면만 그리지 않고,<br><span style="color: #E4004C;">정책과 예외까지</span> 문서에 담습니다</h2>
+        <p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; max-width: 480px;">
+          개발자가 구현하다 멈춰서 되묻지 않도록, 화면과 함께 <b style="color: #F2F3F6;">상태 전이 · 검증 규칙 · 예외 처리</b>를 정의합니다. 오른쪽은 실제 작성한 문서에서 발췌한 내용입니다.
+        </p>
+      </div>
+
+      <!-- Right: real policy excerpts -->
+      <div style="flex: 0.95; min-width: 0;">
+        <div class="card">
+          <div style="font-size: 12px; color: #8B90A0; margin-bottom: 14px;">실제 작성 문서 발췌</div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="padding: 14px 16px; border-radius: 8px; background: #23262F;">
+              <div style="font-size: 12px; color: #E4004C; font-weight: 800; margin-bottom: 4px;">PMS · 계정 정책정의서</div>
+              <div style="font-size: 15px; color: #F2F3F6; font-weight: 700; margin-bottom: 6px;">휴면 · 파기 · 잠금 규칙</div>
+              <div style="font-size: 13.5px; color: #C7CAD3; line-height: 1.65;">1년 미접속 시 휴면 전환(30일 전 고지) → 휴면 1년 후 논리 삭제 → 3년 후 물리 삭제<br>로그인 5회 실패 시 계정 비활성화, 3개월 주기 비밀번호 변경 안내</div>
+            </div>
+            <div style="padding: 14px 16px; border-radius: 8px; background: #23262F;">
+              <div style="font-size: 12px; color: #E4004C; font-weight: 800; margin-bottom: 4px;">KNU 오픈캠퍼스 · 서비스 정책 정의서</div>
+              <div style="font-size: 15px; color: #F2F3F6; font-weight: 700; margin-bottom: 6px;">중복 신청 검증 로직</div>
+              <div style="font-size: 13.5px; color: #C7CAD3; line-height: 1.65;">동일 날짜 1인 1전공, 같은 날 같은 학과 중복 지원 차단<br>학과 선택 직후 + 최종 신청 시 2회 검증, 기간 외 취소 버튼 자동 비활성화</div>
+            </div>
+            <div style="padding: 14px 16px; border-radius: 8px; background: #23262F;">
+              <div style="font-size: 12px; color: #E4004C; font-weight: 800; margin-bottom: 4px;">가톨릭대 입학처 · 메뉴구조도(IA)</div>
+              <div style="font-size: 15px; color: #F2F3F6; font-weight: 700; margin-bottom: 6px;">151개 페이지 표준화</div>
+              <div style="font-size: 13.5px; color: #C7CAD3; line-height: 1.65;">전체 페이지를 6종 콘텐츠 타입으로 분류하고 Depth · Page ID 매핑</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05-C 기획서 작성 능력 · 결과 -->
+  <section data-case="6" class="panel" style="padding-left: 7vw; padding-right: 7vw; background: radial-gradient(ellipse 80% 60% at 75% 30%, #2A0F1A 0%, #12131A 60%);">
+    <div class="reveal split" style="display: flex; align-items: center; gap: 64px; width: 100%;">
+
+      <!-- Left: copy -->
+      <div style="flex: 1.05; min-width: 0;">
+        <div class="step-dots"><div class="step-dot"></div><div class="step-dot active"></div></div>
+        <span class="badge-pill">06 · 기획 문서 — 실제 산출물</span>
+        <h2 style="font-size: 46px; font-weight: 800; margin: 22px 0 24px; line-height: 1.3; letter-spacing: -0.5px;">실제로 작성한 산출물로<br><span style="color: #E4004C;">증명하는 문서 밀도</span></h2>
+        <p style="font-size: 16.5px; color: #C7CAD3; line-height: 1.9; margin-bottom: 26px; max-width: 480px;">
+          화면설계뿐 아니라 <b style="color: #F2F3F6;">메뉴구조도(IA), 정책 문서</b>까지 — 기획 단계별로 실제 작성한 문서의 구조와 밀도를 확인할 수 있습니다.
+        </p>
+        <div style="font-size: 14px; color: #B5B9C4; line-height: 1.7;">프로젝트 탭을 눌러 문서를 넘겨보고, 썸네일을 누르면 크게 볼 수 있습니다.<br><span style="color: #8B90A0; font-size: 13px;">고객사 기밀 보호를 위해 세부 텍스트는 모자이크 처리했습니다.</span></div>
+      </div>
+
+      <!-- Right: 실제 산출물 갤러리 -->
+      <div style="flex: 0.95; min-width: 0;">
+        <div class="gal-win">
+          <div style="display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: #23262F;">
+            <div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div><div class="win-dot" style="background: #4A4D5A;"></div>
+            <span style="margin-left: 8px; font-size: 11px; color: #A3A7B3; font-weight: 700;">실제 산출물 — 프로젝트 3개 · 문서 14종</span>
+          </div>
+          <div class="gal-tabs"><button type="button" class="gal-tab active" data-gal="cuk">가톨릭대 입학처<span>4</span></button><button type="button" class="gal-tab" data-gal="any">안양대 입학처<span>4</span></button><button type="button" class="gal-tab" data-gal="pms">PMS 구축<span>6</span></button></div>
+          <div class="gal-grid active" data-gal="cuk"><div class="gal-period">가톨릭대 입학처 · 2023.04 – 08</div><button type="button" class="gal-card" data-src="./assets/gallery/cuk_front_12.jpg" data-cap="가톨릭대 입학처 · 화면설계 Front · p.12 — 게시판형 목록 — 브레드크럼 + 번호 주석"><span class="gal-thumb"><img src="./assets/gallery/cuk_front_12.jpg" alt="가톨릭대 입학처 화면설계 Front · p.12 — 게시판형 목록 — 브레드크럼 + 번호 주석" loading="lazy"></span><span class="gal-kind">화면설계 · Front · p.12</span><span class="gal-desc">게시판형 목록 — 브레드크럼 + 번호 주석</span></button><button type="button" class="gal-card" data-src="./assets/gallery/cuk_front_48.jpg" data-cap="가톨릭대 입학처 · 화면설계 Front · p.48 — 신청 프로그램 접수 현황 — 승인 상태 배지"><span class="gal-thumb"><img src="./assets/gallery/cuk_front_48.jpg" alt="가톨릭대 입학처 화면설계 Front · p.48 — 신청 프로그램 접수 현황 — 승인 상태 배지" loading="lazy"></span><span class="gal-kind">화면설계 · Front · p.48</span><span class="gal-desc">신청 프로그램 접수 현황 — 승인 상태 배지</span></button><button type="button" class="gal-card" data-src="./assets/gallery/cuk_admin_26.jpg" data-cap="가톨릭대 입학처 · 화면설계 Admin · p.26 — 메뉴 관리 — 트리 구조 + 콘텐츠 타입"><span class="gal-thumb"><img src="./assets/gallery/cuk_admin_26.jpg" alt="가톨릭대 입학처 화면설계 Admin · p.26 — 메뉴 관리 — 트리 구조 + 콘텐츠 타입" loading="lazy"></span><span class="gal-kind">화면설계 · Admin · p.26</span><span class="gal-desc">메뉴 관리 — 트리 구조 + 콘텐츠 타입</span></button><button type="button" class="gal-card" data-src="./assets/gallery/cuk_menu.jpg" data-cap="가톨릭대 입학처 · 메뉴구조도 IA v0.3 — Depth·콘텐츠 타입·Page ID 매핑 (151p)"><span class="gal-thumb"><img src="./assets/gallery/cuk_menu.jpg" alt="가톨릭대 입학처 메뉴구조도 IA v0.3 — Depth·콘텐츠 타입·Page ID 매핑 (151p)" loading="lazy"></span><span class="gal-kind">메뉴구조도 · IA v0.3</span><span class="gal-desc">Depth·콘텐츠 타입·Page ID 매핑 (151p)</span></button></div><div class="gal-grid" data-gal="any"><div class="gal-period">안양대 입학처 · 2024.04 – 08</div><button type="button" class="gal-card" data-src="./assets/gallery/any_front_08.jpg" data-cap="안양대 입학처 · 화면설계 Front · p.8 — 메인 화면 — GNB·검색 영역"><span class="gal-thumb"><img src="./assets/gallery/any_front_08.jpg" alt="안양대 입학처 화면설계 Front · p.8 — 메인 화면 — GNB·검색 영역" loading="lazy"></span><span class="gal-kind">화면설계 · Front · p.8</span><span class="gal-desc">메인 화면 — GNB·검색 영역</span></button><button type="button" class="gal-card" data-src="./assets/gallery/any_front_21.jpg" data-cap="안양대 입학처 · 화면설계 Front · p.21 — 게시판 — 비공개글 확인번호 팝업"><span class="gal-thumb"><img src="./assets/gallery/any_front_21.jpg" alt="안양대 입학처 화면설계 Front · p.21 — 게시판 — 비공개글 확인번호 팝업" loading="lazy"></span><span class="gal-kind">화면설계 · Front · p.21</span><span class="gal-desc">게시판 — 비공개글 확인번호 팝업</span></button><button type="button" class="gal-card" data-src="./assets/gallery/any_admin_09.jpg" data-cap="안양대 입학처 · 화면설계 Admin · p.9 — 관리자 그룹 권한 설정"><span class="gal-thumb"><img src="./assets/gallery/any_admin_09.jpg" alt="안양대 입학처 화면설계 Admin · p.9 — 관리자 그룹 권한 설정" loading="lazy"></span><span class="gal-kind">화면설계 · Admin · p.9</span><span class="gal-desc">관리자 그룹 권한 설정</span></button><button type="button" class="gal-card" data-src="./assets/gallery/any_menu.jpg" data-cap="안양대 입학처 · 메뉴구조도 확정안 — AS-IS/TO-BE 대조표 — 메뉴 재설계 근거"><span class="gal-thumb"><img src="./assets/gallery/any_menu.jpg" alt="안양대 입학처 메뉴구조도 확정안 — AS-IS/TO-BE 대조표 — 메뉴 재설계 근거" loading="lazy"></span><span class="gal-kind">메뉴구조도 · 확정안</span><span class="gal-desc">AS-IS/TO-BE 대조표 — 메뉴 재설계 근거</span></button></div><div class="gal-grid" data-gal="pms"><div class="gal-period">PMS 구축 · 2025.06 – 10</div><button type="button" class="gal-card" data-src="./assets/gallery/pms_front_27.jpg" data-cap="PMS 구축 · 화면설계 Front · 대시보드 — 현황·캘린더·통계 위젯 메인 대시보드"><span class="gal-thumb"><img src="./assets/gallery/pms_front_27.jpg" alt="PMS 구축 화면설계 Front · 대시보드 — 현황·캘린더·통계 위젯 메인 대시보드" loading="lazy"></span><span class="gal-kind">화면설계 · Front · 대시보드</span><span class="gal-desc">현황·캘린더·통계 위젯 메인 대시보드</span></button><button type="button" class="gal-card" data-src="./assets/gallery/pms_front_34.jpg" data-cap="PMS 구축 · 화면설계 Front · Workflow — 초기 비밀번호 변경 유도 플로우"><span class="gal-thumb"><img src="./assets/gallery/pms_front_34.jpg" alt="PMS 구축 화면설계 Front · Workflow — 초기 비밀번호 변경 유도 플로우" loading="lazy"></span><span class="gal-kind">화면설계 · Front · Workflow</span><span class="gal-desc">초기 비밀번호 변경 유도 플로우</span></button><button type="button" class="gal-card" data-src="./assets/gallery/pms_admin_13.jpg" data-cap="PMS 구축 · 화면설계 Admin · 통계 — 대학별 이용 현황 통계 화면"><span class="gal-thumb"><img src="./assets/gallery/pms_admin_13.jpg" alt="PMS 구축 화면설계 Admin · 통계 — 대학별 이용 현황 통계 화면" loading="lazy"></span><span class="gal-kind">화면설계 · Admin · 통계</span><span class="gal-desc">대학별 이용 현황 통계 화면</span></button><button type="button" class="gal-card" data-src="./assets/gallery/pms_ia.jpg" data-cap="PMS 구축 · IA 재구축 IA — Page ID·CRUD·연동 API 명시"><span class="gal-thumb"><img src="./assets/gallery/pms_ia.jpg" alt="PMS 구축 IA 재구축 IA — Page ID·CRUD·연동 API 명시" loading="lazy"></span><span class="gal-kind">IA · 재구축 IA</span><span class="gal-desc">Page ID·CRUD·연동 API 명시</span></button><button type="button" class="gal-card" data-src="./assets/gallery/pms_privacy.jpg" data-cap="PMS 구축 · 정책문서 개인정보처리방침 — 수집 목적·항목·보유기간 조항 정의"><span class="gal-thumb"><img src="./assets/gallery/pms_privacy.jpg" alt="PMS 구축 정책문서 개인정보처리방침 — 수집 목적·항목·보유기간 조항 정의" loading="lazy"></span><span class="gal-kind">정책문서 · 개인정보처리방침</span><span class="gal-desc">수집 목적·항목·보유기간 조항 정의</span></button><button type="button" class="gal-card" data-src="./assets/gallery/pms_terms.jpg" data-cap="PMS 구축 · 정책문서 이용약관·수집동의 — 회원가입 수집동의·약관 조항 구성"><span class="gal-thumb"><img src="./assets/gallery/pms_terms.jpg" alt="PMS 구축 정책문서 이용약관·수집동의 — 회원가입 수집동의·약관 조항 구성" loading="lazy"></span><span class="gal-kind">정책문서 · 이용약관·수집동의</span><span class="gal-desc">회원가입 수집동의·약관 조항 구성</span></button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing -->
+  <section data-case="9" class="panel" style="align-items: flex-start;">
+    <div class="reveal" style="max-width: 720px;">
+      <h2 style="font-size: 32px; font-weight: 800; margin: 0 0 18px; line-height: 1.45;">합격 발표 화면 너머의 1년을<br><span style="color: #E4004C;">함께하는 서비스</span>에서 일하고 싶습니다</h2>
+      <p style="font-size: 15px; color: #B5B9C4; line-height: 1.8; margin-bottom: 28px;">
+        합격자 발표를 운영하며 수험생의 1년이 결과로 확인되는 순간을 지켜봤습니다. 이제는 그 결과에 이르는 과정, 학생이 수업을 듣고 출결과 자습을 관리하고 학부모가 그 과정을 확인하는 일상을 더 낫게 만드는 서비스를 오래 키우고 싶습니다.
+      </p>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;"><a class="btn-primary" href="mailto:hellomin92@naver.com">✉ 연락하기 — hellomin92@naver.com</a><a class="btn-ghost" href="https://whellomin92-hue.github.io/portfolio/" target="_blank">기본 포트폴리오 보기 →</a></div>
+    </div>
+  </section>
+
+</div>
+</x-dc>
+
+
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        }
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    // 현재 보고 있는 사례를 사이드 내비에 표시
+    const navLinks = document.querySelectorAll('.side-nav a');
+    const setActive = (c) => {
+      document.body.classList.toggle('on-cover', c === '0' || c === '9');
+      navLinks.forEach((a) => a.classList.toggle('active', a.dataset.nav === c));
+    };
+    setActive('0');
+    const panelObs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) setActive(e.target.dataset.case); });
+    }, { threshold: 0.55 });
+    document.querySelectorAll('section[data-case]').forEach((s) => panelObs.observe(s));
+    // 산출물 갤러리: 탭 전환 + 크게 보기
+    const tabs = document.querySelectorAll('.gal-tab');
+    tabs.forEach((t) => t.addEventListener('click', () => {
+      tabs.forEach((x) => x.classList.toggle('active', x === t));
+      document.querySelectorAll('.gal-grid').forEach((g) => g.classList.toggle('active', g.dataset.gal === t.dataset.gal));
+    }));
+    const lb = document.querySelector('.gal-lightbox');
+    if (lb) {
+      const img = lb.querySelector('img'), cap = lb.querySelector('.gal-lcap');
+      const close = () => { lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true'); };
+      document.querySelectorAll('.gal-card').forEach((c) => c.addEventListener('click', () => {
+        img.src = c.dataset.src; img.alt = c.dataset.cap; cap.textContent = c.dataset.cap;
+        lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false');
+      }));
+      lb.addEventListener('click', close);
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+    }
+  }
+
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>
